@@ -1,0 +1,80 @@
+{% extends 'base_edit_app.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block before_content %}
+    <div id="div_before_content" xmlns="http://www.w3.org/1999/html">
+        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"
+                                                                               alt="" style="width: 100%;"></a>
+        </div>
+        <div id="div_app_name"><h2 id="h2_app_name">Błąd w zmianie właściciela <br> ciągnika lub naczepy</h2></div>
+
+    </div>
+    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
+
+
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a id="dashboard" class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}"
+                   role="button"
+                   style="margin-right: 30px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p id="logout_p"><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block content3 %}
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
+        {% for field in ulotki %}
+            <h3 class="h3_form_tittle"
+                style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                Podgląd załączonych zdjęć do ulotkowania z {{ field.uploaded_at }}
+            </h3>
+            <hr style="width: 85%; margin-bottom: 30px;">
+            <font class="font-dom-left-div">
+                <b>ID: </b><font style="color: slategray">{{ field.id }} <br></font>
+                <b>Ilość ulotek: </b><font style="color: slategray">{{ field.ilosc }}<br></font>
+                <b>Opis: </b><font style="color: slategray">{{ field.opis }}<br></font>
+                <b>Użytkownik dodający: </b><font style="color: slategray">{{ field.uzytkownik }}<br></font>
+                <b>Liczba zdjęć: </b><font style="color: slategray">{{ photos.count }}<br></font><br>
+                {% for item in photos %}
+                    <td>
+                        <a href="/media/{{ item.file }}" target="_blank"><img
+                                class="shadow-sm bg-white rounded photo_success"
+                                src="/media/{{ item.file }}"
+                                alt="{{ item.uploaded_at }}"> </a>
+                    </td>
+                {% endfor %}
+
+            </font>
+
+        {% endfor %}
+        <div style="margin-top: 50px;">
+
+            <input type=" mine" onclick="window.close()"
+                   value="Zamknij" class="btn btn-dark btn-sm button-detail button_form" readonly="readonly"></div>
+
+    </div>
+
+
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

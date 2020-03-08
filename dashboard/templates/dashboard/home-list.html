@@ -1,0 +1,48 @@
+{% extends 'base-home.html' %}
+
+{% block title %}TAJ - Driver Management{% endblock %}
+
+{% block before_content %}
+    <div id="div_before_content">
+        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"
+                                                                               alt="" style="width: 100%;"></a>
+        </div>
+        <div id="div_app_name"><h2 id="h2_app_name">Drivers Management</h2></div>
+    </div>
+    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
+
+
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 30px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+{% endblock %}
+
+
+{% block content-home %}
+    {% if user.is_authenticated %}
+        <p style="margin-left: 5%"><a href="{% url 'cars_list:cars_list' %}">Lista zarejestrowanych pojazdów</a></p>
+        <p style="margin-left: 5%"><a href="{% url 'cars_list:drivers_list' %}">Lista zarejestrowanych kierowców</a>
+        </p>
+
+        {% if user.is_staff or user.is_superuser %}
+
+            <p style="margin-left: 5%; margin-top: 3%"><a href="{% url 'car_registration:car_registration' %}">Rejestracja
+                pojazdów</a></p>
+            <p style="margin-left: 5%"><a href="{% url 'car_registration:add_driver' %}">Rejestracja kierowców</a></p>
+        {% endif %}
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a>
+    {% endif %}
+{% endblock %}

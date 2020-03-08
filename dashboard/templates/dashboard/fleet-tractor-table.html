@@ -1,0 +1,62 @@
+<table id="table_tractor_driver" class="table table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Producent</th>
+        <th>Model</th>
+        <th>Numer rejestracyjny</th>
+        <th>Podpięta naczepa</th>
+        <th>Poprzedni kierowca</th>
+        <th class="th_button"></th>
+        <th class="th_button"></th>
+        <th class="th_button"></th>
+    </tr>
+    </thead>
+    {% for field in car %}
+
+        <tr>
+        <td>{{ field.id }}</td>
+        <td>{{ field.car.brand }}</td>
+        <td>{{ field.car }}</td>
+        <td>{{ field.numer_rejestracyjny }}</td>
+        {% if field.semi_trailer %}
+            <td>{{ field.semi_trailer }}</td>
+        {% else %}
+            <td>----</td>
+        {% endif %}
+        <td>{{ field.last_driver }}</td>
+        <td class="td_button">
+            <button onclick="return car_details()" class="btn btn-warning btn-sm dashboard_button" type="submit"
+                    value="reg_cmr">Szczegóły<br>ciągnika
+            </button>
+        </td>
+        <td class="td_button">
+            <button onclick="return popitup2()" class="btn btn-info btn-sm dashboard_button" type="submit"
+                    value="Przekaz">Przekaż<br>ciągnik
+            </button>
+        </td>
+        <td class="td_button">
+            {% if field.semi_trailer %}
+                {% include 'pages/tables/DriversTable/button-edit-car-semi-odczep.html' %}
+            {% else %}
+                {% include 'pages/tables/DriversTable/button-edit-car-semi.html' %}
+            {% endif %}
+        </td>
+    {% endfor %}
+    </tr>
+</table>
+
+
+<script>
+    function popitup2(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/change-driver/redirect_change_driver/' + getIdFromRow, '_self',)
+    }
+
+    function car_details(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/car-details/redirect-car-details/' + getIdFromRow, '_blank',)
+    }
+</script>

@@ -1,0 +1,462 @@
+@import url(http://fonts.googleapis.com/css?family=Muli);
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, sans-serif;
+}
+
+p {
+    line-height: 1.8;
+}
+
+a {
+    color: #67ADDB;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #076EB1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Muli', sans-serif;
+    font-weight: bold;
+}
+
+h1 {
+    border-bottom: 1px solid #bbb;
+    padding: 0 0 10px 0;
+    margin: 10px 0 20px 0;
+    font-size: 30px;
+}
+
+h2 {
+    margin: 30px 0 20px;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 20px;
+    margin: 0px 0 0px;
+}
+
+.h3_ulotki {
+    font-size: 14pt;
+    font-weight: bold;
+    font-family: Muli;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+ol {
+    line-height: 1.5;
+}
+
+#header {
+    padding: 7px 100px;
+    font-size: 14px;
+    background: #1C84C7;
+    color: #fff;
+    border-bottom: 4px solid #3E9DDB;
+    overflow: auto;
+}
+
+#header .logo {
+    font-family: 'Muli', sans-serif;
+    float: left;
+    color: #f3f7cc;
+    font-size: 20px;
+    margin-right: 10%;
+}
+
+#header ul.menu {
+    list-style: none;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#header ul.menu li {
+    float: left;
+    padding: 4px 10px;
+}
+
+#header ul.menu li.selected a, #header ul.menu li.selected a:hover {
+    color: #1b6d32;
+    font-weight: bold;
+}
+
+#header a {
+    color: #f3f7cc;
+}
+
+#header a:hover {
+    color: #fff;
+}
+
+#header .user {
+    float: right;
+    padding-top: 4px;
+}
+
+#before_content {
+    padding: 0px 100px;
+    float: left;
+    width: 100%;
+}
+
+#content {
+    padding: 30px 100px;
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+#content-home {
+    margin-top: 12%;
+    padding: 75px 200px;
+    width: 100%;
+    vertical-align: center;
+}
+
+#content2 {
+    padding: 50px 100px;
+    width: 80%;
+    margin-left: 100px;
+}
+
+#content3 {
+    padding: 50px 25px;
+    width: 425px;
+    float: left;
+}
+
+#content4 {
+    padding: 50px 25px;
+    width: 1450px;
+    float: left;
+}
+
+#table {
+    padding: 0px 100px;
+    width: 100%;
+    float: left;
+}
+
+#login-div {
+    width: 25%;
+    font-size: 8pt;
+    font-family: 'Muli', sans-serif;
+    float: right;
+}
+
+/* forms */
+form {
+    clear: both;
+}
+
+form p {
+    width: 100%;
+    padding: 3px 25px;
+
+}
+
+
+/*input, textarea {*/
+/*    clear: both;*/
+/*    background: #efefef;*/
+/*    border: 0;*/
+/*    padding: 6px 10px;*/
+/*    font-size: 14px;*/
+/*    width: 80%;*/
+/*    height: 30px;*/
+/*    border-radius: 3px;*/
+/*    color: black;*/
+/*}*/
+
+
+.input-handlowiec {
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+.button_form {
+    font-size: 12pt;
+    width: 250px;
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 25%;
+    text-shadow: 0.25pt 0.25pt black;
+    letter-spacing: 1.5px;
+    float: left;
+    position: static;
+}
+
+label {
+    /*width: 250px;*/
+    float: left;
+    clear: both;
+    /*margin-bottom: 6px;*/
+    font-size: 9pt;
+    color: slategray;
+    text-transform: uppercase;
+}
+
+#div_app_name {
+    padding: 10px;
+    margin-top: 1%;
+    width: 40%;
+    margin-right: calc(25% + (36 - 22) * ((800vw - 300px) / (1600 - 300)));
+    float: right;
+    vertical-align: bottom;
+    margin-bottom: 0;
+}
+
+.p_damage_succes {
+    float: left;
+    margin-left: 25px;
+    font-size: 10pt;
+    color: slategray;
+    font-family: helvetica, sans-serif;
+}
+
+.font_powiadomienie {
+    font-size: 12pt;
+    font-style: italic;
+    float: left;
+}
+
+#home_hr {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.select-style {
+    margin-top: 30px;
+    margin-left: 10%;
+    width: 80%;
+    height: 25px;
+    border-radius: 3px;
+    padding: 0px;
+}
+
+.select-style7 {
+    width: 400px;
+    height: auto;
+    border-radius: 3px;
+    float: left;
+    padding: 20px;
+}
+
+.helptext {
+    font-size: 12pt;
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.head_table {
+    width: 250px;
+    font-size: 11.5pt;
+    margin-left: 200px;
+    float: left;
+    margin-top: 25px;
+}
+
+.dataTables_wrapper .dataTables_length {
+    margin: 10px 0 0 75px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    margin: 10px 10px 0 0;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding: 10px;
+    margin: 10px 0 0 75px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding: 10px;
+}
+
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter select {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.1em 0.3em;
+    font-size: 11px;
+}
+
+.select-style8 {
+    width: 400px;
+    height: auto;
+    border-radius: 3px;
+    float: left;
+    padding: 40px;
+}
+
+.select-style8-1 {
+    width: 1350px;
+    height: auto;
+    border-radius: 3px;
+    float: left;
+    padding: 40px;
+    margin-bottom: 25px;
+}
+
+.select-style8-ulotki {
+    width: 662px;
+    height: auto;
+    border-radius: 3px;
+    float: left;
+    padding: 40px;
+    margin-bottom: 25px;
+    margin-right: 25px;
+}
+
+#id_uruchomienie_od, #id_uruchomienie_do {
+    font-size: 9pt;
+    /*background-color: #efefef;*/
+}
+
+.select-style9 {
+    width: 500px;
+    height: auto;
+    border-radius: 3px;
+    float: left;
+    padding: 50px;
+    margin-left: 25px;
+}
+
+label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_konca_umowy], label[for=id_konkurencja], label[for=id_klatka], label[for=id_rodzaj_kontaktu], label[for=id_opis], label[for=id_price], label[for=id_imie_klienta], label[for=id_telefon], label[for=id_ilosc] {
+    float: left;
+    color: slategray;
+    margin-bottom: 20px;
+
+}
+
+#id_numer_mieszkania, #id_data_kontaktu, #id_data_kolejnego_kontaktu, #id_data_kolejnego_kontaktu, #id_data_konca_umowy, #id_konkurencja, #id_klatka, #id_rodzaj_kontaktu, #id_opis, #id_price, #id_imie_klienta, #id_telefon, #id_ilosc {
+    width: 150px;
+    height: 25px;
+    float: right;
+    margin-top: -1px;
+    background: #efefef;
+    border: 0;
+    border-radius: 3px;
+    color: black;
+}
+
+#id_nasz_klient, #id_konkurencji_klient {
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-right: 100px;
+    margin-bottom: 20px;
+}
+
+#div_logo {
+    width: 480px;
+    float: left;
+}
+
+#jmdi_logo {
+    width: 125px;
+    float: left;
+}
+
+#logo_img {
+    width: 125px;
+    margin-top: 5px;
+}
+
+#h2_header_JMDI {
+    font-size: 30px;
+    font-family: 'Arial Black';
+    color: #6ca5ad;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-shadow: 0 0 3px black; /* Firefox 3.5+, Opera 9+, Safari 1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#ffffff, Strength=1); /* IE<10 */
+    float: left;
+}
+
+.font-dom-left-div {
+    font-size: 12pt;
+    letter-spacing: 0.5px;
+    line-height: 2.0;
+}
+
+
+#id_file_field::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#id_file_field {
+    display: block;
+    position: relative;
+    width: 300px;
+    cursor: auto;
+    border: 0;
+    height: 32px;
+    border-radius: 5px;
+    outline: 0;
+    margin-bottom: 7%;
+    margin-left: 0px;
+    font-size: 9pt;
+    font-family: Muli;
+    background-color: white;
+    letter-spacing: 1px;
+    color: #626e6e;
+    padding: 40px;
+}
+
+#id_file_field::before {
+    margin-top: 20px;
+    transition: 500ms all ease;
+    background: #007bff;
+    color: white;
+    font-size: 12pt;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 25px;
+    content: 'Upload';
+    line-height: 22px;
+    border-radius: 100px 100px 100px 100px;
+    border: 1px solid #076EB1;
+    font-family: "Calibri Light";
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#id_file_field:hover:before {
+    background: #076EB1;
+}
+
+#id_file_field:active:before {
+    background: -webkit-linear-gradient(top, black, black);
+}
+
+.photo_success {
+    margin-bottom: 15px;
+    border: solid 2px #3e4747;
+    position: static;
+    width: 18%;
+    height: 10%;
+}
+
+.font_powiadomienie_photos {
+    font-size: 10pt;
+    color: slategray;
+    margin-left: 25px;
+}

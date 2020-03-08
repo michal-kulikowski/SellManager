@@ -1,0 +1,83 @@
+<table id="table_mieszkania" class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Numer Mieszkania</th>
+        <th>Klatka</th>
+        <th>Klient JMDI</th>
+        <th>Klient konkurencji</th>
+        <th>Ile obecnie płaci?</th>
+        <th>Data konca umowy</th>
+        <th>Data ostatniego kontaktu</th>
+        <th>Data kolejnego kontaktu</th>
+        <th>Data dodania wpisu</th>
+        <th>Data modyfikacji</th>
+        <th>Dodatkowy opis klienta</th>
+        <th>Imie klienta</th>
+        <th>Telefon kontaktowy</th>
+        <th>Uzytkownik</th>
+    </tr>
+    </thead>
+    <tfoot>
+    {#    <tr>#}
+    {#        <<th>ID</th>#}
+    {#        <th>Numer Mieszkania</th>#}
+    {#        <th>Klient</th>#}
+    {#        <th>Data kontaktu</th>#}
+    {#        <th>Data kolejnego kontaktu</th>#}
+    {#        <th>Data konca umowy</th>#}
+    {#        <th>Konkurencja</th>#}
+    {#        <th>Klatka</th>#}
+    {#        <th>Uzytkownik</th>#}
+    {#        <th>Data dodania wpisu</th>#}
+    {#        <th>Data modyfikacji</th>#}
+    {#        <th>Rodzaj kontaktu</th>#}
+    {#    </tr>#}
+    </tfoot>
+
+    {% for field in lokale %}
+        <tr>
+            <td>{{ field.id }}</td>
+            <td>{{ field.numer_mieszkania }}</td>
+            <td>{{ field.klatka }}</td>
+            {% if field.nasz_klient is True %}
+            <td>Tak</td>
+            {% endif %}
+            {% if field.nasz_klient is False %}
+            <td>Nie</td>
+            {% endif %}
+             {% if field.konkurencji_klient is True %}
+            <td>Tak - {{ field.konkurencja|default_if_none:'' }}</td>
+            {% endif %}
+            {% if field.konkurencji_klient is False %}
+            <td>Nie</td>
+            {% endif %}
+            <td>{{ field.price|default_if_none:''|floatformat:2 }} {% if field.price is not None %} zł {% endif %}</td>
+            <td>{{ field.data_konca_umowy|default_if_none:'' }}</td>
+            <td>{{ field.data_kontaktu|default_if_none:'' }}</td>
+            <td>{{ field.data_kolejnego_kontaktu|default_if_none:'' }}</td>
+            <td>{{ field.data_dodania_wpisu }}</td>
+            <td>{{ field.data_modyfikacji }}</td>
+            <td>{{ field.opis }}</td>
+            <td>{{ field.imie_klienta }}</td>
+            <td>{{ field.telefon|default_if_none:'' }}</td>
+            <td>{{ field.uzytkownik }}</td>
+
+            <td style="padding: 2px; width: 5px; border: none">
+                <button onclick="return show2()"
+                        class="btn btn-secondary btn-sm" type="submit" value="Details"
+                        style="font-size: 9.5pt;">Historia
+                </button>
+            </td>
+        </tr>
+
+    {% endfor %}
+</table>
+
+<script>
+    function show2(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/show_lokal_redirect/' + getIdFromRow, '_self',)
+    }
+</script>

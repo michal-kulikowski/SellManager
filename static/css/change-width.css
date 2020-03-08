@@ -1,0 +1,387 @@
+@media only screen and (max-width: 1500px) {
+
+    .dashboard_p {
+        font-size: 24pt;
+        margin-top: 10px;
+    }
+
+
+    #content3 {
+        padding: 50px 25px;
+        width: 100%;
+        float: left;
+    }
+
+
+    #login-div {
+        width: 100px;
+        font-size: 10pt;
+        margin-right: 125px;
+        float: right;
+        font-family: 'Muli', sans-serif;
+    }
+
+    .head_table {
+        width: 200px;
+        font-size: 11.5pt;
+        margin-left: 10%;
+        float: left;
+        margin-top: 15px;
+    }
+
+    #table {
+        padding: 0px 10px;
+    }
+
+
+    #div_app_name {
+        width: 100%;
+        padding: 10px;
+        margin: 0 0 0 0;
+        vertical-align: bottom;
+        text-align: center;
+    }
+
+    #h2_app_name {
+        font-size: 26pt;
+    }
+
+    #home_hr {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 100px;
+    }
+
+
+    .select-style {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        padding: 80px;
+        margin-top: 60px;
+    }
+
+    .table-style {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        padding: 80px;
+        margin-top: 60px;
+    }
+
+    .select-style2 {
+        float: none;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin-top: 100px;
+        padding: 40px;
+    }
+
+    .h3_form_tittle {
+        font-size: 23pt;
+    }
+
+    label[for=id_ilosc], label[for=id_opis] {
+        font-size: 16pt;
+        width: 25%;
+        margin-left: 25px;
+    }
+
+    #change_driver_disadvantage_text {
+        font-size: 18pt;
+        width: 80%;
+        margin-left: 70px;
+        color: slategray;
+        float: left;
+    }
+
+    .button_form {
+        font-size: 30pt;
+        width: 80%;
+        margin-left: 10%;
+        text-shadow: 0.5pt 0.5pt black;
+        letter-spacing: 1.5px;
+    }
+
+
+    .button_form2 {
+        font-size: 25pt;
+        width: 80%;
+        text-shadow: 0.5pt 0.5pt black;
+        letter-spacing: 1.5px;
+    }
+
+    #button_akcept, #button_back {
+        font-size: 18pt;
+    }
+
+    #button_zamknij_detal {
+        font-size: 18pt;
+    }
+
+    p {
+        margin-top: 15%;
+        font-size: 20pt;
+        font-family: helvetica, sans-serif;
+        padding: 20px;
+    }
+
+    #dashboard {
+        font-size: 20pt;
+        margin-left: -50px;
+    }
+
+
+    .select-style4 {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        padding: 40px;
+        margin-top: 10px;
+    }
+
+    .select-style5 {
+        width: 100%;
+        height: auto;
+        border-radius: 3px;
+        margin-top: 25px;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+
+    #change_driver_no_equipment_text {
+        font-size: 22pt;
+        width: 100%;
+    }
+
+    .h3_change_driver {
+        font-size: 24pt;
+        font-weight: bold;
+    }
+
+    .damage_detal {
+        font-size: 20pt;
+    }
+
+    .photos_div {
+        width: 800px;
+    }
+
+    .p_zaznaczenie {
+        color: slategray;
+        font-size: 22pt;
+        font-family: helvetica, sans-serif;
+        margin-bottom: 50px;
+    }
+
+    .font_powiadomienie {
+        font-size: 16pt;
+        font-style: italic;
+        font-weight: normal;
+        float: left;
+    }
+
+    #id_file_field {
+        display: block;
+        position: relative;
+        width: 100%;
+        cursor: auto;
+        border: 0;
+        height: 32px;
+        border-radius: 5px;
+        outline: 0;
+        margin-bottom: 7%;
+        margin-left: 5%;
+        font-size: 18pt;
+        font-family: Muli;
+        background-color: white;
+        letter-spacing: 1px;
+        color: #626e6e;
+        padding: 60px;
+    }
+
+    #id_file_field::before {
+        font-size: 22pt;
+        width: 250px;
+        height: 40px;
+        content: 'Upload';
+        line-height: 32px;
+        font-family: "Calibri";
+        font-weight: normal;
+    }
+
+    .font_under {
+        margin-left: 50%;
+        font-size: 36pt;
+    }
+
+    /*label {*/
+    /*    float: left;*/
+    /*    clear: both;*/
+    /*    color: #333;*/
+    /*    margin-bottom: 25px;*/
+    /*    margin-left: 80px;*/
+    /*    font-size: 18pt;*/
+    /*    color: slategray;*/
+    /*    text-transform: uppercase;*/
+    /*}*/
+
+    .helptext {
+        font-size: 20pt;
+        float: left;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .p_odznacz {
+        font-size: 22pt;
+        color: slategray;
+        float: left;
+        margin-bottom: 25px;
+    }
+
+    .select-style6 {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        padding: 40px;
+        margin-top: 15px;
+    }
+
+    .select-style7 {
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        padding: 40px;
+        margin-top: 25px;
+    }
+
+    .select-style8 {
+        width: 80%;
+        height: auto;
+        margin-left: 10%;
+        float: left;
+        padding: 40px;
+    }
+
+    .select-style9 {
+        width: 80%;
+        height: auto;
+        margin-left: 10%;
+        float: left;
+        padding: 40px;
+    }
+
+    .driver_template_font {
+        font-size: 32px;
+    }
+
+    label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_konca_umowy], label[for=id_konkurencja], label[for=id_klatka], label[for=id_rodzaj_kontaktu], label[for=id_opis], label[for=id_price], label[for=id_imie_klienta], label[for=id_telefon], label[for=id_ilosc], label[for=id_nasz_klient], label[for=id_konkurencji_klient] {
+        font-size: 14pt;
+        width: 50%;
+        margin-left: 10px;
+
+    }
+
+    .td_form_search {
+        font-size: 10pt;
+        width: 150px;
+    }
+
+    .td_form_search input {
+        font-size: 11pt;
+        width: 100px;
+    }
+
+    #button_search {
+        position: absolute;
+        float: left;
+        margin-left: -150px;
+        margin-top: 50px;
+        width: 125px;
+    }
+
+
+    #id_data_kolejnego_kontaktu {
+        margin-top: 25px;
+        font-size: 14pt;
+        width: 40%;
+        height: 35px;
+    }
+
+    #id_numer_mieszkania, #id_data_kontaktu, #id_data_kolejnego_kontaktu, #id_data_konca_umowy, #id_konkurencja, #id_klatka, #id_rodzaj_kontaktu, #id_opis, #id_price, #id_imie_klienta, #id_telefon, #id_ilosc, #id_opis {
+        font-size: 14pt;
+        width: 40%;
+        height: 35px;
+    }
+
+    .dashboard_button {
+        font-size: 18pt;
+        padding: 4px;
+        font-weight: bold;
+    }
+
+    .button-download {
+        width: 95%;
+        font-size: 24pt;
+        padding: 10px;
+        margin: 10px;
+        margin-top: 25px;
+        letter-spacing: 4px;
+    }
+
+    #content-home {
+        margin-top: 12%;
+        padding: 75px 200px;
+        width: 100%;
+        vertical-align: center;
+    }
+
+    #content2 {
+        padding: 50px 0px;
+        width: 100%;
+        margin-left: 0px;
+    }
+
+}
+
+@media only screen and (max-width: 1200px) {
+    #logo_img {
+        width: 100px;
+        margin-top: 5px;
+    }
+
+    #div_logo {
+        width: 350px;
+        float: left;
+    }
+
+    #jmdi_logo {
+        width: 100px;
+        float: left;
+    }
+
+    #h2_header_JMDI {
+        font-size: 24px;
+        margin-top: 12px;
+    }
+
+    #header {
+        padding: 10px 40px;
+    }
+
+}

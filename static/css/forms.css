@@ -1,0 +1,182 @@
+#id_klin_pod_kola_1, #id_klin_pod_kola_2, #id_narozniki_34_sztuki, #id_lampa_blyskowa_pomaranczowa, #id_tablica_convoi_exceptionnel_1, #id_tablica_convoi_exceptionnel_2, #id_lopatka_2, #id_trojkat_2, #id_sorbent_2, #id_maska_2, #id_krople_do_oczu_2, #id_kamizelka_2, #id_okulary_2, #id_rekawiczki_2, #id_mata_2, #id_latarka_2, #id_lopatka, #id_trojkat, #id_sorbent, #id_maska, #id_krople_do_oczu, #id_kamizelka, #id_okulary, #id_rekawiczki, #id_mata, #id_pas_zabezpieczajacy_17_sztuk, #id_lancuch_do_gabarytow_1, #id_lancuch_do_gabarytow_2, #id_kask_1, #id_kask_2, #id_zapasowa_linka_celna_1, #id_zapasowa_linka_celna_2, #id_pas_zabezpieczajacy_4_sztuki, #id_adaptery_8_sztuk, #id_gasnica_6kg_1, #id_gasnica_6kg_2, #id_mata_antyposlizgowa, #id_tyczki_zabezpieczajace_ladunek, #id_belki_zabezpieczajace_ladunek, #id_nadkole_1, #id_nadkole_2, #id_kolo_zapasowe_do_ciagnika, #id_kolo_zapasowe_do_naczepy, #id_klodka, #id_sztaba, #id_karta_pin, #id_skrzynka_adr_1, #id_skrzynka_adr_2, #id_dodatkowa_skrzynka, #id_srubokret_1, #id_srubokret_2, #id_klucz_plaski_1719_1, #id_klucz_plaski_1719_2, #id_klucz_plaski_10, #id_torx, #id_klucz_do_kol_standardowy, #id_klucz_do_kol_przekladniowy, #id_lewarek, #id_lancuchy, #id_kable_rozruchowe, #id_apteczka, #id_rura_do_podnoszenia_kabiny, #id_przewod_do_pompowania, #id_ucho_holownicze, #id_latarka, #id_kamizelka_1, #id_kamizelka_2, #id_trojkat_ostrzegawczy_1, #id_trojkat_ostrzegawczy_2, #id_pistolet_do_pompowania_kol, #id_toolbox, #id_gasnica_2_kg {
+    width: 15px;
+    height: 15px;
+    margin-left: 25%;
+    margin-bottom: 8%;
+}
+
+#id_comments {
+    width: 300px;
+    height: 70px;
+}
+
+#id_oswiadczenie_pojazd {
+    width: 17px;
+    height: 17px;
+    margin-top: -55px;
+    margin-left: 10px;
+}
+
+#id_oswiadczenie_wyposazenie {
+    width: 17px;
+    height: 17px;
+    margin-top: -55px;
+    margin-left: 10px;
+}
+
+#id_driver option:empty {
+    display: none;
+}
+
+#id_semi_trailer option:empty {
+    display: none;
+}
+
+#id_driver option {
+    font-size: 14pt;
+}
+
+label[for=id_driver] {
+    margin-left: 0px;
+}
+
+#id_driver, #id_semitrailer {
+    width: 250px;
+    height: 30px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    font-size: 14pt;
+}
+
+#id_rodzaj_naczepy {
+    width: 250px;
+    height: 30px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    font-size: 14pt;
+}
+
+#id_typ_naczepy {
+    width: 250px;
+    height: 30px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    font-size: 14pt;
+}
+
+#id_oswiadczenie_odbior {
+    width: 22px;
+    height: 20px;
+    margin-top: -125px;
+    margin-left: -15px;
+}
+
+label[for=id_oswiadczenie_pojazd] {
+    width: 250px;
+    margin-top: 20px;
+    margin-left: 50px;
+    text-transform: none;
+    font-size: 11.5pt;
+    font-family: helvetica, sans-serif;
+}
+
+label[for=id_oswiadczenie_wyposazenie] {
+    width: 250px;
+    margin-top: 40px;
+    margin-left: 50px;
+    text-transform: none;
+    font-size: 11.5pt;
+    font-family: helvetica, sans-serif;
+
+}
+
+
+label[for=id_oswiadczenie_odbior] {
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 20px;
+    text-transform: none;
+    font-size: 11.5pt;
+    font-family: helvetica, sans-serif;
+    line-height: 24px;
+}
+
+label[for=id_driver] {
+    width: 250px;
+}
+
+label[for=id_semitrailer] {
+    width: 250px;
+}
+
+label[for=id_rodzaj_naczepy] {
+    width: 250px;
+    margin-top: 10px;
+}
+
+label[for=id_typ_naczepy] {
+    width: 250px;
+    margin-top: 10px;
+}
+
+#change_driver_disadvantage_question_first {
+    width: 15px;
+    height: 15px;
+    margin-top: -30px;
+    margin-left: 35px;
+}
+
+label[for=change_driver_disadvantage_question_first] {
+    width: 250px;
+    margin-top: 30px;
+    margin-left: 80px;
+    text-transform: none;
+    color: slategray;
+    font-size: 11.5pt;
+    font-family: helvetica, sans-serif;
+}
+
+#change_driver_disadvantage_text {
+    margin-top: 50px;
+    margin-left: 25px;
+    width: 300px;
+    text-transform: none;
+    margin-bottom: 0px;
+    font-size: 11pt;
+    font-style: italic;
+}
+
+#change_driver_no_equipment_text {
+    width: 450px;
+    margin-top: 0px;
+    margin-left: 25px;
+    text-transform: none;
+    color: slategray;
+    font-size: 12.5pt;
+    font-family: helvetica, sans-serif;
+}
+
+
+label {
+    float: left;
+    clear: both;
+    color: #333;
+    margin-bottom: 6px;
+    font-size: 10pt;
+    color: slategray;
+    text-transform: uppercase;
+}
+
+.button_form2 {
+    font-size: 15pt;
+    width: 80%;
+    margin-left: 10%;
+    text-shadow: 0.5pt 0.5pt black;
+    letter-spacing: 1.5px;
+    font-family: "Calibri Light";
+}
+
+.p_odznacz {
+    font-size: 11.5pt;
+    color: slategray;
+}

@@ -1,0 +1,67 @@
+<table id="table_change_driver" class="table table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Data przekazania</th>
+        <th>Nr rej</th>
+        <th>Czy były<br>uszkodzenia?</th>
+        <th>Czy brakowało<br>wyposażenia?</th>
+        <th>Kierowca przekazujący</th>
+        <th class="th_button"></th>
+        <th class="th_button"></th>
+        <th class="th_button"></th>
+
+    </tr>
+    </thead>
+    {% for field in change_driver_to_accept %}
+        <tr>
+        <td>{{ field.id }}</td>
+        <td>{{ field.date_of_change|date:'d.m.y H:i' }}</td>
+        {% if field.semi %}
+            <td>{{ field.semi.numer_rejestracyjny }}</td>
+        {% else %}
+            <td>{{ field.car.numer_rejestracyjny }}</td>
+        {% endif %}
+        {% if field.oswiadczenie_pojazd  == False %}
+            <td>Tak</td>
+        {% else %}
+            <td>Nie</td>
+        {% endif %}
+        {% if field.oswiadczenie_wyposazenie  == False %}
+            <td>Tak</td>
+        {% else %}
+            <td>Nie</td>
+        {% endif %}
+        <td>{{ field.last_driver }}</td>
+        <td class="td_button">
+            <button onclick="return accept()" class="btn btn-warning btn-sm dashboard_button" type="submit"
+                    value="Akceptuj">Potwierdź<br>odbiór
+            </button>
+        </td>
+        <td class="td_button">
+            <button onclick="return change_driver_raport()" class="btn btn-success btn-sm dashboard_button"
+                    type="submit"
+                    value="Raport">Raport<br>zmiany
+            </button>
+        </td>
+        <td class="td_button">
+            <button onclick="return popitup()" class="btn btn-danger btn-sm dashboard_button" type="submit"
+                    value="Uwaga">Zgłoś<br>uwagi
+            </button>
+        </td>
+    {% endfor %}
+    </tr>
+</table>
+
+
+<script>
+    function change_driver_raport(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        newwindow = window.open('/car-details/change-driver-details/' + getIdFromRow, '_blank',)
+    }
+
+    function accept(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        newwindow = window.open('/change-driver/transfer_confirm_redirect/' + getIdFromRow, '_blank',)
+    }
+</script>

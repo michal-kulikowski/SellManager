@@ -1,0 +1,195 @@
+#table_fleet {
+    font-size: 10.5pt;
+    color: #3d4545;
+    text-align: center;
+    font-family: "Calibri";
+}
+
+#table_fleet thead input {
+    width: 100%;
+    height: 25px;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 10pt;
+}
+
+#table_fleet tfoot select {
+    width: 100%;
+    height: 1%;
+    font-weight: bold;
+    padding: 0px;
+    font-size: 10pt;
+    background-color: #efefef; /* fallback color if gradients are not supported */
+    background-position: center right;
+    background-repeat: no-repeat;
+    border: 0px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+}
+
+#table_fleet tfoot option {
+    text-align: center;
+}
+
+#table_fleet_previous, #table_fleet_next, .page-link {
+    font-size: 9pt;
+}
+
+#table_fleet_wrapper {
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #007bff !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 10pt;
+}
+
+select[name=table_fleet_length] {
+    font-size: 11pt;
+}
+
+
+#table_mieszkania {
+    font-size: 9pt;
+    color: #3d4545;
+    text-align: center;
+    font-family: "Calibri";
+}
+
+#table_mieszkania thead input {
+    width: 100%;
+    height: 25px;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 8pt;
+}
+
+
+#table_mieszkania tfoot select {
+    width: 100%;
+    height: 1%;
+    font-weight: bold;
+    padding: 0px;
+    font-size: 8pt;
+    background-color: #efefef; /* fallback color if gradients are not supported */
+    background-position: center right;
+    background-repeat: no-repeat;
+    border: 0px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+}
+
+table_mieszkania tfoot option {
+    text-align: center;
+}
+
+#table_mieszkania_previous, #table_mieszkania_next, .page-link {
+    font-size: 9pt;
+}
+
+#table_mieszkania_wrapper {
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #007bff !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 10pt;
+}
+
+#table-ulotki {
+    font-size: 8.5pt;
+}
+
+#table-ulotki td {
+    padding: 10px;
+    font-size: 7.5pt;
+}
+
+
+#table_proby_kontaktu {
+    font-size: 8.5pt;
+    color: #3d4545;
+    text-align: center;
+    font-family: "Calibri";
+}
+
+#table_proby_kontaktu thead input {
+    width: 100%;
+    height: 25px;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 8pt;
+}
+
+#table_proby_kontaktu tfoot select {
+    width: 100%;
+    height: 1%;
+    font-weight: bold;
+    padding: 0px;
+    font-size: 8.5pt;
+    background-color: #efefef; /* fallback color if gradients are not supported */
+    background-position: center right;
+    background-repeat: no-repeat;
+    border: 0px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+}
+
+#table_proby_kontaktu tfoot option {
+    text-align: center;
+}
+
+#table_proby_kontaktu_previous, #table_proby_kontaktu_next, .page-link {
+    font-size: 7pt;
+}
+
+#table_proby_kontaktu_wrapper {
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #007bff !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 7pt;
+}
+
+select[name=table_proby_kontaktu_length] {
+    font-size: 8pt;
+}
+
+#table_proby_kontaktu_length label, .dataTables_filter label {
+    font-size: 7pt;
+    color: #007bff !important;
+}
+
+#table_proby_kontaktu_length select {
+    font-size: 8pt;
+}
+
+
+@media only screen and (max-width: 1200px) {
+
+    #table_fleet {
+        font-size: 9pt;
+    }
+
+    #table_fleet thead input {
+        font-size: 8.5pt;
+    }
+
+    #table_fleet_previous, #table_fleet_next, .page-link {
+        font-size: 8pt;
+    }
+
+    select[name=table_fleet_length] {
+        font-size: 8pt;
+    }
+
+    .row label {
+        font-size: 8pt;
+    }
+
+
+}

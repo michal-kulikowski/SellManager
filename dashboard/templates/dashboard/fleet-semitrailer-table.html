@@ -1,0 +1,81 @@
+<table id="table_semi_driver" class="table table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Typ naczepy</th>
+        <th>Rodzaj naczepy</th>
+        <th>Numer rejestracyjny</th>
+        <th>Poprzedni kierowca</th>
+        <th class="th_button"></th>
+        <th class="th_button"></th>
+        <th class="th_button"></th>
+
+    </tr>
+    </thead>
+    {% for field in semitrailer %}
+
+        <tr>
+        <td>{{ field.id }}</td>
+        <td>{{ field.typ_naczepy }}</td>
+        {% if field.rodzaj_naczepy == 'PP' %}
+            <td>PP - plandeka płaska</td>
+        {% endif %}
+        {% if field.rodzaj_naczepy == 'SCR' %}
+            <td>SCR - standard cooler rolka</td>
+        {% endif %}
+        {% if field.rodzaj_naczepy == 'SBR' %}
+            <td>SBR - standard box rolki</td>
+        {% endif %}
+        {% if field.rodzaj_naczepy == 'MPR' %}
+            <td>MPR - mega plandeka płaska</td>
+        {% endif %}
+        {% if field.rodzaj_naczepy == 'BP' %}
+            <td>BP - płaska bez niczego</td>
+        {% endif %}
+        {% if field.rodzaj_naczepy == 'MBR' %}
+            <td>MBR - mega box rolki</td>
+        {% endif %}
+        {% if field.rodzaj_naczepy == 'MCR' %}
+            <td>MCR - mega cooler rolki</td>
+        {% endif %}
+        <td>{{ field.numer_rejestracyjny }}</td>
+        <td>{{ field.last_driver }}</td>
+        <td class="td_button">
+            <button onclick="return details()" class="btn btn-warning btn-sm dashboard_button" type="submit"
+                    value="reg_cmr">Szczegóły<br>naczepy
+            </button>
+        </td>
+        <td class="td_button">
+            <button onclick="return przekaz()" class="btn btn-info btn-sm dashboard_button" type="submit"
+                    value="Przekaż">Przekaż<br>naczepę
+            </button>
+        </td>
+        <td class="td_button">
+            <button onclick="return reg_cmr()" class="btn btn-danger btn-sm dashboard_button" type="submit"
+                    value="reg_cmr">Awaryjne<br>CMR
+            </button>
+        </td>
+    {% endfor %}
+    </tr>
+</table>
+
+<script>
+    function przekaz(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/change-driver/redirect_semi_change_driver/' + getIdFromRow, '_self',)
+    }
+
+    function reg_cmr(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/cmr/redirect-cmr-register/' + getIdFromRow, '_self',)
+    }
+
+    function details(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/car-details/redirect-semi-details/' + getIdFromRow, '_blank',)
+    }
+</script>
+

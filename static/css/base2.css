@@ -1,0 +1,23 @@
+input, textarea {
+    clear: both;
+    background: #efefef;
+    border: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    width: 80%;
+    height: 30px;
+    border-radius: 3px;
+    color: black;
+}
+
+.button_form2 {
+    font-size: 12pt;
+    width: 150px;
+    margin-top: 18px;
+    margin-left: 25px;
+    margin-right: 25%;
+    text-shadow: 0.5pt 0.5pt black;
+    letter-spacing: 1.5px;
+    float: left;
+    position: static;
+}

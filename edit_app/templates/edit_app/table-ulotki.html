@@ -1,0 +1,53 @@
+<table id="table-ulotki" class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ilość</th>
+        <th>Data wykonania</th>
+        <th>Opis</th>
+        <th>Użytkownik</th>
+    </tr>
+    </thead>
+    <tfoot>
+    {#    <tr>#}
+    {#        <<th>ID</th>#}
+    {#        <th>Numer Mieszkania</th>#}
+    {#        <th>Klient</th>#}
+    {#        <th>Data kontaktu</th>#}
+    {#        <th>Data kolejnego kontaktu</th>#}
+    {#        <th>Data konca umowy</th>#}
+    {#        <th>Konkurencja</th>#}
+    {#        <th>Klatka</th>#}
+    {#        <th>Uzytkownik</th>#}
+    {#        <th>Data dodania wpisu</th>#}
+    {#        <th>Data modyfikacji</th>#}
+    {#        <th>Rodzaj kontaktu</th>#}
+    {#    </tr>#}
+    </tfoot>
+
+    {% for field in ulotki %}
+        <tr>
+           <td>{{ field.id }}</td>
+           <td>{{ field.ilosc }}</td>
+           <td>{{ field.uploaded_at|date:'Y-m-d (H:i)' }}</td>
+           <td>{{ field.opis }}</td>
+           <td>{{ field.uzytkownik }}</td>
+
+            <td style="padding: 2px; width: 5px; border: none">
+                <button onclick="return show()"
+                        class="btn btn-link btn-sm" type="submit" value="Details"
+                        style="font-size: 9.5pt;">Zdjęcia
+                </button>
+            </td>
+        </tr>
+
+    {% endfor %}
+</table>
+
+<script>
+    function show(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/show_ulotki_redirect/' + getIdFromRow, '_blank',)
+    }
+</script>

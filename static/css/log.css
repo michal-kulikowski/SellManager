@@ -1,0 +1,61 @@
+#bt-login {
+    width: 50%;
+    background-color: #1C84C7;
+    float: right;
+    margin-top: 20px;
+}
+
+#behind_log {
+    width: 200px;
+}
+
+central_log {
+    width: 25%;
+    float:left;
+}
+
+#bt-login:hover {
+    background-color: #3E9DDB;
+}
+
+label[for=id_username], label[for=id_password] {
+    width: 100%;
+    margin-top: 10px;
+    color: #777777;
+    font-size: 12pt;
+}
+
+#id_username  {
+    width: 100%;
+    font-size: 12pt;
+}
+
+#id_password {
+    width: 100%;
+    font-size: 12pt;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    #central_log {
+        width: 100%;
+    }
+
+    #id_username, #id_password {
+        font-size: 24pt;
+    }
+
+    label[for=id_username], label[for=id_password] {
+        font-size: 28pt;
+    }
+    #bt-login {
+        width: 100%;
+        font-size: 28pt;
+        margin-top: 25px;
+    }
+
+    #behind_log {
+        margin-top: 200px;
+        width: 100%;
+    }
+}

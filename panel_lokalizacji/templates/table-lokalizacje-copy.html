@@ -1,0 +1,222 @@
+<div class="select-style">
+    <table class="head_table">
+        <tr>
+            <td>
+                <b>HP:</b> {{ hp.total_hp|cut:'.0' }}
+            </td>
+            <td>
+                <b>Lokalizacje:</b> {{ hp.total_dom }}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<table id="table_fleet" class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Sprzedawca</th>
+        <th>Symbol</th>
+        <th>Ulica</th>
+        <th>Numer</th>
+        <th>Miejscowość</th>
+        <th>Typ budynku</th>
+        <th>Ilość HP</th>
+        <th>Prędkość max</th>
+        <th>Handlowiec</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>ID</th>
+        <th>Sprzedawca</th>
+        <th>Symbol</th>
+        <th>Ulica</th>
+        <th>Numer</th>
+        <th>Miejscowość</th>
+        <th>Typ budynku</th>
+        <th>HP</th>
+        <th>Prędkość max</th>
+        <th>Handlowiec</th>
+    </tr>
+    </tfoot>
+    {#    <tfoot>#}
+    {#    <tr>#}
+    {#        <th colspan="7" style="text-align:right">Total:</th>#}
+    {#        <th></th>#}
+    {#    </tr>#}
+    {#    </tfoot>#}
+
+    {% for field in dom2 %}
+        <tr>
+            <td>{{ field.id_adr_dom }}</td>
+            <td>{{ field.nazwa_sprzedawcy }}</td>
+            {% if field.symbol is None %}
+                <td>brak</td>
+            {% else %}
+                <td>{{ field.symbol }}</td>
+            {% endif %}
+            {% if field.nazwa_ulicy is None %}
+                <td>brak</td>
+            {% else %}
+                <td>{{ field.typ_ulicy }} {{ field.nazwa_ulicy }}</td>
+            {% endif %}
+            <td>{{ field.numer_domu }}</td>
+            <td>{{ field.nazwa_miejscowosci }}</td>
+            {% if field.nazwa_typu is None %}
+                <td>brak</td>
+            {% else %}
+                <td>{{ field.nazwa_typu }}</td>
+            {% endif %}
+            {% if field.licz_lokali is None %}
+                <td>0</td>
+            {% else %}
+                <td>{{ field.licz_lokali|cut:".0" }}</td>
+            {% endif %}
+            {% if field.predkosc_max is None %}
+                <td>brak</td>
+            {% else %}
+                <td>{{ field.predkosc_max|cut:".0" }}</td>
+            {% endif %}
+            <td>{{ field.imie }} {{ field.nazwisko }}</td>
+            <td style="padding: 2px; width: 5px; border: none">
+                <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                        style="font-size: 9.5pt;">Edytuj
+                </button>
+            </td>
+            <td style="padding: 2px; width: 5px; border: none">
+                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"
+                        style="font-size: 9.5pt;">Raport
+                </button>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+<script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" language="javascript" class="init">
+
+
+    $(document).ready(function () {
+        $('#table_fleet').DataTable({
+                "pageLength": 10,
+                "processing": true,
+                {#"paging": true,#}
+                {#"scrollx": false,#}
+                "deferRender": true,
+
+                "infoCallback":
+                    function (settings, start, end, max, total, pre) {
+                        return "Rekord " + start + " do " + end + " z " + total + " wszystkich"
+                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 12pt;">' + ' | ' + 'HP: ' + pageTotal + ' / ' + {{ hp.total_hp|cut:'.0' }} +'</font>';
+                    },
+
+                "footerCallback": function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    total_hp = api
+                        .column(7)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(7, {filter: 'applied'})
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    {#$(api.column(7).footer()).html(#}
+                    {#    pageTotal + '/' + total#}
+                    {#);#}
+                },
+                {##}
+                {#"ajax": {#}
+                {#    "url": "{% url 'panel_lokalizacji:lokalizacje_json' %}",#}
+                {#    "dataSrc": "",#}
+
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            },
+        )
+        ;
+
+
+    });
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table_fleet thead th').each(function () {
+
+            var title = $(this).text();
+            $(this).html('<input type="text" style="text-align: center;" placeholder="' + title + '" />');
+
+        });
+
+        // DataTable
+        var table = $('#table_fleet').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.header()).on('keyup change clear', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+
+    function raport(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/raport/' + getIdFromRow, '_blank',)
+    }
+
+    function edytuj(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/edit-dom-redirect/' + getIdFromRow, '_blank',)
+    }
+
+
+</script>

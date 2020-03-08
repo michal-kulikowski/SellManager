@@ -1,0 +1,94 @@
+<table id="table_proby_kontaktu" class="table table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Numer mieszkania</th>
+        <th>Data próby</th>
+        <th>Użytkownik</th>
+    </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+        <th>Numer mieszkania</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+        <th>Użytkownik</th>
+    </tr>
+    </tfoot>
+
+    {% for field in proby_kontaktu %}
+        <tr>
+            <td>{{ field.id }}</td>
+            <td>{{ field.numer_mieszkania }}</td>
+            <td>{{ field.data_proby_kontaktu|date:'Y-m-d (H:i)' }}</td>
+            <td>{{ field.uzytkownik }}</td>
+
+        </tr>
+
+    {% endfor %}
+</table>
+
+
+<script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" language="javascript" class="init">
+
+    $(document).ready(function () {
+        $('#table_proby_kontaktu').DataTable({
+                "pageLength": 10,
+                "processing": true,
+                "order": [[0, "desc"]],
+
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            },
+        );
+    });
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table_proby_kontaktu thead th').each(function () {
+
+            var title = $(this).text();
+            $(this).html('<input type="text" style="text-align: center;" placeholder="' + title + '" />');
+
+        });
+
+        // DataTable
+        var table = $('#table_proby_kontaktu').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.header()).on('keyup change clear', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+
+</script>

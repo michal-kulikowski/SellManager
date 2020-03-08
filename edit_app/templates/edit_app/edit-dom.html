@@ -1,0 +1,165 @@
+{% extends "base_edit_app.html" %}
+
+
+{% block head %}
+    {% load static %}
+    <meta charset="utf-8" xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+{% endblock %}
+
+{% block before_content %}
+    <div id="div_before_content">
+        {#        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"#}
+        {#                                                                               alt="" style="width: 100%;"></a>#}
+        {#        </div>#}
+        <div id="div_app_name"><h2 id="h2_app_name">Manager sprzedaży</h2></div>
+
+    </div>
+    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
+
+
+{% endblock %}
+
+
+{% block login-div %}
+    <table>
+        <tr>
+
+
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 15px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+
+
+    <style>
+        #login-div {
+            margin-left: 59%;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content3 %}
+    <div class="select-style8 shadow-sm" style="border: solid 1px #e8d6d5;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            {% if dom.typ_budynku != 'Brak' %}
+                {{ dom.typ_budynku }}
+            {% else %}
+                Nieznany typ budynku
+            {% endif %}</h3>
+
+        <p style="text-align: center; font-size: 9pt; color: slategray">
+            ul. {{ dom.nazwa_ulicy }} {{ dom.numer_domu }}, {{ dom.miejscowosc }}</p>
+
+
+        <hr style="width: 85%; margin-bottom: 30px;">
+        <font class="font-dom-left-div">
+            <b>ID: </b><font style="color: slategray">{{ dom.id_adr_dom }} <br></font>
+            <b>Symbol: </b><font style="color: slategray">{{ dom.symbol }}/{{ dom.numer_domu }}<br></font>
+            <b>HP: </b><font style="color: slategray">{{ dom.licz_lokali }}<br></font>
+            <b>Ilość klientów: </b><font style="color: slategray">{{ dom.ilosc_klientow }}<br></font>
+            <b>Predkość max: </b><font style="color: slategray">{{ dom.predkosc_max }}<br></font>
+            <b>Data uruchomienia: </b><font style="color: slategray">{{ dom.uruchomienie|date:'d/m/Y' }}<br></font>
+            <b>Opiekun: </b><font style="color: slategray">{{ dom.handlowiec }} <br></font>
+            <b>Technologia: </b><font style="color: slategray">{{ dom.technologia }}<br></font>
+            <b>Data dodania: </b><font style="color: slategray">{{ dom.data_dod|date:'Y/m/d' }}<br></font>
+            {% if dom.konkurencja is not False %}
+                <b>Konkurencja: </b><font style="color: slategray">{{ dom.jaka_konkurencja }}<br></font></font>
+            {% else %}
+                <b>Konkurencja: </b><font style="color: slategray">brak<br></font>
+                <b>Ostatnie ulotkowania: </b>
+                <font style="color: slategray">{{ last_ulotka.uploaded_at|date:'d/m/Y' }}<br></font></font>
+            {% endif %}
+
+
+        </font>
+        <div style="margin-top: 50px;">
+            <input type="submit" onclick="window.open('/edit_app/dodaj-informacje-klient/', '_self');"
+                   value="Formularz kontaktu"
+                   class="btn btn-primary button-detail button_form">
+
+            <input type="submit" onclick="window.open('/edit_app/dodaj-probe-kontaktu/', '_self');"
+                   value="Formularz próby kontaktu"
+                   class="btn btn-danger button-detail button_form">
+
+            <input type="submit" onclick="window.open('/edit_app/rejestracja-zaulotkowania/', '_self');"
+                   value="Formularz zaulotkowania"
+                   class="btn btn-warning button-detail button_form">
+
+            <input type=" mine" onclick="window.close()"
+                   value="Zamknij" class="btn btn-dark button-detail button_form" readonly="readonly"></div>
+
+    </div>
+
+{% endblock %}
+
+{% block content4 %}
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            {% if lokale %}
+                Informacje dotyczące klientów na tym budynku:</h3>
+                <hr style="width: 85%">
+                <font style="font-size: 11pt">
+
+                {% include 'edit_app/table-mieszkania.html' %}
+            {% else %}
+                Brak informacji o klientach
+            {% endif %}
+
+            </font>
+    </div>
+
+    <div class="select-style8-ulotki shadow-sm" style="border: solid 1px #e8d6d5;">
+        <h3 class="h3_ulotki">
+            {% if ulotki %}
+                Ulotkowanie:</h3><br>
+
+                {% include 'edit_app/table-ulotki.html' %}
+            {% else %}
+                Brak zarejestrowanych akcji dotyczących ulotek
+            {% endif %}
+
+        </font>
+    </div>
+
+    <div class="select-style8-ulotki shadow-sm" style="border: solid 1px #e8d6d5;">
+        <h3 class="h3_ulotki">
+            {% if proby_kontaktu %}
+                Próby kontaktu:</h3><br>
+                <font style="font-size: 11pt">
+                <hr style="width: 85%; margin-bottom: 10px;">
+                {% include 'edit_app/table-proby-kontaktu.html' %}
+            {% else %}
+                Brak zarejestrowanych prób kontaktu
+            {% endif %}
+
+            </font>
+    </div>
+
+
+    <div style="width: 100%; height: 50px; float: left"></div>
+
+{% endblock %}
+
+<script>
+
+    $('#DomForm').on('submit', function (event) {
+        alert("Pomyślnie edytowano budynek.");
+    });
+
+
+</script>
+<script src="https://kit.fontawesome.com/f6a76ea909.js" crossorigin="anonymous"></script>
+
+

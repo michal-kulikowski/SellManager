@@ -1,0 +1,52 @@
+{% extends 'base-home.html' %}
+
+{% block title %}JMDI - manager aplikacji{% endblock %}
+
+{% block before_content %}
+    <div id="div_before_content">
+        {#        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src=""#}
+        {#                                                                               alt="" style="width: 100%;"></a>#}
+    </div>
+    <div id="div_app_name"><h2 id="h2_app_name">Manager Aplikacji</h2></div>
+    </div>
+    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
+
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a id="dashboard" class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}"
+                   role="button"
+                   style="margin-right: 30px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p id="logout_p"><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+{% endblock %}
+
+
+{% block content-home %}
+    {% if user.is_authenticated %}
+        {% if user.is_staff or user.is_superuser %}
+            {% include 'dashboard/staff_template.html' %}
+        {% else %}
+            {% include 'dashboard/employ_template.html' %}
+        {% endif %}
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a>
+    {% endif %}
+
+
+
+    <script type="text/javascript" language="javascript" class="init">
+        function no_authenticated_open() {
+            alert("Brak Ci uprawnień do uruchomienia tego modułu");
+        }
+    </script>
+{% endblock %}
+

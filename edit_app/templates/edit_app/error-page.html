@@ -1,0 +1,58 @@
+{% extends 'base_edit_app.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block before_content %}
+    <div id="div_before_content" xmlns="http://www.w3.org/1999/html">
+        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"
+                                                                               alt="" style="width: 100%;"></a>
+        </div>
+        <div id="div_app_name"><h2 id="h2_app_name">Błąd w zmianie właściciela <br> ciągnika lub naczepy</h2></div>
+
+    </div>
+    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
+
+
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a id="dashboard" class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}"
+                   role="button"
+                   style="margin-right: 30px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p id="logout_p"><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block content3 %}
+    <div class="select-style" style="font-size: 16pt; margin-top: 3%; color: red; width: 600px;">
+        <p style="color: black;">
+            Wystąpił błąd:</p>
+        <font class="font_damage_inside" style="color: red;">
+        {{ error_message }}</font>
+        <br><br>
+
+        <a class="btn btn-dark btn-sm button_form" onclick="window.history.back();" role="button"
+           style="color: white;">Powrót</a>
+
+
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
