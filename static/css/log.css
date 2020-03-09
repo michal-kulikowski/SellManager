@@ -1,15 +1,16 @@
 #bt-login {
-    width: 50%;
+    width: 200px;
     background-color: #1C84C7;
     float: right;
     margin-top: 20px;
 }
 
 #behind_log {
-    width: 200px;
+    width: 400px;
+    margin-top: 100px;
 }
 
-central_log {
+#central_log {
     width: 25%;
     float:left;
 }
@@ -26,13 +27,16 @@ label[for=id_username], label[for=id_password] {
 }
 
 #id_username  {
-    width: 100%;
-    font-size: 12pt;
+    width: 400px;
+    height: 50px;
+    font-size: 14pt;
+    margin-bottom: 50px;
 }
 
 #id_password {
-    width: 100%;
-    font-size: 12pt;
+    width: 400px;
+    height: 50px;
+    font-size: 14pt;
 }
 
 
@@ -42,14 +46,14 @@ label[for=id_username], label[for=id_password] {
     }
 
     #id_username, #id_password {
-        font-size: 24pt;
+        font-size: 26pt;
     }
 
     label[for=id_username], label[for=id_password] {
-        font-size: 28pt;
+        font-size: 26pt;
     }
     #bt-login {
-        width: 100%;
+        width: 400px;
         font-size: 28pt;
         margin-top: 25px;
     }

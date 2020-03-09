@@ -120,6 +120,11 @@ ol {
     vertical-align: center;
 }
 
+#content-log {
+    padding: 0px 200px;
+    width: 100%;
+}
+
 #content2 {
     padding: 50px 100px;
     width: 80%;

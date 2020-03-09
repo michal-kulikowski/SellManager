@@ -1,8 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-
-
 <head>
     <title>{% block title %}{% endblock %}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -15,34 +13,23 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
 </head>
-
-
 <body>
 <div id="header">
-        <span class="user">
-        </span>
-</div>
+    <div id="div_logo"><a id="jmdi_logo" class="navbar-brand" href="/dashboard/"><img src="/static/img/logo_jmdi.png"
+                                                                                      alt="" id="logo_img"></a>
+        <h2 id="h2_header_JMDI"><font style="color: white;">Manager aplikacji</font></h2>
+    </div>
+    <table class="head_table">
+        <tr>
 
-<div id="login-div">
-    {% block login-div %}
+        </tr>
+    </table>
+</div>
+<div id="content-log">
+    {% block content-log %}
 
     {% endblock %}
 </div>
-
-<div id="before_content">
-    {% block before_content %}
-    {% endblock %}
-</div>
-
-
-<div id="content-home">
-    {% block content-home %}
-    {% endblock %}
-</div>
-
 
 </body>
-
-{% block js %}{% endblock %}
-
 </html>

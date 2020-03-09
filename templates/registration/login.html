@@ -2,18 +2,7 @@
 
 {% block title %}JMDI - Sign in{% endblock %}
 
-{% block before_content %}
-    <div id="div_before_content">
-        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"
-                                                                               alt="" style="width: 100%;"></a>
-        </div>
-        <div id="div_app_name"><h2 id="h2_app_name">Manager Aplikacji</h2></div>
-    </div>
-    <hr style="border-top: 1px solid #aaaaaa; width: 90%; margin-right: 10%; float: left">
-
-{% endblock %}
-
-{% block content-home %}
+{% block content-log %}
 
     <div id="central_log">
         <div id="behind_log">
@@ -24,7 +13,7 @@
                 <form action="/" method="post">
             {% endif %}
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form }}
             <p>
                 <button type="submit" id="bt-login" class="btn btn-primary">Zaloguj</button>
             </p>
