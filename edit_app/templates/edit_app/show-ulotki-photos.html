@@ -1,20 +1,6 @@
-{% extends 'base_edit_app.html' %}
+{% extends 'base-lokal.html' %}
 
 {% block head %}
-{% endblock %}
-
-
-{% block before_content %}
-    <div id="div_before_content" xmlns="http://www.w3.org/1999/html">
-        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"
-                                                                               alt="" style="width: 100%;"></a>
-        </div>
-        <div id="div_app_name"><h2 id="h2_app_name">Błąd w zmianie właściciela <br> ciągnika lub naczepy</h2></div>
-
-    </div>
-    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
-
-
 {% endblock %}
 
 {% block login-div %}
@@ -32,7 +18,7 @@
     </table>
 {% endblock %}
 
-{% block content3 %}
+{% block content-home %}
     <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
         {% for field in ulotki %}
             <h3 class="h3_form_tittle"

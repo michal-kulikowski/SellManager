@@ -1,4 +1,4 @@
-{% extends "base_edit_app.html" %}
+{% extends "base-lokal.html" %}
 
 
 {% block head %}
@@ -58,7 +58,7 @@
             <hr style="width: 85%">
             <font style="font-size: 11pt">
                 <form action="" method="post">
-                    {% csrf_token %}<br>
+                    {% csrf_token %}
                     {{ form_proba.as_p }}
 
                 <input id="button_akcept" type="submit" value="Zatwierdź"

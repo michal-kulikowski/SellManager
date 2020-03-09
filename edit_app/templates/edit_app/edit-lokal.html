@@ -1,4 +1,4 @@
-{% extends "base_edit_app.html" %}
+{% extends "base-lokal.html" %}
 
 
 {% block head %}
@@ -9,48 +9,6 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 {% endblock %}
 
-{% block before_content %}
-    <div id="div_before_content">
-        {#        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"#}
-        {#                                                                               alt="" style="width: 100%;"></a>#}
-        {#        </div>#}
-        <div id="div_app_name"><h2 id="h2_app_name">Manager sprzedaży</h2></div>
-
-    </div>
-    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
-
-
-{% endblock %}
-
-
-{% block login-div %}
-    <script>
-        function no_authenticated_add() {
-            alert("Brak Ci uprawnień do dodania pojazdu");
-        }
-    </script>
-    <table>
-        <tr>
-
-
-            <th>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
-                   style="margin-right: 15px;">Dashboard</a>
-            </th>
-            <th></th>
-            <th>Zalogowano <br> {{ user.username }}!
-                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
-        </tr>
-    </table>
-
-
-    <style>
-        #login-div {
-            margin-left: 59%;
-        }
-    </style>
-
-{% endblock %}
 
 {% block content3 %}
     <div class="select-style9 shadow-sm" style="border: solid 1px #e8d6d5;">
@@ -60,11 +18,12 @@
             Dodanie informacji o kliencie</h3>
 
 
-            <hr style="width: 85%">
+            <hr style="width: 85%; margin-bottom: 50px;">
             <font style="font-size: 11pt">
                 <form action="" method="post">
                     {% csrf_token %}
-                    {{ form_lokal.as_p }}
+
+                    {{ form_lokal }}
 
                 <input id="button_akcept" type="submit" value="Zatwierdź"
                        class="btn btn-primary button-detail button_form">

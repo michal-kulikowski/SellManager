@@ -9,25 +9,9 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 {% endblock %}
 
-{% block before_content %}
-    <div id="div_before_content">
-        {#        <div id="div_logo"><a id="taj_logo" class="navbar-brand" href="#"><img src="/static/img/logo_TAJ.jpg"#}
-        {#                                                                               alt="" style="width: 100%;"></a>#}
-        {#        </div>#}
-        <div id="div_app_name"><h2 id="h2_app_name">Manager sprzedaży</h2></div>
-
-    </div>
-    <hr id="home_hr" style="border-top: 1px solid #aaaaaa; margin-right: 10%; float: left">
-
-
-{% endblock %}
-
-
 {% block login-div %}
     <table>
         <tr>
-
-
             <th>
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
                    style="margin-right: 15px;">Dashboard</a>
@@ -37,13 +21,6 @@
                 <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
         </tr>
     </table>
-
-
-    <style>
-        #login-div {
-            margin-left: 59%;
-        }
-    </style>
 
 {% endblock %}
 
@@ -86,18 +63,18 @@
         <div style="margin-top: 50px;">
             <input type="submit" onclick="window.open('/edit_app/dodaj-informacje-klient/', '_self');"
                    value="Formularz kontaktu"
-                   class="btn btn-primary button-detail button_form">
+                   class="btn btn-primary button-detail button_form_dom">
 
             <input type="submit" onclick="window.open('/edit_app/dodaj-probe-kontaktu/', '_self');"
                    value="Formularz próby kontaktu"
-                   class="btn btn-danger button-detail button_form">
+                   class="btn btn-danger button-detail button_form_dom">
 
             <input type="submit" onclick="window.open('/edit_app/rejestracja-zaulotkowania/', '_self');"
                    value="Formularz zaulotkowania"
-                   class="btn btn-warning button-detail button_form">
+                   class="btn btn-warning button-detail button_form_dom">
 
             <input type=" mine" onclick="window.close()"
-                   value="Zamknij" class="btn btn-dark button-detail button_form" readonly="readonly"></div>
+                   value="Zamknij" class="btn btn-dark button-detail button_form_dom" readonly="readonly"></div>
 
     </div>
 
@@ -148,7 +125,6 @@
     </div>
 
 
-    <div style="width: 100%; height: 50px; float: left"></div>
 
 {% endblock %}
 

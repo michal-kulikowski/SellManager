@@ -53,11 +53,11 @@
             <td>Nie</td>
             {% endif %}
             <td>{{ field.price|default_if_none:''|floatformat:2 }} {% if field.price is not None %} zł {% endif %}</td>
-            <td>{{ field.data_konca_umowy|default_if_none:'' }}</td>
-            <td>{{ field.data_kontaktu|default_if_none:'' }}</td>
-            <td>{{ field.data_kolejnego_kontaktu|default_if_none:'' }}</td>
-            <td>{{ field.data_dodania_wpisu }}</td>
-            <td>{{ field.data_modyfikacji }}</td>
+            <td>{{ field.data_konca_umowy|default_if_none:''|date:"m/d/y" }}</td>
+            <td>{{ field.data_kontaktu|default_if_none:''|date:"m/d/y" }}</td>
+            <td>{{ field.data_kolejnego_kontaktu|default_if_none:''|date:"m/d/y" }}</td>
+            <td>{{ field.data_dodania_wpisu|date:"m/d/y" }}</td>
+            <td>{{ field.data_modyfikacji|date:"m/d/y" }}</td>
             <td>{{ field.opis }}</td>
             <td>{{ field.imie_klienta }}</td>
             <td>{{ field.telefon|default_if_none:'' }}</td>

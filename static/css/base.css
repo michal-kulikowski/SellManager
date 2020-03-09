@@ -115,9 +115,8 @@ ol {
 }
 
 #content-home {
-    margin-top: 12%;
-    padding: 75px 200px;
-    width: 100%;
+    padding: 100px 100px;
+    width: 70%;
     vertical-align: center;
 }
 
@@ -130,12 +129,13 @@ ol {
 #content3 {
     padding: 50px 25px;
     width: 425px;
+    height: 100%;
     float: left;
 }
 
 #content4 {
     padding: 50px 25px;
-    width: 1450px;
+    width: 70%;
     float: left;
 }
 
@@ -182,7 +182,7 @@ form p {
     margin-bottom: 15px;
 }
 
-.button_form {
+.button_form, .button_form_dom {
     font-size: 12pt;
     width: 250px;
     margin-top: 10px;
@@ -193,6 +193,7 @@ form p {
     float: left;
     position: static;
 }
+
 
 label {
     /*width: 250px;*/
@@ -302,7 +303,7 @@ label {
 }
 
 .select-style8-1 {
-    width: 1350px;
+    width: 100%;
     height: auto;
     border-radius: 3px;
     float: left;
@@ -311,13 +312,13 @@ label {
 }
 
 .select-style8-ulotki {
-    width: 662px;
+    width: 48%;
     height: auto;
     border-radius: 3px;
     float: left;
     padding: 40px;
     margin-bottom: 25px;
-    margin-right: 25px;
+    margin-left: 15px;
 }
 
 #id_uruchomienie_od, #id_uruchomienie_do {
