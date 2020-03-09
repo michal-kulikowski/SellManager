@@ -18,9 +18,10 @@
 </head>
 <body>
 <div id="header">
-        <div id="div_logo"><a id="jmdi_logo" class="navbar-brand" href="/dashboard/"><img src="/static/img/logo_jmdi.png" alt="" id="logo_img"></a>
+    <div id="div_logo"><a id="jmdi_logo" class="navbar-brand" href="/dashboard/"><img src="/static/img/logo_jmdi.png"
+                                                                                      alt="" id="logo_img"></a>
         <h2 id="h2_header_JMDI"><font style="color: white;">Panel lokalizacji</font></h2>
-        </div>
+    </div>
     <table class="head_table">
         <tr>
 
@@ -30,19 +31,24 @@
         <table>
             <tr>
                 <th>
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                    <a id="dashboard-button" class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
                        style="margin-right: 15px;">Dashboard</a>
                 </th>
                 <th></th>
                 <th>Zalogowano <br> {{ user.username }}!
-                    <span id="logout_p"><a href="{% url 'dashboard:change_password' %}"><br><font style="color: #f9be3f;">zmień hasło</font></a><br>
+                    <span id="logout_p"><a href="{% url 'dashboard:change_password' %}"><br><font
+                            style="color: #f9be3f;">zmień hasło</font></a><br>
                     <a href="{% url 'logout' %}">wyloguj</a></span>
-            </th>
+                </th>
             </tr>
         </table>
     </div>
 </div>
+<div id="content3">
+    {% block content3 %}
 
+    {% endblock %}
+</div>
 <div id="content-home">
     {% block content-home %}
 
