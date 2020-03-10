@@ -6,7 +6,7 @@
 
 {% if request.user|has_group:"Instalatorzy" %}
     <p><a href="#" onclick="return brak_uprawnien()">Panel Lokalizacji</a></p>
-    <p><a href="{% url 'panel_lokalizacji:lokalizacje_list' %}">Panel instalatora</a></p>
+    <p><a href="{% url 'panel_instalatora:panel_instalatora' %}">Panel instalatora</a></p>
 {% endif %}
 
 <script>
