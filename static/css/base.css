@@ -199,6 +199,18 @@ form p {
     position: static;
 }
 
+.button_form3 {
+    font-size: 12pt;
+    width: 250px;
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 25%;
+    text-shadow: 0.25pt 0.25pt black;
+    letter-spacing: 1.5px;
+    float: left;
+    position: static;
+}
+
 
 label {
     /*width: 250px;*/
@@ -246,6 +258,14 @@ label {
     height: 25px;
     border-radius: 3px;
     padding: 0px;
+}
+
+.select-style-instalacja-confirm {
+    width: 650px;
+    margin-left: 50px;
+    border-radius: 3px;
+    padding: 50px;
+    float: left;
 }
 
 .select-style7 {
@@ -340,14 +360,14 @@ label {
     margin-left: 25px;
 }
 
-label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_konca_umowy], label[for=id_konkurencja], label[for=id_klatka], label[for=id_rodzaj_kontaktu], label[for=id_opis], label[for=id_price], label[for=id_imie_klienta], label[for=id_telefon], label[for=id_ilosc] {
+label[for=id_poprzedni_numer_klienta], label[for=id_numer_klienta], label[for=id_notatka], label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_kolejnego_kontaktu], label[for=id_data_konca_umowy], label[for=id_konkurencja], label[for=id_klatka], label[for=id_rodzaj_kontaktu], label[for=id_opis], label[for=id_price], label[for=id_imie_klienta], label[for=id_telefon], label[for=id_ilosc] {
     float: left;
     color: slategray;
     margin-bottom: 20px;
 
 }
 
-#id_numer_mieszkania, #id_data_kontaktu, #id_data_kolejnego_kontaktu, #id_data_kolejnego_kontaktu, #id_data_konca_umowy, #id_konkurencja, #id_klatka, #id_rodzaj_kontaktu, #id_opis, #id_price, #id_imie_klienta, #id_telefon, #id_ilosc {
+#id_poprzedni_numer_klienta, #id_numer_klienta, #id_numer_mieszkania, #id_data_kontaktu, #id_data_kolejnego_kontaktu, #id_data_kolejnego_kontaktu, #id_data_konca_umowy, #id_konkurencja, #id_klatka, #id_rodzaj_kontaktu, #id_opis, #id_price, #id_imie_klienta, #id_telefon, #id_ilosc {
     width: 150px;
     height: 25px;
     float: right;
@@ -356,6 +376,7 @@ label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_k
     border: 0;
     border-radius: 3px;
     color: black;
+    padding: 6px 6px;
 }
 
 #id_nasz_klient, #id_konkurencji_klient {
@@ -365,6 +386,16 @@ label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_k
     margin-right: 100px;
     margin-bottom: 20px;
 }
+
+#text_comments {
+    background-color: #efefef;
+    width: 300px;
+    height: 200px;
+    margin-bottom: 50px;
+    float: right;
+    font-size: 9pt;
+}
+
 
 #div_logo {
     width: 480px;
@@ -429,14 +460,14 @@ label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_k
     transition: 500ms all ease;
     background: #007bff;
     color: white;
-    font-size: 12pt;
+    font-size: 11pt;
     text-align: center;
     position: absolute;
     top: 0;
     left: 0;
-    width: 120px;
+    width: 140px;
     height: 25px;
-    content: 'Upload';
+    content: 'Dodaj zdjęcia';
     line-height: 22px;
     border-radius: 100px 100px 100px 100px;
     border: 1px solid #076EB1;
@@ -461,8 +492,20 @@ label[for=id_numer_mieszkania], label[for=id_data_kontaktu], label[for=id_data_k
     height: 10%;
 }
 
+.photo_success2 {
+    margin-bottom: 15px;
+    border: solid 2px #3e4747;
+    position: static;
+    width: 250px;
+    height: 170px;
+}
+
 .font_powiadomienie_photos {
     font-size: 10pt;
     color: slategray;
     margin-left: 25px;
+}
+
+.font_potwierdzenie_instalacji {
+    /*color: slategray;*/
 }

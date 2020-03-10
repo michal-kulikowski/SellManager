@@ -1,0 +1,79 @@
+{% extends "base_panel_instalatora.html" %}
+
+
+{% block head %}
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 15px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+
+{% endblock %}
+
+{% block content3 %}
+    <div class="select-style8 shadow-sm" style="border: solid 1px #e8d6d5;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            Możliwe operacje
+        </h3>
+
+
+        <hr style="width: 85%; margin-bottom: 30px;">
+
+        <div style="margin-top: 50px;">
+            <button type="submit" onclick="window.open('/panel-instalatora/formularz-instalacji', '_self');"
+                   value="Formularz instalacji"
+                    class="btn btn-primary button-detail button_form_dom">Formularz instalacji</button>
+
+{#            <input type="submit" onclick="window.open('#', '_self');"#}
+{#                   value="Formularz próby instalacji"#}
+{#                   class="btn btn-danger button-detail button_form3">#}
+
+            <button type="submit" onclick="window.open('/panel-instalatora/', '_self');"
+                    value="Wróć" class="btn btn-dark button-detail button_form3" readonly="readonly">Powrót</button></div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block content4 %}
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            {% if photos %}
+                Zdjęcia z instalacji klienta {{instalacja.poprzedni_numer_klienta}}
+                <button type="submit" onclick="window.open('/panel-instalatora/', '_self');"  value="Wróć" class="btn btn-warning btn-sm button-detail" readonly="readonly">Wróć</button><div></div></h3>
+                <hr style="width: 85%; margin-bottom: 50px;">
+                {% for photo in photos %}
+                    <td>
+                        <a href="/media/{{ photo.file }}" target="_blank"><img
+                                class="shadow-sm bg-white rounded photo_success2"
+                                src="/media/{{ photo.file }}"
+                                alt="{{ photo.uploaded_at }}"> </a>
+                    </td>
+                {% endfor %}
+            {% else %}
+                Brak zdjęć:</h3>
+                <hr style="width: 85%">
+            {% endif %}
+
+            </font>
+    </div>
+
+
+
+{% endblock %}
+

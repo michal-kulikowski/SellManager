@@ -99,6 +99,7 @@ class Dom(models.Model):
 
 
 photo_upload = 'Ulotki/%Y/%m/%d'
+photo_upload2 = 'Instalacje/%Y/%m/%d'
 
 
 class Ulotki(models.Model):
@@ -120,6 +121,21 @@ class ProbyKontaktu(models.Model):
     numer_mieszkania = models.IntegerField()
     data_proby_kontaktu = models.DateTimeField(auto_now_add=True)
     uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
+
+
+class Instalacje(models.Model):
+    poprzedni_numer_klienta = models.CharField(max_length=50, null=False)
+    numer_klienta = models.IntegerField()
+    data_instalacji = models.DateTimeField(auto_now_add=True)
+    notatka = models.CharField(max_length=400)
+    uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
+
+
+class InstalacjeZdjecia(models.Model):
+    instalacje = models.ForeignKey(Instalacje, on_delete=models.CASCADE, default=None, null=True)
+    file = models.FileField(default=None, upload_to=photo_upload2, validators=[my_validate])
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    ident = models.IntegerField(default=None, null=True)
 
 
 class Lokale(models.Model):

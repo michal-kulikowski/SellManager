@@ -54,8 +54,12 @@
                 <b>Konkurencja: </b><font style="color: slategray">{{ dom.jaka_konkurencja }}<br></font></font>
             {% else %}
                 <b>Konkurencja: </b><font style="color: slategray">brak<br></font>
-                <b>Ostatnie ulotkowania: </b>
-                <font style="color: slategray">{{ last_ulotka.uploaded_at|date:'d/m/Y' }}<br></font></font>
+                {% if last_ulotka %}
+                    <b>Ostatnie ulotkowanie: </b>
+                    <font style="color: slategray">{{ last_ulotka.uploaded_at|date:'d/m/Y' }}<br></font></font>
+                {% else %}
+                    <b>Brak ulotkowania </b>
+                {% endif %}
             {% endif %}
 
 

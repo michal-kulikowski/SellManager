@@ -230,7 +230,6 @@ class FileFieldView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['dom_id'] = self.request.session['dom_id']
-        # context['statement_equipment'] = self.request.session.get('statement_equipment')
         return context
 
     def get_success_url(self):

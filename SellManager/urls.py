@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^logout/', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^panel-lokalizacji/', include('panel_lokalizacji.urls')),
+    url(r'^panel-instalatora/', include('panel_instalatora.urls')),
     url(r'^edit_app/', include('edit_app.urls')),
 ]
 

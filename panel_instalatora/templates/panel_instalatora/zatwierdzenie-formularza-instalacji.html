@@ -1,0 +1,80 @@
+{% extends 'base-instalator2.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a id="dashboard" class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}"
+                   role="button"
+                   style="margin-right: 30px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p id="logout_p"><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+{% endblock %}
+
+
+{% block content4 %}
+
+<div class="select-style-instalacja-confirm shadow-sm" style="border: solid 1px #e8d6d5;">
+
+    <h3 class="h3_form_tittle"
+        style="font-weight: bold; font-family: Muli; margin-top: 15px; text-align: center;">
+        FORMULARZ INSTALACJI KROK 3 z 3</h3>
+
+
+    <hr style="width: 85%; margin-bottom: 50px;">
+
+
+        <font class="font_potwierdzenie_instalacji">
+            Poprzedni numer klienta: <b>{{ poprzedni_numer }}<br></b>
+            Numer klienta: <b>{{ numer_klienta }}<br></b><br>
+            Notatka:<br>  <font style="margin-left: 25px; float: left; font-weight: bold">{{ notatka }}<br></font>
+
+            <br><br>
+            <font class="font_potwierdzenie_instalacji"><br>Dodano poniższe zdjęcia instalacji:<br><br>
+                <font/>
+                <div id="photos_success">
+                    {% for photo in photos %}
+                        <td>
+                            <a href="/media/{{ photo.file }}" target="_blank"><img
+                                    class="shadow-sm bg-white rounded photo_success2"
+                                    src="/media/{{ photo.file }}"
+                                    alt="{{ photo.uploaded_at }}"> </a>
+                        </td>
+                    {% endfor %}
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+                    <input style="margin-top: 35px" type="submit" value="Zatwierdź"
+                           class="btn btn-primary button_form"
+                           readonly="readonly">
+
+                    <input style="margin-top: 5px" onclick="window.history.back();"
+                           value="Anuluj" class="btn btn-dark button_form" readonly="readonly">
+
+                </form></font></font>
+</div>
+<br><br>
+
+<div style="width: 100%; height: 50px; float: none"></div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

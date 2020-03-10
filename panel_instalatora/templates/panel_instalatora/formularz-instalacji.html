@@ -1,0 +1,50 @@
+{% extends "base-instalator.html" %}
+
+
+{% block head %}
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 15px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+
+{% endblock %}
+
+{% block content3 %}
+    <div class="select-style9 shadow-sm" style="border: solid 1px #e8d6d5;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            FORMULARZ INSTALACJI KROK 1 z 3
+        </h3>
+
+
+        <hr style="width: 85%; margin-bottom: 70px;">
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+
+            <input type="submit" value="Następny krok"
+                   class="btn btn-primary button-detail button_form">
+
+            <input type=" mine" onclick="window.history.back()"
+                   value="Anuluj" class="btn btn-dark button-detail button_form" readonly="readonly">
+
+        </form>
+    </div>
+    </div>
+
+{% endblock %}
+

@@ -3,6 +3,7 @@
     color: #3d4545;
     text-align: center;
     font-family: "Calibri";
+    border: none;
 }
 
 #table_fleet thead input {

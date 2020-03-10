@@ -1,0 +1,72 @@
+{% extends "base_panel_instalatora.html" %}
+
+
+{% block head %}
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 15px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+
+{% endblock %}
+
+{% block content3 %}
+    <div class="select-style8 shadow-sm" style="border: solid 1px #e8d6d5;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            Możliwe operacje
+        </h3>
+
+
+        <hr style="width: 85%; margin-bottom: 30px;">
+
+        <div style="margin-top: 50px;">
+            <button type="submit" onclick="window.open('/panel-instalatora/formularz-instalacji', '_self');"
+                   value="Formularz instalacji"
+                    class="btn btn-primary button-detail button_form_dom">Formularz instalacji</button>
+
+{#            <input type="submit" onclick="window.open('#', '_self');"#}
+{#                   value="Formularz próby instalacji"#}
+{#                   class="btn btn-danger button-detail button_form3">#}
+
+            <button type=" mine" onclick="window.history.back()"
+                    value="Wróć" class="btn btn-dark button-detail button_form3" readonly="readonly">Powrót</button></div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block content4 %}
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            {% if instalacje %}
+                Wykonane instalacje:</h3>
+                <hr style="width: 85%">
+                <font style="font-size: 11pt">
+
+                {% include 'panel_instalatora/table-instalacje.html' %}
+            {% else %}
+                Nie masz jeszcze wykonanych instalacji
+            {% endif %}
+
+            </font>
+    </div>
+
+
+
+{% endblock %}
+

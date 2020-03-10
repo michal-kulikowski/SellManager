@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'core',
     'dashboard',
     'panel_lokalizacji',
+    'panel_instalatora',
     'rest_framework',
     'edit_app',
     'users',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
