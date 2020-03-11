@@ -108,9 +108,9 @@ DATABASES = {
     'remote': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'SORT4',
-        'USER': 'SYSDBM',
-        'PASSWORD': 'vooxuHai0thu',
-        'HOST': '10.1.10.31',
+        'USER': 'XDBM',
+        'PASSWORD': 'cocei9Sufuu3',
+        'HOST': 'sortdb.jmdi.pl',
         'PORT': '1521',
     }
 }
