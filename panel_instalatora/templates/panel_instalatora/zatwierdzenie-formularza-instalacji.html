@@ -1,6 +1,7 @@
 {% extends 'base-instalator2.html' %}
 
 {% block head %}
+    {% block title %}JMDI - Panel instalatora / formularz{% endblock %}
 {% endblock %}
 
 {% block login-div %}
@@ -59,7 +60,7 @@
                            readonly="readonly">
 
                     <input style="margin-top: 5px" onclick="window.history.back();"
-                           value="Anuluj" class="btn btn-dark button_form" readonly="readonly">
+                           value="Powrót" class="btn btn-dark button_form" readonly="readonly">
 
                 </form></font></font>
 </div>

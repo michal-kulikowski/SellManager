@@ -33,16 +33,16 @@
         <hr style="width: 85%; margin-bottom: 30px;">
 
         <div style="margin-top: 50px;">
-            <button type="submit" onclick="window.open('/panel-instalatora/formularz-instalacji', '_self');"
-                   value="Formularz instalacji"
-                    class="btn btn-primary button-detail button_form_dom">Formularz instalacji</button>
+{#            <button type="submit" onclick="window.open('/panel-instalatora/formularz-instalacji', '_self');"#}
+{#                   value="Formularz instalacji"#}
+{#                    class="btn btn-primary button-detail button_form_dom">Formularz instalacji</button>#}
 
 {#            <input type="submit" onclick="window.open('#', '_self');"#}
 {#                   value="Formularz próby instalacji"#}
 {#                   class="btn btn-danger button-detail button_form3">#}
 
-            <button type="submit" onclick="window.open('/panel-instalatora/', '_self');"
-                    value="Wróć" class="btn btn-dark button-detail button_form3" readonly="readonly">Powrót</button></div>
+            <button type="submit" onclick="window.close()"
+                    value="Wróć" class="btn btn-dark button-detail button_form3" readonly="readonly">Zamknij</button></div>
 
     </div>
 
@@ -55,7 +55,6 @@
             style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
             {% if photos %}
                 Zdjęcia z instalacji klienta {{instalacja.poprzedni_numer_klienta}}
-                <button type="submit" onclick="window.open('/panel-instalatora/', '_self');"  value="Wróć" class="btn btn-warning btn-sm button-detail" readonly="readonly">Wróć</button><div></div></h3>
                 <hr style="width: 85%; margin-bottom: 50px;">
                 {% for photo in photos %}
                     <td>

@@ -64,13 +64,6 @@
             <td>{{ field.imie_klienta }}</td>
             <td>{{ field.telefon|default_if_none:'' }}</td>
             <td>{{ field.uzytkownik }}</td>
-
-            <td style="padding: 2px; width: 5px; border: none">
-                <button onclick="return show()"
-                        class="btn btn-secondary btn-sm" type="submit" value="Details"
-                        style="font-size: 9.5pt;">Historia
-                </button>
-            </td>
         </tr>
 
     {% endfor %}

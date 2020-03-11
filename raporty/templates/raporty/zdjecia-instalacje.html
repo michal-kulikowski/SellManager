@@ -3,6 +3,7 @@
 
 {% block head %}
     {% load static %}
+    {% block title %}JMDI - Panel raportów / zdjęcia{% endblock %}
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 {% endblock %}
 
@@ -22,8 +23,35 @@
 {% endblock %}
 
 
+{% block content3 %}
+    <div class="select-style8 shadow-sm" style="border: solid 1px #e8d6d5;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            Możliwe operacje
+        </h3>
+
+
+        <hr style="width: 85%; margin-bottom: 30px;">
+
+        <div style="margin-top: 50px;">
+{#            <button type="submit" onclick="window.open('/panel-instalatora/formularz-instalacji', '_self');"#}
+{#                   value="Formularz instalacji"#}
+{#                    class="btn btn-primary button-detail button_form_dom">Formularz instalacji</button>#}
+
+{#            <input type="submit" onclick="window.open('#', '_self');"#}
+{#                   value="Formularz próby instalacji"#}
+{#                   class="btn btn-danger button-detail button_form3">#}
+
+            <button type="submit" onclick="window.close()"
+                    value="Wróć" class="btn btn-dark button-detail button_form3" readonly="readonly">Zamknij</button></div>
+
+    </div>
+
+{% endblock %}
+
 {% block content4 %}
-    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5; margin-left: -350px;">
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
         <h3 class="h3_form_tittle"
             style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
             {% if photos %}
