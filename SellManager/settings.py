@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'edit_app',
     'users',
     'bootstrap4',
+    'raporty',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,8 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
     },
+    'OPTIONS': {'charset': 'utf8mb4'},
+
     'remote': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'SORT4',

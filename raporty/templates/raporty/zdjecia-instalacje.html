@@ -1,0 +1,51 @@
+{% extends "base_raporty.html" %}
+
+
+{% block head %}
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 15px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+
+{% endblock %}
+
+
+{% block content4 %}
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5; margin-left: -350px;">
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            {% if photos %}
+                Zdjęcia z instalacji klienta {{instalacja.poprzedni_numer_klienta}}
+                <hr style="width: 85%; margin-bottom: 50px;">
+                {% for photo in photos %}
+                    <td>
+                        <a href="/media/{{ photo.file }}" target="_blank"><img
+                                class="shadow-sm bg-white rounded photo_success2"
+                                src="/media/{{ photo.file }}"
+                                alt="{{ photo.uploaded_at }}"> </a>
+                    </td>
+                {% endfor %}
+            {% else %}
+                Brak zdjęć:</h3>
+                <hr style="width: 85%">
+            {% endif %}
+
+            </font>
+    </div>
+
+
+
+{% endblock %}
+

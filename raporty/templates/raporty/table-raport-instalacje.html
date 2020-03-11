@@ -1,0 +1,112 @@
+<table id="table_fleet" class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Poprzedni numer klienta</th>
+        <th>Numer klienta</th>
+        <th>Notatka</th>
+        <th>Data instalacji</th>
+        <th>Instalator</th>
+        <th style="visibility: hidden"></th>
+    </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th style="visibility: hidden">ID</th>
+        <th style="visibility: hidden">Poprzedni numer klienta</th>
+        <th style="visibility: hidden">Numer klienta</th>
+        <th style="visibility: hidden">Notatka</th>
+        <th>Data instalacji</th>
+        <th>Instalator</th>
+        <th style="visibility: hidden"></th>
+    </tr>
+    </tfoot>
+
+    {% for field in instalacje %}
+        <tr>
+            <td>{{ field.id }}</td>
+            <td>{{ field.numer_klienta }}</td>
+            <td>{{ field.poprzedni_numer_klienta }}</td>
+            <td>{{ field.notatka }}</td>
+            <td>{{ field.data_instalacji|date:'Y-m-d' }}</td>
+            <td>{{ field.uzytkownik }}</td>
+            <td style="width: 5px; border: none">
+                <button onclick="return zdjecia()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                        style="font-size: 9.5pt;">Zdjęcia
+                </button>
+            </td>
+
+        </tr>
+
+    {% endfor %}
+</table>
+
+
+<script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" language="javascript" class="init">
+
+    $(document).ready(function () {
+        $('#table_fleet').DataTable({
+                "pageLength": 10,
+                "processing": true,
+                "order": [[0, "desc"]],
+
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            },
+        );
+    });
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table_fleet thead th').each(function () {
+
+            var title = $(this).text();
+            $(this).html('<input type="text" style="text-align: center;" placeholder="' + title + '" />');
+
+        });
+
+        // DataTable
+        var table = $('#table_fleet').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.header()).on('keyup change clear', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+
+    function zdjecia(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        newwindow = window.open('/raporty/zdjecie-instalacji-redirect/' + getIdFromRow, '_blank')
+    }
+
+</script>
