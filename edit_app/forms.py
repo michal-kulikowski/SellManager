@@ -72,4 +72,4 @@ def my_validate(value):
 class FileFieldForm(forms.Form):
     ilosc = forms.IntegerField(required=True, label='Ilość')
     opis = forms.CharField(required=False)
-    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'inputfile'}), validators=[my_validate])
+    file_field = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'inputfile'}), validators=[my_validate])

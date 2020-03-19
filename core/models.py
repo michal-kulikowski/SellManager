@@ -97,6 +97,10 @@ class Dom(models.Model):
     jaka_konkurencja = models.ForeignKey(Konkurencja, on_delete=models.CASCADE, null=True)
     data_dod = models.DateTimeField(default=datetime.date.today)
 
+    def __str__(self):
+        # return str(self.first_name) + ' ' + str(self.last_name) + ' (id: ' + str(self.pk) + ')'
+        return str(self.nazwa_ulicy) + ' ' + str(self.numer_domu)
+
 
 photo_upload = 'Ulotki/%Y/%m/%d'
 photo_upload2 = 'Instalacje/%Y/%m/%d'

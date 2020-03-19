@@ -17,6 +17,13 @@ def edit_dom_redirect(request, getIdFromRow, liczba_klientow):
     return redirect('edit_app:edit_dom')
 
 
+def edit_dom_redirect_ulotki(request, getIdFromRow, liczba_klientow):
+    dom_id = Ulotki.objects.get(id=getIdFromRow).id_adr_dom.id_adr_dom
+    request.session['dom_id'] = dom_id
+    request.session['ilosc_klientow'] = liczba_klientow
+    return redirect('edit_app:edit_dom')
+
+
 def edit_dom(request):
     dom_id = request.session.get('dom_id')
     ilosc_klientow = request.session.get('ilosc_klientow')
@@ -34,31 +41,36 @@ def edit_dom(request):
     miejscowosc = SortAdrMiejscowosc.objects.get(id_adr_miejscowosc=SortAdrUlica.objects.get(
         id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica).id_adr_miejscowosc).nazwa_miejscowosci
     try:
-        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
+        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(
+            id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica,
+            numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
     except SortAdrBudynek.DoesNotExist or SortAdrTypBudynku.DoesNotExist:
         typ_budynku = 'Brak'
     symbol = SortAdrDomSymbol.objects.filter(id_adr_dom=dom_id)[0].symbol
     uruchomienie = SortAdrDomPodpisujacy.objects.filter(id_adr_dom=dom_id)[0].uruchomienie
     try:
-        technologia = SortGniazdkaTechnologie.objects.get(id_gniazdka_technologie=SortAdrDomTechnologia.objects.get(id_adr_dom=dom_id).id_gniazdka_technologie).nazwa
+        technologia = SortGniazdkaTechnologie.objects.get(
+            id_gniazdka_technologie=SortAdrDomTechnologia.objects.get(id_adr_dom=dom_id).id_gniazdka_technologie).nazwa
     except SortAdrDomTechnologia.DoesNotExist:
         technologia = 'Brak'
     handlowiec = SortUmPodpisujacy.objects.get(
         id_um_podpisujacy=SortAdrDomPodpisujacy.objects.filter(id_adr_dom=dom_id)[
             0].id_um_podpisujacy).imie + ' ' + SortUmPodpisujacy.objects.get(
         id_um_podpisujacy=SortAdrDomPodpisujacy.objects.filter(id_adr_dom=dom_id)[0].id_um_podpisujacy).nazwisko
+
     if Dom.objects.filter(id_adr_dom=dom_id).exists():
         dom = Dom.objects.filter(id_adr_dom=dom_id)
-        dom.update(id_adr_dom=dom_id, numer_domu=numer_domu, licz_lokali=licz_lokali, predkosc_max=predkosc_max,
-                   nazwa_ulicy=nazwa_ulicy, uruchomienie=uruchomienie, miejscowosc=miejscowosc, typ_budynku=typ_budynku,
-                   handlowiec=handlowiec, ilosc_klientow=ilosc_klientow, symbol=symbol, technologia=technologia)
-        dom = Dom.objects.get(id_adr_dom=dom_id)
+        if ilosc_klientow != 'Brak':
+            dom.update(id_adr_dom=dom_id, numer_domu=numer_domu, licz_lokali=licz_lokali, predkosc_max=predkosc_max, nazwa_ulicy=nazwa_ulicy, uruchomienie=uruchomienie, miejscowosc=miejscowosc, typ_budynku=typ_budynku, handlowiec=handlowiec, ilosc_klientow=ilosc_klientow, symbol=symbol, technologia=technologia)
+            dom = Dom.objects.get(id_adr_dom=dom_id)
+        else:
+            dom = Dom.objects.get(id_adr_dom=dom_id)
     else:
-        Dom.objects.create(id_adr_dom=dom_id, numer_domu=numer_domu, licz_lokali=licz_lokali, predkosc_max=predkosc_max,
-                           nazwa_ulicy=nazwa_ulicy, uruchomienie=uruchomienie, miejscowosc=miejscowosc,
-                           typ_budynku=typ_budynku,
-                           handlowiec=handlowiec, ilosc_klientow=ilosc_klientow, symbol=symbol, technologia=technologia)
-        dom = Dom.objects.get(id_adr_dom=dom_id)
+        if ilosc_klientow != 'Brak':
+            Dom.objects.create(id_adr_dom=dom_id, numer_domu=numer_domu, licz_lokali=licz_lokali, predkosc_max=predkosc_max, nazwa_ulicy=nazwa_ulicy, uruchomienie=uruchomienie, miejscowosc=miejscowosc, typ_budynku=typ_budynku, handlowiec=handlowiec, ilosc_klientow=ilosc_klientow, symbol=symbol, technologia=technologia)
+            dom = Dom.objects.get(id_adr_dom=dom_id)
+        else:
+            dom = Dom.objects.get(id_adr_dom=dom_id)
 
     lokale = Lokale.objects.filter(id_adr_dom=dom_id)
 
@@ -107,7 +119,8 @@ def dodaj_informacje_klient(request):
                 lokal.uzytkownik = request.user
                 LokaleHistory.objects.create(
                     id_adr_lokal=Lokale.objects.get(id_adr_dom=dom_id, numer_mieszkania=form.numer_mieszkania),
-                    numer_mieszkania=form.numer_mieszkania, nasz_klient=form.nasz_klient, konkurencji_klient=form.konkurencji_klient,
+                    numer_mieszkania=form.numer_mieszkania, nasz_klient=form.nasz_klient,
+                    konkurencji_klient=form.konkurencji_klient,
                     data_kontaktu=form.data_kontaktu, data_kolejnego_kontaktu=form.data_kolejnego_kontaktu,
                     data_konca_umowy=form.data_konca_umowy, konkurencja=form.konkurencja, klatka=form.klatka,
                     uzytkownik=request.user, data_modyfikacji=form.data_modyfikacji,
@@ -119,7 +132,8 @@ def dodaj_informacje_klient(request):
                 form.save()
                 LokaleHistory.objects.create(
                     id_adr_lokal=Lokale.objects.get(id_adr_dom=dom_id, numer_mieszkania=form.numer_mieszkania),
-                    numer_mieszkania=form.numer_mieszkania, nasz_klient=form.nasz_klient, konkurencji_klient=form.konkurencji_klient,
+                    numer_mieszkania=form.numer_mieszkania, nasz_klient=form.nasz_klient,
+                    konkurencji_klient=form.konkurencji_klient,
                     data_kontaktu=form.data_kontaktu, data_kolejnego_kontaktu=form.data_kolejnego_kontaktu,
                     data_konca_umowy=form.data_konca_umowy, konkurencja=form.konkurencja, klatka=form.klatka,
                     imie_klienta=form.imie_klienta, telefon=form.telefon,
@@ -158,7 +172,9 @@ def show_lokal(request):
     miejscowosc = SortAdrMiejscowosc.objects.get(id_adr_miejscowosc=SortAdrUlica.objects.get(
         id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica).id_adr_miejscowosc).nazwa_miejscowosci
     try:
-        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
+        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(
+            id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica,
+            numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
     except SortAdrBudynek.DoesNotExist or SortAdrTypBudynku.DoesNotExist:
         typ_budynku = 'Brak'
     symbol = SortAdrDomSymbol.objects.filter(id_adr_dom=dom_id)[0].symbol
@@ -219,7 +235,8 @@ class FileFieldView(FormView):
                 return render(request, 'edit_app/error-page.html',
                               {'error_message': msg})
             else:
-                ulotki = Ulotki.objects.create(id_adr_dom_id=dom_id, ilosc=form.cleaned_data.get('ilosc'), uzytkownik=request.user, opis=form.cleaned_data.get('opis'))
+                ulotki = Ulotki.objects.create(id_adr_dom_id=dom_id, ilosc=form.cleaned_data.get('ilosc'),
+                                               uzytkownik=request.user, opis=form.cleaned_data.get('opis'))
                 for f in files:
                     Photo.objects.create(file=f, ulotki_id=ulotki.id)
 

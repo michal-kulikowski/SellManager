@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^show_ulotki_redirect/(?P<getIdFromRow>.*)$', views.show_ulotki_photos_redirect, name='show_ulotki_photos_redirect'),
     url('show-ulotki-photos', views.show_ulotki_photos, name='show_ulotki_photos'),
     url(r'^edit_dom_redirect/(?P<getIdFromRow>.*)/(?P<liczba_klientow>.*)$', views.edit_dom_redirect, name='edit_dom_redirect'),
+    url(r'^edit_dom_redirect_ulotki/(?P<getIdFromRow>.*)/(?P<liczba_klientow>.*)$', views.edit_dom_redirect_ulotki, name='edit_dom_redirect_ulotki'),
     url(r'^show_lokal_redirect/(?P<getIdFromRow>.*)$', views.show_lokal_redirect, name='show_lokal_redirect'),
     url('edit-dom', views.edit_dom, name='edit_dom'),
     url('show-lokal', views.show_lokal, name='show_lokal'),

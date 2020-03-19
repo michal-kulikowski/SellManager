@@ -2,8 +2,8 @@
 
 
 {% block head %}
-    {% load static %}
     {% block title %}JMDI - Panel raportów{% endblock %}
+    {% load static %}
     <meta charset="utf-8" xmlns="http://www.w3.org/1999/html">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -66,8 +66,11 @@
     <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
         <h3 class="h3_form_tittle"
             style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
-        </h3>
+            Raport z roznoszenia ulotek</h3>
         </font>
+            <hr style="width: 85%; margin-bottom: 30px;">
+
+        {% include 'raporty/table-raport-ulotki.html' %}
     </div>
 
 {% endblock %}
