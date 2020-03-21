@@ -8,6 +8,7 @@
         <th>Symbol</th>
         <th>Ulica</th>
         <th>Numer</th>
+        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
         <th>Typ budynku</th>
         <th>Prędkość max</th>
@@ -18,7 +19,7 @@
         <th>Uruchomienie</th>
         <th>Handlowiec</th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
-{#        <th style="width: 0px; padding: 0px; visibility: hidden"></th>#}
+        {#        <th style="width: 0px; padding: 0px; visibility: hidden"></th>#}
     </tr>
     </thead>
     <tfoot>
@@ -28,6 +29,7 @@
         <th>Symbol</th>
         <th>Ulica</th>
         <th>Numer</th>
+        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
         <th>Typ budynku</th>
         <th>Prędkość max</th>
@@ -59,6 +61,7 @@
                 {% endif %}
             {% endif %}
             <td>{{ field.numer_domu }}</td>
+            <td>{{ field.nazwa_gminy }}</td>
             <td>{{ field.nazwa_miejscowosci }}</td>
             {% if field.nazwa_typu is None %}
                 <td>brak</td>
@@ -76,20 +79,24 @@
                 <td>{{ field.licz_lokali|cut:".0" }}</td>
             {% endif %}
             <td>{{ field.liczba_klientow }}</td>
-            <td>{% widthratio field.liczba_klientow field.licz_lokali 100 %} </td>
+            {% if field.wypelnienie is not None %}
+                <td>{{ field.wypelnienie }} </td>
+            {% else %}
+                <td>0</td>
+            {% endif %}
             <td>{{ field.technologie }}</td>
             <td>{{ field.uruchomienie|date:"Y/m/d" }}</td>
-            <td>{{ field.imie }} {{ field.nazwisko }}</td>
+            <td>{{ field.handlowiec }} </td>
             <td style="padding: 2px; width: 5px; border: none">
                 <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
                         style="font-size: 9.5pt;">Karta
                 </button>
             </td>
-{#            <td style="padding: 2px; width: 5px; border: none">#}
-{#                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"#}
-{#                        style="font-size: 9.5pt;">Zgłoś ulotki#}
-{#                </button>#}
-{#            </td>#}
+            {#            <td style="padding: 2px; width: 5px; border: none">#}
+            {#                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"#}
+            {#                        style="font-size: 9.5pt;">Zgłoś ulotki#}
+            {#                </button>#}
+            {#            </td>#}
         </tr>
 
     {% endfor %}
@@ -110,7 +117,7 @@
                 "infoCallback":
                     function (settings, start, end, max, total, pre) {
                         return "Rekord " + start + " do " + end + " z " + total + " wszystkich"
-                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + 'Klientów: ' + Total_C + '<br>HP: ' + parseInt(Total_HP / 3) + '<br>Wypełnienie: ' + parseInt(Total_C * 100 / parseInt(Total_HP / 3)) + '%' + '</font>';
+                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + 'Klientów: ' + Total_C + '<br>HP: ' + parseInt(Total_HP) + '<br>Wypełnienie: ' + parseInt(Total_C * 100 / parseInt(Total_HP)) + '%' + '</font>';
                     },
 
                 "footerCallback": function (row, data, start, end, display) {
@@ -128,7 +135,7 @@
 
                     // Total over this page
                     Total_HP = api
-                        .column(8, {filter: 'applied'})
+                        .column(9, {filter: 'applied'})
                         .data()
                         .reduce(function (a, b) {
                             {
@@ -137,7 +144,7 @@
                         }, 0);
 
                     Total_C = api
-                        .column(9, {filter: 'applied'})
+                        .column(10, {filter: 'applied'})
                         .data()
                         .reduce(function (a, b) {
                             {
