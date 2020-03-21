@@ -343,14 +343,6 @@
         width: 100px;
     }
 
-    #button_search {
-        position: absolute;
-        float: left;
-        margin-left: -150px;
-        margin-top: 50px;
-        width: 125px;
-    }
-
     #id_poprzedni_numer_klienta, #id_numer_klienta, #id_notatka, #id_data_kolejnego_kontaktu, #id_numer_mieszkania, #id_data_kontaktu, #id_data_kolejnego_kontaktu, #id_data_konca_umowy, #id_konkurencja, #id_klatka, #id_rodzaj_kontaktu, #id_opis, #id_price, #id_imie_klienta, #id_telefon, #id_ilosc, #id_opis {
         font-size: 18pt;
         width: 40%;

@@ -124,13 +124,14 @@ def lokalizacje_list(request):
             else:
                 wypelnienie_query = ""
 
+            uruchomienie = 'MIN(lokalizacja.URUCHOMIENIE)'
             if uruchomienie_od is not None or uruchomienie_do is not None:
                 if uruchomienie_od is not None and uruchomienie_do is None:
-                    uruchomienie_query = " AND lokalizacja.uruchomienie >= '" + str(uruchomienie_od) + "' "
+                    uruchomienie_query = " AND " + uruchomienie + " >= '" + str(uruchomienie_od) + "' "
                 if uruchomienie_od is None and uruchomienie_do is not None:
-                    uruchomienie_query = " AND (lokalizacja.uruchomienie <= '" + str(uruchomienie_do) + "'"
+                    uruchomienie_query = " AND (" + uruchomienie + " <= '" + str(uruchomienie_do) + "'"
                 if uruchomienie_od is not None and uruchomienie_do is not None:
-                    uruchomienie_query = " AND lokalizacja.uruchomienie BETWEEN '" + str(
+                    uruchomienie_query = " AND " + uruchomienie + " BETWEEN '" + str(
                         uruchomienie_od) + "' AND '" + str(uruchomienie_do) + "' "
             else:
                 uruchomienie_query = ""
