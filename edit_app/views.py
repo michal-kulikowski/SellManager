@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -41,10 +42,8 @@ def edit_dom(request):
     miejscowosc = SortAdrMiejscowosc.objects.get(id_adr_miejscowosc=SortAdrUlica.objects.get(
         id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica).id_adr_miejscowosc).nazwa_miejscowosci
     try:
-        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(
-            id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica,
-            numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
-    except SortAdrBudynek.DoesNotExist or SortAdrTypBudynku.DoesNotExist:
+        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
+    except ObjectDoesNotExist:
         typ_budynku = 'Brak'
     symbol = SortAdrDomSymbol.objects.filter(id_adr_dom=dom_id)[0].symbol
     uruchomienie = SortAdrDomPodpisujacy.objects.filter(id_adr_dom=dom_id)[0].uruchomienie
@@ -172,10 +171,8 @@ def show_lokal(request):
     miejscowosc = SortAdrMiejscowosc.objects.get(id_adr_miejscowosc=SortAdrUlica.objects.get(
         id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica).id_adr_miejscowosc).nazwa_miejscowosci
     try:
-        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(
-            id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica,
-            numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
-    except SortAdrBudynek.DoesNotExist or SortAdrTypBudynku.DoesNotExist:
+        typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=dom_id).numer_domu).id_adr_typ_budynku).nazwa_typu
+    except ObjectDoesNotExist:
         typ_budynku = 'Brak'
     symbol = SortAdrDomSymbol.objects.filter(id_adr_dom=dom_id)[0].symbol
     uruchomienie = SortAdrDomPodpisujacy.objects.filter(id_adr_dom=dom_id)[0].uruchomienie

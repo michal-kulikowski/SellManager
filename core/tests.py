@@ -1,6 +1,6 @@
 import django
 import os
-
+from django.core.exceptions import ObjectDoesNotExist
 from MySQLdb import cursors
 from django.core import serializers
 from django.core.management.commands import dumpdata
@@ -291,10 +291,13 @@ import json
 
 from core.models import SortAdrDomPodpisujacy
 
-symbol = SortAdrDomSymbol.objects.filter(id_adr_dom=15209)
 # uruchomienie = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=10482).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=10482).numer_domu).id_adr_typ_budynku)
 # .get(numer_budynku=SortAdrDom.objects.get(id_adr_dom=3457).numer_domu).id_adr_typ_budynku).nazwa_typu
-print(symbol[0].symbol)
+try:
+    typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=20881).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=20881).numer_domu).id_adr_typ_budynku).nazwa_typu
+except ObjectDoesNotExist:
+    typ_budynku = "Brak"
+print(typ_budynku)
 
 # print(dom2)
 #
@@ -310,6 +313,3 @@ print(symbol[0].symbol)
 # print (con.version)
 #
 # con.close()
-dom = SortAdrDomPodpisujacy.objects.raw(
-    '''SELECT lokalizacja.ID_ADR_DOM_PODPISUJACY AS id_adr_dom_podpisujacy, dane_osobowe.NAZWA_KLIENTA AS NAZWA_SPRZEDAWCY, miejscowosc.NAZWA_MIEJSCOWOSCI, ulica.TYP, ulica.NAZWA_ULICY, dom.NUMER_DOMU, symbol.SYMBOL, budynek.NAZWA_TYPU, dom.LICZ_LOKALI, COALESCE(klienci.LICZBA_KLIENTOW, 0) AS LICZBA_KLIENTOW, dom.PREDKOSC_MAX, handlowiec.IMIE, handlowiec.NAZWISKO, technologie.TECHNOLOGIE FROM USORT4.ADR_DOM_PODPISUJACY lokalizacja INNER JOIN USORT4.ADR_DOM dom ON lokalizacja.ID_ADR_DOM = dom.ID_ADR_DOM INNER JOIN USORT4.ADR_ULICA ulica ON dom.ID_ADR_ULICA = ulica.ID_ADR_ULICA INNER JOIN USORT4.ADR_MIEJSCOWOSC miejscowosc ON ulica.ID_ADR_MIEJSCOWOSC = miejscowosc.ID_ADR_MIEJSCOWOSC INNER JOIN USORT4.SPRZEDAWCA sprzedawca ON lokalizacja.ID_SPRZEDAWCA = sprzedawca.ID_SPRZEDAWCA INNER JOIN USORT4.DANE_OSOBOWE dane_osobowe ON sprzedawca.ID_DANE_OSOBOWE = dane_osobowe.ID_DANE_OSOBOWE LEFT JOIN USORT4.UM_PODPISUJACY handlowiec ON lokalizacja.ID_UM_PODPISUJACY = handlowiec.ID_UM_PODPISUJACY LEFT JOIN USORT4.ADR_DOM_SYMBOL symbol ON lokalizacja.ID_SPRZEDAWCA = symbol.ID_SPRZEDAWCA AND lokalizacja.ID_ADR_DOM = symbol.ID_ADR_DOM LEFT JOIN (    SELECT budynek.ID_ADR_ULICA, budynek.NUMER_BUDYNKU, typ_budynku.NAZWA_TYPU FROM USORT4.ADR_BUDYNEK budynek LEFT JOIN USORT4.ADR_TYP_BUDYNKU typ_budynku ON budynek.ID_ADR_TYP_BUDYNKU = typ_budynku.ID_ADR_TYP_BUDYNKU) budynek ON ulica.ID_ADR_ULICA = budynek.ID_ADR_ULICA AND dom.NUMER_DOMU = budynek.NUMER_BUDYNKU LEFT JOIN (    SELECT sprzedawca.ID_SPRZEDAWCA, dom.ID_ADR_DOM, COUNT(DISTINCT(klient.ID_KLIENCI)) AS LICZBA_KLIENTOW FROM USORT4.KLIENCI klient INNER JOIN USORT4.SPRZEDAWCA sprzedawca ON klient.ID_SPRZEDAWCA = sprzedawca.ID_SPRZEDAWCA INNER JOIN USORT4.OPLATY_STALE oplata ON klient.ID_KLIENCI = oplata.ID_KLIENCI INNER JOIN USORT4.WAZNOSCI_PORTOW waznosc_portu ON oplata.ID_OPLATY_STALE = waznosc_portu.ID_OPLATY_STALE AND TRUNC(oplata.POCZ_WAZNOSCI) <= TRUNC(CURRENT_DATE) AND (oplata.KON_WAZNOSCI IS NULL OR TRUNC(oplata.KON_WAZNOSCI) >= TRUNC(CURRENT_DATE)) AND TRUNC(waznosc_portu.POCZ_WAZNOSCI) <= TRUNC(CURRENT_DATE) AND (waznosc_portu.KON_WAZNOSCI IS NULL OR TRUNC(waznosc_portu.KON_WAZNOSCI) >= TRUNC(CURRENT_DATE)) INNER JOIN USORT4.GNIAZDKA gniazdko ON waznosc_portu.ID_GNIAZDKA = gniazdko.ID_GNIAZDKA INNER JOIN USORT4.ADR_LOKAL lokal ON gniazdko.ID_ADR_LOKAL = lokal.ID_ADR_LOKAL INNER JOIN USORT4.ADR_DOM dom ON lokal.ID_ADR_DOM = dom.ID_ADR_DOM GROUP BY sprzedawca.ID_SPRZEDAWCA, dom.ID_ADR_DOM) klienci ON lokalizacja.ID_SPRZEDAWCA = klienci.ID_SPRZEDAWCA AND dom.ID_ADR_DOM = klienci.ID_ADR_DOM  LEFT JOIN (    SELECT dom_technologia.ID_ADR_DOM, LISTAGG(technologia.NAZWA, ', ') WITHIN GROUP (ORDER BY technologia.NAZWA) AS TECHNOLOGIE FROM USORT4.ADR_DOM_TECHNOLOGIA dom_technologia INNER JOIN USORT4.GNIAZDKA_TECHNOLOGIE technologia ON dom_technologia.ID_GNIAZDKA_TECHNOLOGIE = technologia.ID_GNIAZDKA_TECHNOLOGIE GROUP BY dom_technologia.ID_ADR_DOM) technologie ON dom.ID_ADR_DOM = technologie.ID_ADR_DOM WHERE handlowiec.nazwisko LIKE %s AND ulica.nazwa_ulicy LIKE %s AND miejscowosc.nazwa_miejscowosci LIKE %s''',
-    [handlowiec, ulica, miejscowosc])
