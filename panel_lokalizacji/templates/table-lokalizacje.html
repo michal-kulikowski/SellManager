@@ -76,7 +76,7 @@
             {% if field.licz_lokali == None %}
                 <td>0</td>
             {% else %}
-                <td>{{ field.licz_lokali|cut:".0" }}</td>
+                <td>{{ field.licz_lokali }}</td>
             {% endif %}
             <td>{{ field.liczba_klientow }}</td>
             {% if field.wypelnienie is not None %}
@@ -117,7 +117,7 @@
                 "infoCallback":
                     function (settings, start, end, max, total, pre) {
                         return "Rekord " + start + " do " + end + " z " + total + " wszystkich"
-                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + 'Klientów: ' + Total_C + '<br>HP: ' + parseInt(Total_HP) + '<br>Wypełnienie: ' + parseInt(Total_C * 100 / parseInt(Total_HP)) + '%' + '</font>';
+                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + 'Klientów: ' + Total_C + '<br>HP: ' + (Total_HP) + '<br>Wypełnienie: ' + parseInt(Total_C * 100 / parseInt(Total_HP)) + '%' + '</font>';
                     },
 
                 "footerCallback": function (row, data, start, end, display) {

@@ -41,9 +41,11 @@
         </div>
     <table class="head_table">
         <tr>
+            {% for field in hp %}
             <td>
-                HP: {{ hp.total_hp|cut:'.0' }}
+                HP: {{ field.total_hp }}
             </td>
+            {% endfor %}
             <td>
                 Lokalizacje: {{ hp2.total_dom }}
             </td>

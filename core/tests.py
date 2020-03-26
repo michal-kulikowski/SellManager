@@ -1,3 +1,5 @@
+from itertools import count
+
 import django
 import os
 from django.core.exceptions import ObjectDoesNotExist
@@ -290,14 +292,23 @@ import json
 # print(test.columns)
 
 from core.models import SortAdrDomPodpisujacy
+from django.db.models import Q
 
 # uruchomienie = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=10482).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=10482).numer_domu).id_adr_typ_budynku)
 # .get(numer_budynku=SortAdrDom.objects.get(id_adr_dom=3457).numer_domu).id_adr_typ_budynku).nazwa_typu
-try:
-    typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=20881).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=20881).numer_domu).id_adr_typ_budynku).nazwa_typu
-except ObjectDoesNotExist:
-    typ_budynku = "Brak"
-print(typ_budynku)
+hp = SortAdrDom.objects.aggregate(total_hp=Sum('licz_lokali'))
+print(hp)
+
+sql = '''SELECT 1 as id_adr_dom, SUM("USORT4"."ADR_DOM"."LICZ_LOKALI") as total_hp 
+FROM "USORT4"."ADR_DOM" 
+WHERE "USORT4"."ADR_DOM"."ID_ADR_DOM" 
+IN (SELECT "USORT4"."ADR_DOM_PODPISUJACY"."ID_ADR_DOM" 
+FROM "USORT4"."ADR_DOM_PODPISUJACY")'''
+
+hp2 = SortAdrDom.objects.raw(sql)
+
+for field in hp2:
+    print(field.total_hp)
 
 # print(dom2)
 #

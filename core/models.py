@@ -227,8 +227,8 @@ class ExternalModel(models.Model):
 
 
 class SortAdrDom(ExternalModel):
-    id_adr_dom = models.AutoField(primary_key=True)
-    licz_lokali = models.TextField(db_column='licz_lokali')
+    id_adr_dom = models.AutoField(primary_key=True, db_column='id_adr_dom')
+    licz_lokali = models.IntegerField(db_column='licz_lokali')
     numer_domu = models.TextField(db_column='numer_domu')
     predkosc_max = models.TextField(db_column='predkosc_max')
     id_adr_ulica = models.IntegerField(db_column='id_adr_ulica')
@@ -277,7 +277,7 @@ class SortAdrMiejscowosc(ExternalModel):
 
 
 class SortAdrDomPodpisujacy(ExternalModel):
-    id_adr_dom_podpisujacy = models.AutoField(primary_key=True)
+    id_adr_dom_podpisujacy = models.AutoField(primary_key=True, db_column='id_adr_dom_podpisujacy')
     id_adr_dom = models.IntegerField(db_column='id_adr_dom')
     uruchomienie = models.DateField(db_column='uruchomienie')
     id_um_podpisujacy = models.IntegerField(db_column='id_um_podpisujacy')
