@@ -83,7 +83,7 @@ class Konkurencja(models.Model):
 class Dom(models.Model):
     id_adr_dom = models.AutoField(primary_key=True)
     numer_domu = models.CharField(max_length=10, default='')
-    licz_lokali = models.CharField(max_length=10, default='')
+    licz_lokali = models.CharField(max_length=10, default='', null=True)
     predkosc_max = models.CharField(max_length=10, default='')
     nazwa_ulicy = models.CharField(max_length=50, default='')
     uruchomienie = models.DateField(null=True)

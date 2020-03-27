@@ -1,5 +1,3 @@
-<br><br>
-
 <table id="table_fleet" class="table table-hover table-bordered table-sm">
     <thead>
     <tr>
@@ -19,25 +17,25 @@
         <th>Uruchomienie</th>
         <th>Handlowiec</th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
-        {#        <th style="width: 0px; padding: 0px; visibility: hidden"></th>#}
+        {#                <th style="width: 0px; padding: 0px; visibility: hidden"></th>#}
     </tr>
     </thead>
     <tfoot>
     <tr>
-        <th>ID</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">ID</th>
         <th>Sprzedawca</th>
         <th>Symbol</th>
-        <th>Ulica</th>
-        <th>Numer</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Ulica</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Numer</th>
         <th>Nazwa gminy</th>
         <th>Miejscowość</th>
         <th>Typ budynku</th>
         <th>Prędkość max</th>
-        <th>Ilość HP</th>
-        <th>Ilość klientów</th>
-        <th>Wypełnienie</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Ilość HP</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Ilość klientów</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Wypełnienie</th>
         <th>Technologia</th>
-        <th>Uruchomienie</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Uruchomienie</th>
         <th>Handlowiec</th>
     </tr>
     </tfoot>
@@ -113,6 +111,8 @@
         $('#table_fleet').DataTable({
                 "pageLength": 10,
                 "processing": true,
+                "deferRender": true,
+                "order": [],
 
                 "infoCallback":
                     function (settings, start, end, max, total, pre) {
@@ -131,9 +131,6 @@
                                 i : 0;
                     };
 
-                    // Total over all pages
-
-                    // Total over this page
                     Total_HP = api
                         .column(9, {filter: 'applied'})
                         .data()
@@ -152,11 +149,6 @@
                             }
                         }, 0);
 
-
-                    // Update footer
-                    {#$(api.column(7).footer()).html(#}
-                    {#    pageTotal + '/' + total#}
-                    {#);#}
                 },
 
                 initComplete: function () {
@@ -208,23 +200,6 @@
                         .draw();
                 }
             });
-        });
-
-        var table = $('#table_fleet').DataTable();
-
-        $('#table_fleet tbody').on('click', 'tr', function () {
-            console.log(table.row(this).data());
-        });
-
-        $('#table_fleet tbody').on('click', 'tr', function () {
-            var d = table.row(this).data();
-            {#d[2] = 'XXX';#}
-            {#d[8] = "1";#}
-            {#d[7] = '1001';#}
-            table
-                .row(this)
-                .data(d)
-                .draw();
         });
 
     });
