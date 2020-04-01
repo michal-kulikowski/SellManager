@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.views.generic import FormView
 
@@ -10,6 +9,7 @@ from core.models import InstalacjeZdjecia, Instalacje
 from panel_instalatora.forms import InstalacjaForm, FileFieldFormInstalacje
 
 
+@login_required
 def panel_instalatora(request):
     instalacje = Instalacje.objects.filter(uzytkownik=request.user)
 
@@ -19,6 +19,7 @@ def panel_instalatora(request):
     return render(request, 'panel_instalatora/panel_instalatora.html', context)
 
 
+@login_required
 def formularz_instalacji(request):
     if request.method == 'POST':
         form = InstalacjaForm(request.POST)
@@ -45,6 +46,7 @@ def formularz_instalacji(request):
     return render(request, 'panel_instalatora/formularz-instalacji.html', context)
 
 
+# @login_required
 class FileFieldView(FormView):
     form_class = FileFieldFormInstalacje
     template_name = 'panel_instalatora/dodanie-zdjec-instalacji.html'
@@ -75,6 +77,7 @@ class FileFieldView(FormView):
         return reverse('panel_instalatora:potwierdzenie_formularza_instalacji')
 
 
+@login_required
 def potwierdzenie_formularza_instalacji(request):
     poprzedni_numer = request.session.get('poprzedni_numer')
     numer_klienta = request.session.get('numer_klienta')
@@ -97,12 +100,14 @@ def potwierdzenie_formularza_instalacji(request):
     return render(request, 'panel_instalatora/zatwierdzenie-formularza-instalacji.html', context)
 
 
+@login_required
 def show_photos_instalacja_redirect(request, getIdFromRow):
     request.session['id_instalacji'] = getIdFromRow
 
     return redirect('panel_instalatora:show_photos_instalacja')
 
 
+@login_required
 def show_photos_instalacja(request):
     id_instalacji = request.session.get('id_instalacji')
     instalacja = Instalacje.objects.get(id=id_instalacji)

@@ -1,11 +1,12 @@
 from django.db.models import Sum, Count
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from core.models import SortAdrDom, SortAdrDomPodpisujacy
 from panel_lokalizacji.forms import SearchForm
 
 
+@login_required
 def lokalizacje_list(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)

@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.urls import reverse
 from django.views.generic import FormView
@@ -12,12 +12,14 @@ from core.models import Dom, Symbole, Sprzedawca, SortAdrDomPodpisujacy, SortAdr
 from edit_app.forms import EditDomForm, EditSymbolForm, LokalForm, FileFieldForm, ProbaForm
 
 
+@login_required
 def edit_dom_redirect(request, getIdFromRow, liczba_klientow):
     request.session['dom_id'] = getIdFromRow
     request.session['ilosc_klientow'] = liczba_klientow
     return redirect('edit_app:edit_dom')
 
 
+@login_required
 def edit_dom_redirect_ulotki(request, getIdFromRow, liczba_klientow):
     dom_id = Ulotki.objects.get(id=getIdFromRow).id_adr_dom.id_adr_dom
     request.session['dom_id'] = dom_id
@@ -25,6 +27,7 @@ def edit_dom_redirect_ulotki(request, getIdFromRow, liczba_klientow):
     return redirect('edit_app:edit_dom')
 
 
+@login_required
 def edit_dom(request):
     dom_id = request.session.get('dom_id')
     ilosc_klientow = request.session.get('ilosc_klientow')
@@ -96,6 +99,7 @@ def edit_dom(request):
     return render(request, 'edit_app/edit-dom.html', context)
 
 
+@login_required
 def dodaj_informacje_klient(request):
     dom_id = request.session.get('dom_id')
 
@@ -153,11 +157,13 @@ def dodaj_informacje_klient(request):
     return render(request, 'edit_app/edit-lokal.html', context)
 
 
+@login_required
 def show_lokal_redirect(request, getIdFromRow):
     request.session['lokal_id'] = getIdFromRow
     return redirect('edit_app:show_lokal')
 
 
+@login_required
 def show_lokal(request):
     ilosc_klientow = request.session.get('ilosc_klientow')
     lokal_id = request.session.get('lokal_id')
@@ -223,6 +229,7 @@ def show_lokal(request):
     return render(request, 'edit_app/show-lokal.html', context)
 
 
+# @login_required
 class FileFieldView(FormView):
     form_class = FileFieldForm
     template_name = 'edit_app/ulotki-upload-photos.html'
@@ -256,11 +263,13 @@ class FileFieldView(FormView):
         return reverse('edit_app:edit_dom')
 
 
+@login_required
 def show_ulotki_photos_redirect(request, getIdFromRow):
     request.session['ulotki_id'] = getIdFromRow
     return redirect('edit_app:show_ulotki_photos')
 
 
+@login_required
 def show_ulotki_photos(request):
     ulotki_id = request.session.get('ulotki_id')
     ulotki = Ulotki.objects.filter(id=ulotki_id)
@@ -275,6 +284,7 @@ def show_ulotki_photos(request):
     return render(request, 'edit_app/show-ulotki-photos.html', context)
 
 
+@login_required
 def dodaj_probe_kontaktu(request):
     dom_id = request.session.get('dom_id')
 

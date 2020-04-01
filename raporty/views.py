@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def raporty(request):
 
     context = {
@@ -13,6 +15,7 @@ def raporty(request):
     return render(request, 'raporty/raporty-dashboard.html', context)
 
 
+@login_required
 def raport_instalacje(request):
     instalacje = Instalacje.objects.all().order_by('-id')
 
@@ -23,12 +26,14 @@ def raport_instalacje(request):
     return render(request, 'raporty/raport-instalacje.html', context)
 
 
+@login_required
 def zdjecia_instalacja_redirect(request, getIdFromRow):
     request.session['id_instalacji'] = getIdFromRow
 
     return redirect('raporty:zdjecia_instalacja')
 
 
+@login_required
 def zdjecia_instalacja(request):
     id_instalacji = request.session.get('id_instalacji')
     instalacja = Instalacje.objects.get(id=id_instalacji)
@@ -42,6 +47,7 @@ def zdjecia_instalacja(request):
     return render(request, 'raporty/zdjecia-instalacje.html', context)
 
 
+@login_required
 def raport_ulotki(request):
     ulotki = Ulotki.objects.all().order_by('-id')
 
@@ -52,12 +58,14 @@ def raport_ulotki(request):
     return render(request, 'raporty/raport-ulotek.html', context)
 
 
+@login_required
 def zdjecia_ulotek_redirect(request, getIdFromRow):
     request.session['id_ulotki'] = getIdFromRow
 
     return redirect('raporty:zdjecia_ulotek')
 
 
+@login_required
 def zdjecia_ulotek(request):
     id_ulotki = request.session.get('id_ulotki')
     ulotka = Ulotki.objects.get(id=id_ulotki)
