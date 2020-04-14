@@ -62,14 +62,7 @@ class ProbaForm(forms.ModelForm):
             'numer_mieszkania',)
 
 
-def my_validate(value):
-    ext = os.path.splitext(value.name)[1]  # [0] returns path filename
-    valid = ['.jpg', '.jpeg']
-    if ext not in valid:
-        raise ValidationError("Nieodpowiedni format, sprawdź czy wgrałeś poprawny plik .jpg")
-
-
 class FileFieldForm(forms.Form):
     ilosc = forms.IntegerField(required=True, label='Ilość')
     opis = forms.CharField(required=False)
-    file_field = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'inputfile'}), validators=[my_validate])
+    file_field = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'inputfile'}))

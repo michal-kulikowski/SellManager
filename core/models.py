@@ -1,8 +1,11 @@
 import datetime
 import os
+from io import BytesIO
 
+from PIL import Image
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.files import File
 from django.db import models
 
 from SellManager import settings
@@ -13,6 +16,14 @@ def my_validate(value):
     valid = ['.jpg', '.jpeg']
     if ext not in valid:
         raise ValidationError("Nieodpowiedni format, sprawdź czy wgrałeś poprawny plik .jpg")
+
+
+def compress(image):
+    im = Image.open(image)
+    im_io = BytesIO()
+    im.save(im_io, 'JPEG', quality=20)
+    new_image = File(im_io, name=image.name)
+    return new_image
 
 
 class Sprzedawca(models.Model):
@@ -116,8 +127,13 @@ class Ulotki(models.Model):
 
 class Photo(models.Model):
     ulotki = models.ForeignKey(Ulotki, on_delete=models.CASCADE, default=None, null=True)
-    file = models.FileField(default=None, upload_to=photo_upload, validators=[my_validate])
+    file = models.ImageField(default=None, upload_to=photo_upload)
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        new_image = compress(self.file)
+        self.file = new_image
+        super().save(*args, **kwargs)
 
 
 class ProbyKontaktu(models.Model):
@@ -137,9 +153,14 @@ class Instalacje(models.Model):
 
 class InstalacjeZdjecia(models.Model):
     instalacje = models.ForeignKey(Instalacje, on_delete=models.CASCADE, default=None, null=True)
-    file = models.FileField(default=None, upload_to=photo_upload2, validators=[my_validate])
+    file = models.ImageField(default=None, upload_to=photo_upload2)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     ident = models.IntegerField(default=None, null=True)
+
+    def save(self, *args, **kwargs):
+        new_image = compress(self.file)
+        self.file = new_image
+        super().save(*args, **kwargs)
 
 
 class Lokale(models.Model):

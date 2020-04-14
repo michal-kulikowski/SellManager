@@ -1,3 +1,4 @@
+{% load auth_extras %}
 <table id="table_fleet" class="table table-hover table-bordered table-sm">
     <thead>
     <tr>
@@ -86,9 +87,16 @@
             <td>{{ field.uruchomienie|date:"Y/m/d" }}</td>
             <td>{{ field.handlowiec }} </td>
             <td style="padding: 2px; width: 5px; border: none">
-                <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
-                        style="font-size: 9.5pt;">Karta
-                </button>
+                {% if request.user|has_group:"Pracownicy" %}
+                    <button href="#" onclick="return brak_uprawnien()" class="btn btn-secondary btn-sm" type="submit"
+                            value="Details"
+                            style="font-size: 9.5pt;">Karta
+                    </button>
+                {% else %}
+                    <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                            style="font-size: 9.5pt;">Karta
+                    </button>
+                {% endif %}
             </td>
             {#            <td style="padding: 2px; width: 5px; border: none">#}
             {#                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"#}
@@ -215,6 +223,10 @@
         var liczba_klientow = $(event.target).closest('tr').find('td:eq(9)').html();
 
         newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
+    }
+
+    function brak_uprawnien() {
+        return alert("Nie masz uprawnień do otwarcia karty");
     }
 
 
