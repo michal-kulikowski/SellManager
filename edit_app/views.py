@@ -56,6 +56,13 @@ def edit_dom(request):
     try:
         technologia = SortGniazdkaTechnologie.objects.get(
             id_gniazdka_technologie=SortAdrDomTechnologia.objects.get(id_adr_dom=dom_id).id_gniazdka_technologie).nazwa
+    except SortAdrDomTechnologia.MultipleObjectsReturned:
+        test = SortAdrDomTechnologia.objects.filter(id_adr_dom=dom_id)
+        technologia2 = ''
+        for field in test:
+            technologia = SortGniazdkaTechnologie.objects.get(id_gniazdka_technologie=field.id_gniazdka_technologie).nazwa
+            technologia2 = technologia2 + technologia + ', '
+        technologia = technologia2
     except SortAdrDomTechnologia.DoesNotExist:
         technologia = 'Brak'
     handlowiec = SortUmPodpisujacy.objects.get(

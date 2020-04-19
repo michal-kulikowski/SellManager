@@ -16,7 +16,7 @@ django.setup()
 
 from core.models import Dom, Ulica, Miejscowosc, Gmina, Powiat, Wojewodztwo, Kraj, Symbole, Budynek, Typ, Sprzedawca, \
     Handlowiec, Lokalizacja, ExternalModel, SortAdrDom, SortAdrBudynek, SortAdrTypBudynku, SortUmPodpisujacy, \
-    SortAdrDomSymbol
+    SortAdrDomSymbol, SortGniazdkaTechnologie, SortAdrDomTechnologia
 import json
 
 # jdata = open('../templates/modul_sprzedazy.json', 'rb')
@@ -296,19 +296,15 @@ from django.db.models import Q
 
 # uruchomienie = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=10482).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=10482).numer_domu).id_adr_typ_budynku)
 # .get(numer_budynku=SortAdrDom.objects.get(id_adr_dom=3457).numer_domu).id_adr_typ_budynku).nazwa_typu
-hp = SortAdrDom.objects.aggregate(total_hp=Sum('licz_lokali'))
-print(hp)
 
-sql = '''SELECT 1 as id_adr_dom, SUM("USORT4"."ADR_DOM"."LICZ_LOKALI") as total_hp 
-FROM "USORT4"."ADR_DOM" 
-WHERE "USORT4"."ADR_DOM"."ID_ADR_DOM" 
-IN (SELECT "USORT4"."ADR_DOM_PODPISUJACY"."ID_ADR_DOM" 
-FROM "USORT4"."ADR_DOM_PODPISUJACY")'''
-
-hp2 = SortAdrDom.objects.raw(sql)
-
-for field in hp2:
-    print(field.total_hp)
+# technologia = SortGniazdkaTechnologie.objects.get(id_gniazdka_technologie=SortAdrDomTechnologia.objects.get(id_adr_dom=6965).id_gniazdka_technologie).nazwa
+test = SortAdrDomTechnologia.objects.filter(id_adr_dom=6965)
+technologia2 = ''
+for field in test:
+    technologia = SortGniazdkaTechnologie.objects.get(id_gniazdka_technologie=field.id_gniazdka_technologie).nazwa
+    technologia2 = technologia2 + technologia + ', '
+print(technologia2)
+# print(test)
 
 # print(dom2)
 #
