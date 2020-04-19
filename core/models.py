@@ -119,7 +119,7 @@ photo_upload2 = 'Instalacje/%Y/%m/%d'
 
 class Ulotki(models.Model):
     id_adr_dom = models.ForeignKey(Dom, on_delete=models.CASCADE, verbose_name='Dom', null=True, blank=True)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    uploaded_at = models.DateField(auto_now_add=True)
     opis = models.CharField(max_length=300, default='')
     ilosc = models.IntegerField(null=True)
     uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
@@ -146,7 +146,7 @@ class ProbyKontaktu(models.Model):
 class Instalacje(models.Model):
     poprzedni_numer_klienta = models.CharField(max_length=50, null=False)
     numer_klienta = models.IntegerField()
-    data_instalacji = models.DateTimeField(auto_now_add=True)
+    data_instalacji = models.DateField(auto_now_add=True)
     notatka = models.CharField(max_length=400)
     uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
 

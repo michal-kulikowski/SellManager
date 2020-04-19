@@ -37,3 +37,32 @@ class SearchForm(forms.Form):
         }
     ),
     )
+
+
+class DateForm(forms.Form):
+    year = forms.DateField(required=False, widget=DatePicker(
+        options={
+            "format": "YYYY",
+            "pickTime": False,
+            'useCurrent': True,
+            'collapse': False,
+        },
+        attrs={
+            'append': 'fa fa-calendar',
+            'icon_toggle': True,
+        }
+    ), label='Rok'
+    )
+    month = forms.DateField(required=False, widget=DatePicker(
+        options={
+            "format": "M",
+            "pickTime": False,
+            'useCurrent': True,
+            'collapse': False,
+        },
+        attrs={
+            'append': 'fa fa-calendar',
+            'icon_toggle': True,
+        }
+    ), label='Miesiąc'
+    )

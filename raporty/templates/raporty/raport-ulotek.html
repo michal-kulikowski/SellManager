@@ -60,6 +60,43 @@
 
     </div>
 
+    <div class="select-style8 shadow-sm" style="border: solid 1px #e8d6d5; margin-top: 10px;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            Filtr daty</h3>
+
+
+        <hr style="width: 85%; margin-bottom: 30px;">
+        <div style="margin-top: 50px;">
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <font class="p_damage_succes">
+
+                    <table id="table_search">
+                        <tr>
+                            <td class="td_form_search"> {{ form.year.label }}: <br>{{ form.year }} </td>
+                        </tr>
+                        <tr>
+                            <td class="td_form_search"> {{ form.month.label }}: <br>{{ form.month }} </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <button id="button_search" type="submit" value="Filtruj"
+                                        class="btn btn-primary button_form2"
+                                        readonly="readonly">Filtruj
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </font>
+            </form>
+        </div>
+
+    </div>
+
 {% endblock %}
 
 {% block content4 %}
@@ -68,11 +105,9 @@
             style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
             Raport z roznoszenia ulotek</h3>
         </font>
-            <hr style="width: 85%; margin-bottom: 30px;">
+        <hr style="width: 85%; margin-bottom: 30px;">
 
         {% include 'raporty/table-raport-ulotki.html' %}
     </div>
 
 {% endblock %}
-
-

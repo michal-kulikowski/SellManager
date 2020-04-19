@@ -1,8 +1,13 @@
+from django.utils import timezone
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo
 from django.contrib.auth.decorators import login_required
+
+from panel_lokalizacji.forms import DateForm
 
 
 @login_required
@@ -17,9 +22,31 @@ def raporty(request):
 
 @login_required
 def raport_instalacje(request):
-    instalacje = Instalacje.objects.all().order_by('-id')
+    now = timezone.now()
+    if request.method == 'POST':
+        year = ''
+        month = ''
+        form = DateForm(request.POST)
+        if form.is_valid():
+            pass
+        else:
+            year = form.data.get('year')
+            month = form.data.get('month')
+        if year != '' and month != '':
+            instalacje = Instalacje.objects.filter(data_instalacji__year=year, data_instalacji__month=month)
+        if year == '' and month != '':
+            instalacje = Instalacje.objects.filter(data_instalacji__year=now.year, data_instalacji__month=month)
+        if year != '' and month == '':
+            instalacje = Instalacje.objects.filter(data_instalacji__year=year)
+        if year == '' and month == '':
+            instalacje = Instalacje.objects.all().order_by('-id')
+
+    else:
+        form = DateForm()
+        instalacje = Instalacje.objects.filter(data_instalacji__year=now.year, data_instalacji__month=now.month).order_by('-id')
 
     context = {
+        'form': form,
         'instalacje': instalacje,
     }
 
@@ -49,9 +76,31 @@ def zdjecia_instalacja(request):
 
 @login_required
 def raport_ulotki(request):
-    ulotki = Ulotki.objects.all().order_by('-id')
+    now = timezone.now()
+    if request.method == 'POST':
+        year = ''
+        month = ''
+        form = DateForm(request.POST)
+        if form.is_valid():
+            pass
+        else:
+            year = form.data.get('year')
+            month = form.data.get('month')
+        if year != '' and month != '':
+            ulotki = Ulotki.objects.filter(uploaded_at__year=year, uploaded_at__month=month)
+        if year == '' and month != '':
+            ulotki = Ulotki.objects.filter(uploaded_at__year=now.year, uploaded_at__month=month)
+        if year != '' and month == '':
+            ulotki = Ulotki.objects.filter(uploaded_at__year=year)
+        if year =='' and month == '':
+            ulotki = Ulotki.objects.all().order_by('-id')
+
+    else:
+        form = DateForm()
+        ulotki = Ulotki.objects.filter(uploaded_at__year=now.year, uploaded_at__month=now.month).order_by('-id')
 
     context = {
+        'form': form,
         'ulotki': ulotki,
     }
 
