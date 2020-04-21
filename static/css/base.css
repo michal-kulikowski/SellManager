@@ -138,11 +138,25 @@ ol {
     float: left;
 }
 
+#content3-home {
+    padding: 100px 100px;
+    width: 425px;
+    height: 100%;
+    float: left;
+}
+
 #content4 {
     padding: 50px 25px;
     width: 70%;
     float: left;
 }
+
+#content4-home {
+    padding: 50px 200px;
+    width: 77%;
+    float: left;
+}
+
 
 #table {
     padding: 0px 100px;
@@ -325,6 +339,19 @@ label {
     border-radius: 3px;
     float: left;
     padding: 40px;
+}
+
+.select-style8-notifications {
+    width: 500px;
+    height: auto;
+    border-radius: 3px;
+    float: right;
+    padding: 40px;
+    margin-right: 25px;
+}
+
+.notifications {
+    font-size: 10.5pt;
 }
 
 .select-style8-1 {

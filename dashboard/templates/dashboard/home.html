@@ -29,7 +29,7 @@
 {% endblock %}
 
 
-{% block content-home %}
+{% block content3-home %}
     {% if user.is_authenticated %}
         {% if user.is_staff or user.is_superuser %}
             {% include 'dashboard/staff_template.html' %}
@@ -48,5 +48,18 @@
             alert("Brak Ci uprawnień do uruchomienia tego modułu");
         }
     </script>
+{% endblock %}
+
+{% block content4-home %}
+     {% if user.is_authenticated %}
+        {% if user.is_staff or user.is_superuser %}
+            {% include 'dashboard/staff_notifications.html' %}
+        {% else %}
+            {% include 'dashboard/employ_notifications.html' %}
+        {% endif %}
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a>
+    {% endif %}
 {% endblock %}
 

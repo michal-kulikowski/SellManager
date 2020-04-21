@@ -1,0 +1,52 @@
+{% load auth_extras %}
+
+{% if request.user|has_group:"Handlowcy" %}
+
+
+    <div class="select-style8-notifications shadow-sm" style="border: solid 1px #e8d6d5; margin-top: 10px;">
+
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            Powiadomienia</h3>
+
+
+        <hr style="width: 85%; margin-bottom: 30px;">
+        <div style="margin-top: 50px;">
+            <font class="notifications">
+                {% for field in leady %}
+                    <table class="table-hover">
+                        <tr>
+                            <td style="visibility: hidden">{{ field.id_adr_dom.id_adr_dom }}</td>
+                            <td><b>{{ field.data_kolejnego_kontaktu|date:'d.m.Y' }}</b></td>
+                            <td> {{ field.id_adr_dom }}/{{ field.numer_mieszkania }}</td>
+                            <td>{{ field.imie_klienta }}</td>
+                            {% if field.telefon is not None %}
+                                <td><a href="{{ field.telefon }}">{{ field.telefon }}</a></td>
+                            {% endif %}
+                            <td>
+                                <button onclick="return budynek()" class="btn btn-secondary btn-sm" type="submit"
+                                        value="budynek"
+                                        style="font-size: 9.5pt;">->
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                {% endfor %}
+            </font>
+        </div>
+
+    </div>
+
+
+
+{% endif %}
+
+<script>
+
+    function budynek(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        var liczba_klientow = 'Brak';
+
+        newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
+    }
+</script>

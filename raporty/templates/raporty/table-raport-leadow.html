@@ -2,19 +2,21 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Numer mieszkania</th>
+        <th>ID lokalizacji</th>
+        <th>Adres</th>
+        <th>Nr mieszkania</th>
         <th>Nasz klient?</th>
         <th>Klient konkurencji?</th>
         <th>Data kontaktu</th>
-        <th>Data końca umowy</th>
-        <th>Data kolejnego kontaktu</th>
+        <th>Koniec umowy</th>
+        <th>Kolejny kontakt</th>
         <th>Konkurencja</th>
         <th>Imie klienta</th>
-        <th>Telefon do klienta</th>
+        <th>Kontakt</th>
         <th>Użytkownik</th>
-        <th>Data dodania</th>
+        <th>Data wpisu</th>
         <th>Opis</th>
-        <th>Obecnie płaci</th>
+        <th>PLN</th>
         <th style="visibility: hidden"></th>
         <th style="visibility: hidden"></th>
     </tr>
@@ -23,19 +25,21 @@
     <tfoot>
     <tr>
         <th style="visibility: hidden">ID</th>
-        <th>Numer mieszkania</th>
+        <th>ID lokalizacji</th>
+        <th>Adres</th>
+        <th style="visibility: hidden">Numer mieszkania</th>
         <th>Czy nasz klient ?</th>
         <th>Czy klient konkurencji?</th>
         <th>Data kontaktu</th>
         <th>Data końca umowy</th>
         <th>Data kolejnego kontaktu</th>
         <th>Konkurencja</th>
-        <th>Imie klienta</th>
-        <th>Telefon do klienta</th>
+        <th style="visibility: hidden">Imie klienta</th>
+        <th style="visibility: hidden">Kontakt</th>
         <th>Użytkownik</th>
         <th>Data dodania</th>
-        <th>Opis</th>
-        <th>Obecnie płaci</th>
+        <th style="visibility: hidden">Opis</th>
+        <th style="visibility: hidden">PLN</th>
         <th style="visibility: hidden"></th>
         <th style="visibility: hidden"></th>
     </tr>
@@ -44,6 +48,8 @@
     {% for field in leady %}
         <tr>
             <td>{{ field.id }}</td>
+            <td>{{ field.id_adr_dom.id_adr_dom }}</td>
+            <td>{{ field.id_adr_dom }} {{ field.id_adr_dom.miejscowosc }}</td>
             <td>{{ field.numer_mieszkania }}</td>
             {% if field.nasz_klient is True %}
                 <td>Tak</td>
@@ -80,14 +86,14 @@
                 <td></td>
             {% endif %}
             <td style="width: 5px; border: none">
-                {#                <button onclick="return zdjecia()" class="btn btn-secondary btn-sm" type="submit" value="zdjecia"#}
-                {#                        style="font-size: 9.5pt;">Zdjęcia#}
-                {#                </button>#}
+{#                                <button onclick="return zdjecia()" class="btn btn-secondary btn-sm" type="submit" value="zdjecia"#}
+{#                                        style="font-size: 9.5pt;">Zdjęcia#}
+{#                                </button>#}
             </td>
             <td style="width: 5px; border: none">
-                {#                <button onclick="return budynek()" class="btn btn-secondary btn-sm" type="submit" value="budynek"#}
-                {#                        style="font-size: 9.5pt;">Karta budynku#}
-                {#                </button>#}
+                                <button onclick="return budynek()" class="btn btn-secondary btn-sm" type="submit" value="budynek"
+                                        style="font-size: 9.5pt;">Karta budynku
+                                </button>
             </td>
 
         </tr>
@@ -164,10 +170,10 @@
     }
 
     function budynek(url) {
-        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        var getIdFromRow = $(event.target).closest('tr').find('td:eq(1)').html();
         var liczba_klientow = 'Brak';
 
-        newwindow = window.open('/edit_app/edit_dom_redirect_ulotki/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
+        newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
     }
 
 </script>

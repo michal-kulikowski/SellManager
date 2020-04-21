@@ -29,7 +29,13 @@ def lokalizacje_list(request):
             liczba_klientow_do = form.cleaned_data.get('liczba_klientow_do')
             uruchomienie_od = form.cleaned_data.get('uruchomienie_od')
             uruchomienie_do = form.cleaned_data.get('uruchomienie_do')
-            handlowiec_query = " HAVING handlowiec.nazwisko LIKE '%%" + handlowiec + "%%'"
+            if handlowiec != 'NULL':
+                if handlowiec != '':
+                    handlowiec_query = " HAVING handlowiec.nazwisko LIKE '%%" + handlowiec + "%%'"
+                else:
+                    handlowiec_query = " HAVING (handlowiec.nazwisko LIKE '%%" + handlowiec + "%%' OR handlowiec.nazwisko IS NULL)"
+            else:
+                handlowiec_query = " HAVING handlowiec.nazwisko IS NULL"
             if ulica != '':
                 ulica_query = " AND ulica.nazwa_ulicy LIKE '%%" + ulica + "%%'"
             else:

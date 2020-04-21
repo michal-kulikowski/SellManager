@@ -1,3 +1,4 @@
+from datetime import timedelta
 from itertools import count
 
 import django
@@ -299,7 +300,17 @@ from django.db.models import Q
 
 # technologia = SortGniazdkaTechnologie.objects.get(id_gniazdka_technologie=SortAdrDomTechnologia.objects.get(id_adr_dom=6965).id_gniazdka_technologie).nazwa
 
+from django.utils import timezone
+from core.models import Lokale
 
+now = timezone.now()
+date = '2020-04-15'
+
+time_threshold = timezone.now() + timedelta(days=30)
+leady = Lokale.objects.filter(uzytkownik=2).filter(data_kolejnego_kontaktu__lte=time_threshold)
+
+for field in leady:
+    print(field.id_adr_dom, field.data_kolejnego_kontaktu)
 
 
 

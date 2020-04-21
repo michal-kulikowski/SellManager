@@ -1,5 +1,11 @@
+from datetime import timedelta
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.utils import timezone
+from core.models import Lokale
+
+now = timezone.now()
 
 
 @login_required
@@ -7,17 +13,15 @@ def dashboard(request):
     if request.user.first_login is True:
         return redirect('dashboard:change_password')
     else:
-        car = 'none'
+
+        time_threshold = timezone.now() + timedelta(days=30)
+        leady = Lokale.objects.filter(uzytkownik=request.user).filter(data_kolejnego_kontaktu__lte=time_threshold)
+
         context = {
-            'car': car,
+            'leady': leady,
         }
 
         return render(request, 'dashboard/home.html', context)
-
-
-@login_required
-def list(request):
-    return render(request, 'dashboard/home-list.html')
 
 
 from django.contrib import messages
