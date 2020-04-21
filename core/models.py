@@ -120,7 +120,7 @@ photo_upload2 = 'Instalacje/%Y/%m/%d'
 class Ulotki(models.Model):
     id_adr_dom = models.ForeignKey(Dom, on_delete=models.CASCADE, verbose_name='Dom', null=True, blank=True)
     uploaded_at = models.DateField(auto_now_add=True)
-    opis = models.CharField(max_length=300, default='')
+    opis = models.CharField(max_length=500, default='')
     ilosc = models.IntegerField(null=True)
     uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
 
@@ -176,7 +176,7 @@ class Lokale(models.Model):
     imie_klienta = models.CharField(max_length=20, blank=True, null=True)
     telefon = models.IntegerField(blank=True, null=True)
     uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
-    data_dodania_wpisu = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    data_dodania_wpisu = models.DateField(auto_now_add=True, blank=True, null=True)
     data_modyfikacji = models.DateTimeField(auto_now=True, blank=True, null=True)
     opis = models.CharField(max_length=200, default='', blank=True)
     price = models.FloatField(blank=True, verbose_name='Obecnie płaci', null=True)
@@ -196,7 +196,7 @@ class LokaleHistory(models.Model):
     imie_klienta = models.CharField(max_length=20, blank=True, null=True)
     telefon = models.IntegerField(blank=True, null=True)
     uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
-    data_dodania_wpisu = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    data_dodania_wpisu = models.DateField(auto_now_add=True, blank=True, null=True)
     data_modyfikacji = models.DateTimeField(auto_now=True, blank=True, null=True)
     opis = models.CharField(max_length=200, default='', blank=True)
     price = models.FloatField(blank=True, verbose_name='Obecnie płaci', null=True)

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo
+from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo, Lokale
 from django.contrib.auth.decorators import login_required
 
 from panel_lokalizacji.forms import DateForm
@@ -105,6 +105,40 @@ def raport_ulotki(request):
     }
 
     return render(request, 'raporty/raport-ulotek.html', context)
+
+
+@login_required
+def raport_leady(request):
+    now = timezone.now()
+    if request.method == 'POST':
+        year = ''
+        month = ''
+        form = DateForm(request.POST)
+        if form.is_valid():
+            pass
+        else:
+            year = form.data.get('year')
+            month = form.data.get('month')
+        if year != '' and month != '':
+            leady = Lokale.objects.filter(data_dodania_wpisu__year=year, data_dodania_wpisu__month=month)
+        if year == '' and month != '':
+            leady = Lokale.objects.filter(data_dodania_wpisu__year=now.year, data_dodania_wpisu__month=month)
+        if year != '' and month == '':
+            leady = Lokale.objects.filter(data_dodania_wpisu__year=year)
+        if year =='' and month == '':
+            leady = Lokale.objects.all().order_by('-id')
+
+    else:
+        form = DateForm()
+        leady = Lokale.objects.filter(data_dodania_wpisu__year=now.year, data_dodania_wpisu__month=now.month).order_by('-id')
+
+    context = {
+        'form': form,
+        'leady': leady,
+    }
+
+    return render(request, 'raporty/raport-leadow.html', context)
+
 
 
 @login_required

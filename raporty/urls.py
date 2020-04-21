@@ -11,5 +11,6 @@ urlpatterns = [
         name='zdjecia_ulotek_redirect'),
     url('instalacje', views.raport_instalacje, name='raport_instalacje'),
     url('ulotki', views.raport_ulotki, name='raport_ulotki'),
+    url('leady', views.raport_leady, name='raport_leady'),
     url('', views.raporty, name='raporty'),
 ]

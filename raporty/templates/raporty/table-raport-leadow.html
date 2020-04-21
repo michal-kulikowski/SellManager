@@ -1,0 +1,176 @@
+<table id="table_fleet" class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Numer mieszkania</th>
+        <th>Nasz klient?</th>
+        <th>Klient konkurencji?</th>
+        <th>Data kontaktu</th>
+        <th>Data końca umowy</th>
+        <th>Data kolejnego kontaktu</th>
+        <th>Konkurencja</th>
+        <th>Imie klienta</th>
+        <th>Telefon do klienta</th>
+        <th>Użytkownik</th>
+        <th>Data dodania</th>
+        <th>Opis</th>
+        <th>Obecnie płaci</th>
+        <th style="visibility: hidden"></th>
+        <th style="visibility: hidden"></th>
+    </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th style="visibility: hidden">ID</th>
+        <th>Numer mieszkania</th>
+        <th>Czy nasz klient ?</th>
+        <th>Czy klient konkurencji?</th>
+        <th>Data kontaktu</th>
+        <th>Data końca umowy</th>
+        <th>Data kolejnego kontaktu</th>
+        <th>Konkurencja</th>
+        <th>Imie klienta</th>
+        <th>Telefon do klienta</th>
+        <th>Użytkownik</th>
+        <th>Data dodania</th>
+        <th>Opis</th>
+        <th>Obecnie płaci</th>
+        <th style="visibility: hidden"></th>
+        <th style="visibility: hidden"></th>
+    </tr>
+    </tfoot>
+
+    {% for field in leady %}
+        <tr>
+            <td>{{ field.id }}</td>
+            <td>{{ field.numer_mieszkania }}</td>
+            {% if field.nasz_klient is True %}
+                <td>Tak</td>
+            {% endif %}
+            {% if field.nasz_klient is False %}
+                <td>Nie</td>
+            {% endif %}
+            {% if field.konkurencji_klient is True %}
+                <td>Tak</td>
+            {% endif %}
+            {% if field.konkurencji_klient is False %}
+                <td>Nie</td>
+            {% endif %}
+            <td>{{ field.data_kontaktu|date:'d.m.Y' }}</td>
+            <td>{{ field.data_konca_umowy|date:'d.m.Y' }}</td>
+            <td>{{ field.data_kolejnego_kontaktu|date:'d.m.Y' }}</td>
+            {% if field.konkurencja is not None %}
+                <td>{{ field.konkurencja }}</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td>{{ field.imie_klienta }}</td>
+             {% if field.telefon is not None %}
+                <td>{{ field.telefon }}</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td>{{ field.uzytkownik }}</td>
+            <td>{{ field.data_dodania_wpisu|date:'d.m.Y'  }}</td>
+            <td>{{ field.opis }}</td>
+            {% if field.price is not None %}
+                <td>{{ field.price }}</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td style="width: 5px; border: none">
+                {#                <button onclick="return zdjecia()" class="btn btn-secondary btn-sm" type="submit" value="zdjecia"#}
+                {#                        style="font-size: 9.5pt;">Zdjęcia#}
+                {#                </button>#}
+            </td>
+            <td style="width: 5px; border: none">
+                {#                <button onclick="return budynek()" class="btn btn-secondary btn-sm" type="submit" value="budynek"#}
+                {#                        style="font-size: 9.5pt;">Karta budynku#}
+                {#                </button>#}
+            </td>
+
+        </tr>
+
+    {% endfor %}
+</table>
+
+
+<script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" language="javascript" class="init">
+
+    $(document).ready(function () {
+        $('#table_fleet').DataTable({
+                "pageLength": 10,
+                "processing": true,
+                "order": [[0, "desc"]],
+
+
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            },
+        );
+    });
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table_fleet thead th').each(function () {
+
+            var title = $(this).text();
+            $(this).html('<input type="text" style="text-align: center;" placeholder="' + title + '" />');
+
+        });
+
+        // DataTable
+        var table = $('#table_fleet').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.header()).on('keyup change clear', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+
+    function zdjecia(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        newwindow = window.open('/raporty/zdjecie-ulotek-redirect/' + getIdFromRow, '_blank')
+    }
+
+    function budynek(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+        var liczba_klientow = 'Brak';
+
+        newwindow = window.open('/edit_app/edit_dom_redirect_ulotki/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
+    }
+
+</script>
+
+
+
