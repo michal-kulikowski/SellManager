@@ -94,16 +94,16 @@ class Konkurencja(models.Model):
 class Dom(models.Model):
     id_adr_dom = models.AutoField(primary_key=True)
     numer_domu = models.CharField(max_length=10, default='')
-    licz_lokali = models.CharField(max_length=10, default='', null=True)
-    predkosc_max = models.CharField(max_length=10, default='')
-    nazwa_ulicy = models.CharField(max_length=50, default='')
+    licz_lokali = models.IntegerField(null=True)
+    predkosc_max = models.CharField(max_length=10, default='', null=True)
+    nazwa_ulicy = models.CharField(max_length=50, default='', null=True)
     uruchomienie = models.DateField(null=True)
+    nazwa_gminy = models.CharField(max_length=100, default='')
     miejscowosc = models.CharField(max_length=100, default='')
-    typ_budynku = models.CharField(max_length=40, default='')
+    typ_budynku = models.CharField(max_length=40, default='', null=True)
     handlowiec = models.CharField(max_length=40, default='')
-    ilosc_klientow = models.CharField(max_length=10, default='')
-    symbol = models.CharField(max_length=10, default='')
-    technologia = models.CharField(max_length=40, default='')
+    symbol = models.CharField(max_length=10, default='', null=True)
+    technologia = models.CharField(max_length=40, default='', null=True)
     konkurencja = models.BooleanField(default=False)
     jaka_konkurencja = models.ForeignKey(Konkurencja, on_delete=models.CASCADE, null=True)
     data_dod = models.DateTimeField(default=datetime.date.today)
@@ -115,6 +115,12 @@ class Dom(models.Model):
 
 photo_upload = 'Ulotki/%Y/%m/%d'
 photo_upload2 = 'Instalacje/%Y/%m/%d'
+
+
+class Gminy(models.Model):
+    id = models.AutoField(primary_key=True)
+    nazwa_gminy = models.CharField(max_length=30, default='', unique=True)
+    ulotkarz = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class Ulotki(models.Model):
@@ -258,6 +264,14 @@ class SortAdrDom(ExternalModel):
         db_table = '"USORT4"."adr_dom"'
 
 
+class SortAdrGmina(ExternalModel):
+    id_adr_gmina = models.AutoField(primary_key=True, db_column='id_adr_gmina')
+    nazwa_gminy = models.TextField(db_column='nazwa_gminy')
+
+    class Meta(ExternalModel.Meta):
+        db_table = '"USORT4"."adr_gmina"'
+
+
 class SortAdrUlica(ExternalModel):
     id_adr_ulica = models.AutoField(primary_key=True)
     id_adr_miejscowosc = models.IntegerField(db_column='id_adr_miejscowosc')
@@ -292,6 +306,7 @@ class SortAdrTypBudynku(ExternalModel):
 class SortAdrMiejscowosc(ExternalModel):
     id_adr_miejscowosc = models.AutoField(primary_key=True)
     nazwa_miejscowosci = models.TextField(db_column='nazwa_miejscowosci')
+    id_adr_gmina = models.TextField(db_column='id_adr_gmina')
 
     class Meta(ExternalModel.Meta):
         db_table = '"USORT4"."adr_miejscowosc"'

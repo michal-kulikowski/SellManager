@@ -151,9 +151,8 @@
 
     function budynek(url) {
         var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
-        var liczba_klientow = 'Brak';
 
-        newwindow = window.open('/edit_app/edit_dom_redirect_ulotki/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
+        newwindow = window.open('/edit_app/edit_dom_redirect_ulotki/' + getIdFromRow, '_blank',)
     }
 
 </script>

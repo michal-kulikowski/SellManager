@@ -1,8 +1,7 @@
 {% load auth_extras %}
 
 {% if request.user|has_group:"Handlowcy" %}
-
-
+{% if leady %}
     <div class="select-style8-notifications shadow-sm" style="border: solid 1px #e8d6d5; margin-top: 10px;">
 
         <h3 class="h3_form_tittle"
@@ -38,7 +37,7 @@
     </div>
 
 
-
+{% endif %}
 {% endif %}
 
 <script>

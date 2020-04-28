@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dashboard',
     'panel_lokalizacji',
     'panel_instalatora',
+    'panel_ulotek',
     'rest_framework',
     'edit_app',
     'users',
@@ -97,13 +98,13 @@ WSGI_APPLICATION = 'SellManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sellmanagerbase',
-        'USER': 'mkulikowski',
+        'NAME': 'SELLMANAGER',
+        'USER': 'root',
         'PASSWORD': '44Akspe234',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     },
-    'OPTIONS': {'charset': 'utf8mb4'},
+    'OPTIONS': {'charset': 'utf8mb4' },
 
     'remote': {
         'ENGINE': 'django.db.backends.oracle',
@@ -171,22 +172,3 @@ AUTH_USER_MODEL = 'users.User'
 
 DATABASE_ROUTERS = ['SellManager.dbrouters.DbRouter', ]
 
-#
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': 'debug.log',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'DEBUG',
-#             'propagate': True,
-#         },
-#     },
-# }

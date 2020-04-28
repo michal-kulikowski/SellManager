@@ -10,6 +10,7 @@ from django.core.management.commands import dumpdata
 from django.db import IntegrityError
 from django.db.models import Sum
 from django.db.transaction import rollback
+from rest_framework.compat import distinct
 from sqlparse.filters import output
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SellManager.settings")
@@ -17,7 +18,8 @@ django.setup()
 
 from core.models import Dom, Ulica, Miejscowosc, Gmina, Powiat, Wojewodztwo, Kraj, Symbole, Budynek, Typ, Sprzedawca, \
     Handlowiec, Lokalizacja, ExternalModel, SortAdrDom, SortAdrBudynek, SortAdrTypBudynku, SortUmPodpisujacy, \
-    SortAdrDomSymbol, SortGniazdkaTechnologie, SortAdrDomTechnologia, Lokale
+    SortAdrDomSymbol, SortGniazdkaTechnologie, SortAdrDomTechnologia, Lokale, Ulotki, SortAdrGmina, SortAdrMiejscowosc, \
+    SortAdrUlica, Gminy
 import json
 
 # jdata = open('../templates/modul_sprzedazy.json', 'rb')
@@ -295,26 +297,9 @@ import json
 from core.models import SortAdrDomPodpisujacy
 from django.db.models import Q
 
-# uruchomienie = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=10482).id_adr_ulica, numer_budynku=SortAdrDom.objects.get(id_adr_dom=10482).numer_domu).id_adr_typ_budynku)
-# .get(numer_budynku=SortAdrDom.objects.get(id_adr_dom=3457).numer_domu).id_adr_typ_budynku).nazwa_typu
 
-# technologia = SortGniazdkaTechnologie.objects.get(id_gniazdka_technologie=SortAdrDomTechnologia.objects.get(id_adr_dom=6965).id_gniazdka_technologie).nazwa
-
-from django.utils import timezone
-from core.models import Lokale
-
-now = timezone.now()
-date = '2020-04-15'
-
-time_threshold = timezone.now() + timedelta(days=30)
-leady = Lokale.objects.filter(uzytkownik=2).filter(data_kolejnego_kontaktu__lte=time_threshold)
-
-for field in leady:
-    print(field.id_adr_dom, field.data_kolejnego_kontaktu)
-
-
-
-
+ulotkarze = User.objects.filter(groups__name='Ulotkarz')
+print(ulotkarze)
 
 # print(dom2)
 #

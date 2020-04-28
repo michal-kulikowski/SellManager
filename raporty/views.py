@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo, Lokale
+from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo, Lokale, Dom
 from django.contrib.auth.decorators import login_required
 
 from panel_lokalizacji.forms import DateForm
@@ -160,3 +160,17 @@ def zdjecia_ulotek(request):
     }
 
     return render(request, 'raporty/zdjecia-ulotki.html', context)
+
+
+from datetime import datetime, timedelta
+
+
+@login_required
+def lokalizacje_bez_ulotek(request):
+    lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).exclude(ulotki__uploaded_at__gte=datetime.now()-timedelta(days=20)).exclude(nazwa_ulicy__icontains='Szkolna')
+
+
+    context = {
+        'lokalizacje_bez_ulotek': lokalizacje_bez_ulotek,
+    }
+    return render(request, 'raporty/raport-braku-ulotek.html', context)

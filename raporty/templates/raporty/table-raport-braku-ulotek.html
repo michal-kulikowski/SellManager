@@ -1,0 +1,193 @@
+{% load auth_extras %}
+<table id="table_fleet" class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Symbol</th>
+        <th>Ulica</th>
+        <th>Numer</th>
+        <th>Nazwa gminy</th>
+        <th>Miejscowość</th>
+        <th>Ilość HP</th>
+        <th>Technologia</th>
+        <th>Handlowiec</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th style="width: 0px; padding: 0px; visibility: hidden">ID</th>
+        <th>Symbol</th>
+        <th>Ulica</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Numer</th>
+        <th>Nazwa gminy</th>
+        <th>Miejscowość</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Ilość HP</th>
+        <th>Technologia</th>
+        <th>Handlowiec</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+    </tr>
+    </tfoot>
+
+    {% for field in lokalizacje_bez_ulotek %}
+        <tr>
+            <td>{{ field.id_adr_dom }}</td>
+            {% if field.symbol is None %}
+                <td>brak</td>
+            {% else %}
+                <td>{{ field.symbol }}</td>
+            {% endif %}
+            {% if field.nazwa_ulicy is None %}
+                <td>brak</td>
+            {% else %}
+                {% if field.typ is not None %}
+                    <td>{{ field.typ }} {{ field.nazwa_ulicy }}</td>
+                {% else %}
+                    <td>{{ field.nazwa_ulicy }}</td>
+                {% endif %}
+            {% endif %}
+            <td>{{ field.numer_domu }}</td>
+            <td>{{ field.nazwa_gminy }}</td>
+            <td>{{ field.miejscowosc }}</td>
+            {% if field.licz_lokali == None %}
+                <td>0</td>
+            {% else %}
+                <td>{{ field.licz_lokali }}</td>
+            {% endif %}
+            <td>{{ field.technologia }}</td>
+            <td>{{ field.handlowiec }} </td>
+            <td style="padding: 2px; width: 5px; border: none">
+                {% if request.user|has_group:"Pracownicy" %}
+                    <button href="#" onclick="return brak_uprawnien()" class="btn btn-secondary btn-sm" type="submit"
+                            value="Details"
+                            style="font-size: 9.5pt;">Karta
+                    </button>
+                {% else %}
+                    <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                            style="font-size: 9.5pt;">Karta
+                    </button>
+                {% endif %}
+            </td>
+            {#            <td style="padding: 2px; width: 5px; border: none">#}
+            {#                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"#}
+            {#                        style="font-size: 9.5pt;">Zgłoś ulotki#}
+            {#                </button>#}
+            {#            </td>#}
+        </tr>
+
+    {% endfor %}
+</table>
+
+
+<script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" language="javascript" class="init">
+
+
+    $(document).ready(function () {
+        $('#table_fleet').DataTable({
+                "pageLength": 10,
+                "processing": true,
+                "deferRender": true,
+                "order": [],
+
+                "infoCallback":
+                    function (settings, start, end, max, total, pre) {
+                        return "Rekord " + start + " do " + end + " z " + total + " wszystkich"
+                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>Brakujące ulotki: ' + (Total_HP) + '</font>';
+                    },
+
+                "footerCallback": function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    Total_HP = api
+                        .column(6, {filter: 'applied'})
+                        .data()
+                        .reduce(function (a, b) {
+                            {
+                                return intVal(a) + intVal(b);
+                            }
+                        }, 0);
+
+                },
+
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            },
+        );
+
+
+    });
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table_fleet thead th').each(function () {
+
+            var title = $(this).text();
+            $(this).html('<input type="text" style="text-align: center;" placeholder="' + title + '" />');
+
+        });
+
+        // DataTable
+        var table = $('#table_fleet').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.header()).on('keyup change clear', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+    });
+
+    function raport(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/raport/' + getIdFromRow, '_blank',)
+    }
+
+    function edytuj(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow, '_blank',)
+    }
+
+    function brak_uprawnien() {
+        return alert("Nie masz uprawnień do otwarcia karty");
+    }
+
+
+</script>

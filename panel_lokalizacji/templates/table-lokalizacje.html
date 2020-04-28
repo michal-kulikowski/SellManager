@@ -86,18 +86,28 @@
             <td>{{ field.technologie }}</td>
             <td>{{ field.uruchomienie|date:"Y/m/d" }}</td>
             <td>{{ field.handlowiec }} </td>
-            <td style="padding: 2px; width: 5px; border: none">
-                {% if request.user|has_group:"Pracownicy" %}
-                    <button href="#" onclick="return brak_uprawnien()" class="btn btn-secondary btn-sm" type="submit"
-                            value="Details"
-                            style="font-size: 9.5pt;">Karta
+            {% if request.user|has_group:"Ulotkarz" %}
+                <td style="padding: 2px; width: 5px; border: none">
+                    <button onclick="return zglos()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                            style="font-size: 9.5pt;">Zgłoś
                     </button>
-                {% else %}
-                    <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
-                            style="font-size: 9.5pt;">Karta
-                    </button>
-                {% endif %}
-            </td>
+                </td>
+            {% else %}
+                <td style="padding: 2px; width: 5px; border: none">
+                    {% if request.user|has_group:"Pracownicy" %}
+                        <button href="#" onclick="return brak_uprawnien()" class="btn btn-secondary btn-sm"
+                                type="submit"
+                                value="Details"
+                                style="font-size: 9.5pt;">Karta
+                        </button>
+                    {% else %}
+                        <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                                style="font-size: 9.5pt;">Karta
+                        </button>
+                    {% endif %}
+                </td>
+
+            {% endif %}
             {#            <td style="padding: 2px; width: 5px; border: none">#}
             {#                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"#}
             {#                        style="font-size: 9.5pt;">Zgłoś ulotki#}
@@ -220,9 +230,15 @@
 
     function edytuj(url) {
         var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
-        var liczba_klientow = $(event.target).closest('tr').find('td:eq(9)').html();
+        var liczba_klientow = $(event.target).closest('tr').find('td:eq(10)').html();
 
-        newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow + '/' + liczba_klientow, '_blank',)
+        newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow, '_blank',)
+    }
+
+    function zglos(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/rejestracja_ulotek_redirect/' + getIdFromRow,  '_blank',)
     }
 
     function brak_uprawnien() {

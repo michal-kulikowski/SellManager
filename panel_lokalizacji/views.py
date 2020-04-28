@@ -2,7 +2,7 @@ from django.db.models import Sum, Count
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from core.models import SortAdrDom, SortAdrDomPodpisujacy
+from core.models import SortAdrDom, SortAdrDomPodpisujacy, Dom
 from panel_lokalizacji.forms import SearchForm
 
 
@@ -130,12 +130,14 @@ def lokalizacje_list(request):
                         wypelnienie_query = " AND " + wypelnienie + " IS NULL"
             else:
                 wypelnienie_query = ""
-
+            test = 'NULL'
             uruchomienie = 'MIN(lokalizacja.URUCHOMIENIE)'
             if uruchomienie_od is not None or uruchomienie_do is not None:
                 if uruchomienie_od is not None and uruchomienie_do is None:
                     uruchomienie_query = " AND " + uruchomienie + " >= '" + str(uruchomienie_od) + "' "
-                if uruchomienie_od is None and uruchomienie_do is not None:
+                if test == 'NULL' and uruchomienie_do is not None:
+                    uruchomienie_query = " AND (" + uruchomienie + "IS NULL OR " + uruchomienie + " <= '" + str(uruchomienie_do) + "')"
+                if uruchomienie_od is None and uruchomienie_do is not None and test != 'NULL':
                     uruchomienie_query = " AND " + uruchomienie + " <= '" + str(uruchomienie_do) + "'"
                 if uruchomienie_od is not None and uruchomienie_do is not None:
                     uruchomienie_query = " AND " + uruchomienie + " BETWEEN '" + str(uruchomienie_od) + "' AND '" + str(uruchomienie_do) + "' "
@@ -181,7 +183,7 @@ def lokalizacje_list(request):
             # return HttpResponse(dom.raw_query)
     else:
         form = SearchForm()
-        if request.user.groups.filter(name='Handlowcy'):
+        if request.user.groups.filter(name='Handlowcy') or request.user.groups.filter(name='Ulotkarz'):
             handlowiec = '%' + request.user.last_name + '%'
             form.initial['handlowiec'] = request.user.last_name
             ulica = "%"
@@ -217,3 +219,5 @@ def lokalizacje_list(request):
 
 def lokalizacje_json(request):
     return HttpResponse('d')
+
+
