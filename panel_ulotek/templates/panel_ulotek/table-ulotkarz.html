@@ -10,6 +10,7 @@
         <th>Miejscowość</th>
         <th>Ilość HP</th>
         <th>Technologia</th>
+        <th>Handlowiec</th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
     </tr>
     </thead>
@@ -23,6 +24,7 @@
         <th>Miejscowość</th>
         <th style="width: 0px; padding: 0px; visibility: hidden">Ilość HP</th>
         <th>Technologia</th>
+        <th>Handlowiec</th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
     </tr>
     </tfoot>
@@ -53,6 +55,7 @@
                 <td>{{ field.licz_lokali }}</td>
             {% endif %}
             <td>{{ field.technologia }}</td>
+            <td>{{ field.handlowiec }}</td>
             <td style="padding: 2px; width: 5px; border: none">
                 {% if request.user|has_group:"Pracownicy" %}
                     <button href="#" onclick="return brak_uprawnien()" class="btn btn-secondary btn-sm" type="submit"
@@ -60,8 +63,8 @@
                             style="font-size: 9.5pt;">Karta
                     </button>
                 {% else %}
-                    <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
-                            style="font-size: 9.5pt;">Karta
+                    <button onclick="return zaulotkuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
+                            style="font-size: 9.5pt;">Zaulotkuj
                     </button>
                 {% endif %}
             </td>
@@ -176,10 +179,10 @@
         newwindow = window.open('/edit_app/raport/' + getIdFromRow, '_blank',)
     }
 
-    function edytuj(url) {
+    function zaulotkuj(url) {
         var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
 
-        newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow, '_blank',)
+        newwindow = window.open('/edit_app/rejestracja_ulotek_redirect/' + getIdFromRow, '_self',)
     }
 
     function brak_uprawnien() {

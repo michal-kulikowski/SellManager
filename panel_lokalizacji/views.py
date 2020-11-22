@@ -183,7 +183,7 @@ def lokalizacje_list(request):
             # return HttpResponse(dom.raw_query)
     else:
         form = SearchForm()
-        if request.user.groups.filter(name='Handlowcy') or request.user.groups.filter(name='Ulotkarz'):
+        if request.user.groups.filter(name='Handlowcy'):
             handlowiec = '%' + request.user.last_name + '%'
             form.initial['handlowiec'] = request.user.last_name
             ulica = "%"

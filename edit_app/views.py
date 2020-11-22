@@ -281,7 +281,7 @@ class FileFieldView2(FormView):
         return context
 
     def get_success_url(self):
-        return redirect('test')
+        return reverse("panel_ulotek:ulotkarz")
 
 
 # @login_required

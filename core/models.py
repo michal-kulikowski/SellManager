@@ -122,6 +122,9 @@ class Gminy(models.Model):
     nazwa_gminy = models.CharField(max_length=30, default='', unique=True)
     ulotkarz = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
+    def __str__(self):
+        return str(self.nazwa_gminy) + ' (' + str(self.ulotkarz) + ')'
+
 
 class Ulotki(models.Model):
     id_adr_dom = models.ForeignKey(Dom, on_delete=models.CASCADE, verbose_name='Dom', null=True, blank=True)

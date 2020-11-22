@@ -15,8 +15,7 @@
 {% endif %}
 
 {% if request.user|has_group:"Ulotkarz" %}
-    <p><a href="{% url 'panel_ulotek:test' %}">Panel Ulotkarza</a></p>
-    <p><a href="{% url 'panel_lokalizacji:lokalizacje_list' %}">Panel lokalizacji</a></p>
+    <p><a href="{% url 'panel_ulotek:ulotkarz' %}">Ulotkowanie</a></p>
 {% endif %}
 
 <script>
