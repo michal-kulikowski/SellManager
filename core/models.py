@@ -105,7 +105,7 @@ class Dom(models.Model):
     symbol = models.CharField(max_length=10, default='', null=True)
     technologia = models.CharField(max_length=40, default='', null=True)
     konkurencja = models.BooleanField(default=False)
-    jaka_konkurencja = models.ForeignKey(Konkurencja, on_delete=models.CASCADE, null=True)
+    jaka_konkurencja = models.ManyToManyField(Konkurencja, related_name='konkurencje', related_query_name='konkurencje')
     data_dod = models.DateTimeField(default=datetime.date.today)
 
     def __str__(self):

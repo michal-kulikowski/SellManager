@@ -19,7 +19,7 @@ django.setup()
 from core.models import Dom, Ulica, Miejscowosc, Gmina, Powiat, Wojewodztwo, Kraj, Symbole, Budynek, Typ, Sprzedawca, \
     Handlowiec, Lokalizacja, ExternalModel, SortAdrDom, SortAdrBudynek, SortAdrTypBudynku, SortUmPodpisujacy, \
     SortAdrDomSymbol, SortGniazdkaTechnologie, SortAdrDomTechnologia, Lokale, Ulotki, SortAdrGmina, SortAdrMiejscowosc, \
-    SortAdrUlica, Gminy
+    SortAdrUlica, Gminy, Konkurencja
 import json
 
 # jdata = open('../templates/modul_sprzedazy.json', 'rb')
@@ -298,8 +298,9 @@ from core.models import SortAdrDomPodpisujacy
 from django.db.models import Q
 
 
-ulotkarze = User.objects.filter(groups__name='Ulotkarz')
-print(ulotkarze)
+konkurencje = Konkurencja.objects.filter(konkurencje=5784)
+
+print(konkurencje)
 
 # print(dom2)
 #

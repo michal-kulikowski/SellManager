@@ -50,17 +50,16 @@
             <b>Opiekun: </b><font style="color: slategray">{{ dom.handlowiec }} <br></font>
             <b>Technologia: </b><font style="color: slategray">{{ dom.technologia }}<br></font>
             <b>Data dodania: </b><font style="color: slategray">{{ dom.data_dod|date:'Y/m/d' }}<br></font>
-            {% if dom.konkurencja is not False %}
-                <b>Konkurencja: </b><font style="color: slategray">{{ dom.jaka_konkurencja }}<br></font></font>
-            {% else %}
-                <b>Konkurencja: </b><font style="color: slategray">brak<br></font>
-                {% if last_ulotka %}
-                    <b>Ostatnie ulotkowanie: </b>
-                    <font style="color: slategray">{{ last_ulotka.uploaded_at|date:'d/m/Y' }}<br></font></font>
-                {% else %}
-                    <b>Brak ulotkowania </b>
-                {% endif %}
-            {% endif %}
+
+            <b>Konkurencja: </b><font style="color: slategray">
+            {% for field in konkurencje %}{{ field.nazwa_konkurencji }}, {% endfor %}<br></font></font>
+
+        {% if last_ulotka %}
+            <b>Ostatnie ulotkowanie: </b>
+            <font style="color: slategray">{{ last_ulotka.uploaded_at|date:'d/m/Y' }}<br></font></font>
+        {% else %}
+            <b>Brak ulotkowania </b>
+        {% endif %}
 
 
         </font>
@@ -76,6 +75,10 @@
             <input type="submit" onclick="window.open('/edit_app/rejestracja-zaulotkowania/', '_self');"
                    value="Formularz zaulotkowania"
                    class="btn btn-warning button-detail button_form_dom">
+
+            <input type="submit" onclick="window.open('/edit_app/rejestracja-konkurencji/', '_self');"
+                   value="Formularz konkurencji"
+                   class="btn btn-success button-detail button_form_dom">
 
             <input type=" mine" onclick="window.close()"
                    value="Zamknij" class="btn btn-dark button-detail button_form_dom" readonly="readonly"></div>

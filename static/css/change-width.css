@@ -447,4 +447,15 @@
         font-size: 16pt;
     }
 
+    select[name=jaka_konkurencja] {
+        font-size: 22pt;
+        width: 250px;
+        height: 500px;
+        margin-left: 150px;
+    }
+
+    label[for=id_jaka_konkurencja] {
+        font-size: 22pt;
+    }
+
 }

@@ -66,3 +66,12 @@ class FileFieldForm(forms.Form):
     ilosc = forms.IntegerField(required=True, label='Ilość')
     opis = forms.CharField(required=False)
     file_field = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'inputfile'}))
+
+
+class KonkurencjaForm(forms.ModelForm):
+    class Meta:
+        model = Dom
+        fields = (
+            'jaka_konkurencja',)
+
+    jaka_konkurencja = forms.ModelMultipleChoiceField(queryset=Konkurencja.objects.all(), label='Zaznacz konkurencje')

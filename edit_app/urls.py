@@ -16,5 +16,6 @@ urlpatterns = [
     url('rejestracja-zaulotkowania2/', views.FileFieldView2.as_view(), name='photos_upload2'),
     url('rejestracja_ulotek_redirect/(?P<getIdFromRow>.*)$', views.rejestracja_ulotek_redirect, name='rejestracja_ulotek_redirect'),
     url('dodaj-informacje-klient', views.dodaj_informacje_klient, name='dodaj_informacje_klient'),
+    url('rejestracja-konkurencji', views.rejestracja_konkurencji, name='rejestracja_konkurencji'),
     url('dodaj-probe-kontaktu', views.dodaj_probe_kontaktu, name='dodaj_probe_kontaktu'),
 ]

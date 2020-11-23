@@ -8,8 +8,8 @@ from django.views.generic import FormView
 
 from core.models import Dom, Symbole, Sprzedawca, SortAdrDomPodpisujacy, SortAdrDom, SortAdrUlica, SortAdrMiejscowosc, \
     SortAdrBudynek, SortAdrTypBudynku, SortUmPodpisujacy, SortAdrDomSymbol, SortAdrDomTechnologia, \
-    SortGniazdkaTechnologie, Lokale, LokaleHistory, Ulotki, Photo, ProbyKontaktu, SortAdrGmina
-from edit_app.forms import EditDomForm, EditSymbolForm, LokalForm, FileFieldForm, ProbaForm
+    SortGniazdkaTechnologie, Lokale, LokaleHistory, Ulotki, Photo, ProbyKontaktu, SortAdrGmina, Konkurencja
+from edit_app.forms import EditDomForm, EditSymbolForm, LokalForm, FileFieldForm, ProbaForm, KonkurencjaForm
 
 
 @login_required
@@ -30,6 +30,8 @@ def edit_dom(request):
     dom_id = request.session.get('dom_id')
     ulotki = Ulotki.objects.filter(id_adr_dom_id=dom_id).order_by('-id')
     proby_kontaktu = ProbyKontaktu.objects.filter(id_adr_dom_id=dom_id).order_by('-id')
+    konkurencje = Konkurencja.objects.filter(konkurencje=dom_id)
+
     try:
         last_ulotka = Ulotki.objects.filter(id_adr_dom_id=dom_id).order_by('-id')[0]
     except IndexError:
@@ -102,6 +104,7 @@ def edit_dom(request):
         'dom': dom,
         'lokale': lokale,
         'ulotki': ulotki,
+        'konkurencje': konkurencje,
         'last_ulotka': last_ulotka,
         'proby_kontaktu': proby_kontaktu,
     }
@@ -177,6 +180,7 @@ def show_lokal(request):
     ilosc_klientow = request.session.get('ilosc_klientow')
     lokal_id = request.session.get('lokal_id')
     dom_id = request.session.get('dom_id')
+
     try:
         last_ulotka = Ulotki.objects.filter(id_adr_dom_id=dom_id).order_by('-id')[0]
     except IndexError:
@@ -360,6 +364,29 @@ def dodaj_probe_kontaktu(request):
     }
 
     return render(request, 'edit_app/lokal-proba-kontaktu.html', context)
+
+
+
+@login_required
+def rejestracja_konkurencji(request):
+    dom_id = request.session.get('dom_id')
+    dom = get_object_or_404(Dom, id_adr_dom=dom_id)
+
+    if request.method == 'POST':
+        form = KonkurencjaForm(request.POST, instance=dom)
+        if form.is_valid():
+            form.save()
+
+
+            return redirect('edit_app:edit_dom')
+    else:
+        form = KonkurencjaForm(instance=dom)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'edit_app/edit-konkurencja.html', context)
 
 
 def script(request):
