@@ -12,6 +12,7 @@
         <th>Technologia</th>
         <th>Handlowiec</th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
     </tr>
     </thead>
     <tfoot>
@@ -25,6 +26,7 @@
         <th style="width: 0px; padding: 0px; visibility: hidden">Ilość HP</th>
         <th>Technologia</th>
         <th>Handlowiec</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
     </tr>
     </tfoot>
@@ -68,11 +70,14 @@
                     </button>
                 {% endif %}
             </td>
-            {#            <td style="padding: 2px; width: 5px; border: none">#}
-            {#                <button onclick="return raport()" class="btn btn-primary btn-sm" type="submit" value="Details"#}
-            {#                        style="font-size: 9.5pt;">Zgłoś ulotki#}
-            {#                </button>#}
-            {#            </td>#}
+            <td style="padding: 2px; width: 5px; border: none">
+
+                {% if request.user.id is 1 %}
+                    <button onclick="return usun()" class="btn btn-danger btn-sm button-detail" type="submit"
+                            value="Delete">Usuń
+                    </button>
+                {% endif %}
+            </td>
         </tr>
 
     {% endfor %}
@@ -173,10 +178,12 @@
 
     });
 
-    function raport(url) {
-        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
-
-        newwindow = window.open('/edit_app/raport/' + getIdFromRow, '_blank',)
+    function usun() {
+        var wynik = confirm("Jesteś pewien, że chcesz usunąć ten rekord?");
+        if (wynik == true) {
+            var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+            newwindow = window.open('/edit_app/delete_dom/' + getIdFromRow, '_self',)
+        }
     }
 
     function edytuj(url) {
@@ -186,7 +193,7 @@
     }
 
     function brak_uprawnien() {
-        return alert("Nie masz uprawnień do otwarcia karty");
+        return alert("Nie masz uprawnień");
     }
 
 

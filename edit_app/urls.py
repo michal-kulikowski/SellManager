@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^show_lokal_redirect/(?P<getIdFromRow>.*)$', views.show_lokal_redirect, name='show_lokal_redirect'),
     url('edit-dom', views.edit_dom, name='edit_dom'),
     url('script', views.script, name='script'),
+    url('delete_dom/(?P<getIdFromRow>.*)$', views.delete_dom, name='delete_dom'),
     url('show-lokal', views.show_lokal, name='show_lokal'),
     url('rejestracja-zaulotkowania/', views.FileFieldView.as_view(), name='photos_upload'),
     url('rejestracja-zaulotkowania2/', views.FileFieldView2.as_view(), name='photos_upload2'),

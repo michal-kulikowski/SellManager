@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.urls import reverse
@@ -417,3 +417,9 @@ def script(request):
                                handlowiec=field.handlowiec,
                                symbol=field.symbol, technologia=field.technologie)
     return HttpResponse('Finish sucessfull')
+
+
+def delete_dom(request, getIdFromRow):
+    obj = get_object_or_404(Dom, id_adr_dom=getIdFromRow)
+    obj.delete()
+    return redirect('raporty:lokalizacje_bez_ulotek')
