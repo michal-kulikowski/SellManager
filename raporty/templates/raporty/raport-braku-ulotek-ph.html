@@ -1,0 +1,39 @@
+{% extends "base_handlowiec.html" %}
+
+
+{% block head %}
+    {% block title %}JMDI - Panel raportów{% endblock %}
+    {% load static %}
+    <meta charset="utf-8" xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+{% endblock %}
+
+{% block login-div %}
+    <table>
+        <tr>
+            <th>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard:dashboard' %}" role="button"
+                   style="margin-right: 15px;">Dashboard</a>
+            </th>
+            <th></th>
+            <th>Zalogowano <br> {{ user.username }}!
+                <p><a href="{% url 'logout' %}">wyloguj</a></p></th>
+        </tr>
+    </table>
+
+{% endblock %}
+
+{% block content2 %}
+    <div class="select-style8-1 shadow-sm" style="border: solid 1px #e8d6d5;">
+        <h3 class="h3_form_tittle"
+            style="font-weight: bold; font-family: Muli; margin-top: 0px; margin-bottom: 0px; text-align: center;">
+            Raport z braków ulotek (ostatnie 20 dni)</h3>
+        </font>
+        <hr style="width: 85%; margin-bottom: 30px;">
+
+        {% include 'raporty/table-raport-braku-ulotek.html' %}
+    </div>
+
+{% endblock %}

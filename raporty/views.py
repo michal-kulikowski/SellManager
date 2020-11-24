@@ -8,11 +8,11 @@ from core.models import Instalacje, InstalacjeZdjecia, Ulotki, Photo, Lokale, Do
 from django.contrib.auth.decorators import login_required
 
 from panel_lokalizacji.forms import DateForm
+from templates.metody.metody import has_group
 
 
 @login_required
 def raporty(request):
-
     context = {
 
     }
@@ -43,7 +43,8 @@ def raport_instalacje(request):
 
     else:
         form = DateForm()
-        instalacje = Instalacje.objects.filter(data_instalacji__year=now.year, data_instalacji__month=now.month).order_by('-id')
+        instalacje = Instalacje.objects.filter(data_instalacji__year=now.year,
+                                               data_instalacji__month=now.month).order_by('-id')
 
     context = {
         'form': form,
@@ -92,7 +93,7 @@ def raport_ulotki(request):
             ulotki = Ulotki.objects.filter(uploaded_at__year=now.year, uploaded_at__month=month)
         if year != '' and month == '':
             ulotki = Ulotki.objects.filter(uploaded_at__year=year)
-        if year =='' and month == '':
+        if year == '' and month == '':
             ulotki = Ulotki.objects.all().order_by('-id')
 
     else:
@@ -125,12 +126,13 @@ def raport_leady(request):
             leady = Lokale.objects.filter(data_dodania_wpisu__year=now.year, data_dodania_wpisu__month=month)
         if year != '' and month == '':
             leady = Lokale.objects.filter(data_dodania_wpisu__year=year)
-        if year =='' and month == '':
+        if year == '' and month == '':
             leady = Lokale.objects.all().order_by('-id')
 
     else:
         form = DateForm()
-        leady = Lokale.objects.filter(data_dodania_wpisu__year=now.year, data_dodania_wpisu__month=now.month).order_by('-id')
+        leady = Lokale.objects.filter(data_dodania_wpisu__year=now.year, data_dodania_wpisu__month=now.month).order_by(
+            '-id')
 
     context = {
         'form': form,
@@ -138,7 +140,6 @@ def raport_leady(request):
     }
 
     return render(request, 'raporty/raport-leadow.html', context)
-
 
 
 @login_required
@@ -167,8 +168,17 @@ from datetime import datetime, timedelta
 
 @login_required
 def lokalizacje_bez_ulotek(request):
-    lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).exclude(ulotki__uploaded_at__gte=datetime.now()-timedelta(days=20)).exclude(nazwa_ulicy__icontains='Szkolna')
-
+    if has_group(request.user, 'Handlowcy'):
+        lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).filter(
+            handlowiec=(request.user.first_name + ' ' + request.user.last_name)).exclude(
+            ulotki__uploaded_at__gte=datetime.now() - timedelta(days=20)).exclude(nazwa_ulicy__icontains='Szkolna')
+        context = {
+            'lokalizacje_bez_ulotek': lokalizacje_bez_ulotek,
+        }
+        return render(request, 'raporty/raport-braku-ulotek-ph.html', context)
+    else:
+        lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).exclude(
+            ulotki__uploaded_at__gte=datetime.now() - timedelta(days=20)).exclude(nazwa_ulicy__icontains='Szkolna')
 
     context = {
         'lokalizacje_bez_ulotek': lokalizacje_bez_ulotek,

@@ -304,10 +304,14 @@ class FileFieldView(FormView):
                 return render(request, 'edit_app/error-page.html',
                               {'error_message': msg})
             else:
-                ulotki = Ulotki.objects.create(id_adr_dom_id=dom_id, ilosc=form.cleaned_data.get('ilosc'),
-                                               uzytkownik=request.user, opis=form.cleaned_data.get('opis'))
-                for f in files:
-                    Photo.objects.create(file=f, ulotki_id=ulotki.id)
+                hp = Dom.objects.get(id_adr_dom=dom_id)
+                if form.cleaned_data.get('ilosc') <= hp.licz_lokali:
+                    ulotki = Ulotki.objects.create(id_adr_dom_id=dom_id, ilosc=form.cleaned_data.get('ilosc'),
+                                                   uzytkownik=request.user, opis=form.cleaned_data.get('opis'))
+                    for f in files:
+                        Photo.objects.create(file=f, ulotki_id=ulotki.id)
+                else:
+                    return HttpResponse('BŁĄD - Ilość ulotek powinna być mniejsza lub równa ilości HP')
 
                 return self.form_valid(form)
         else:
@@ -366,7 +370,6 @@ def dodaj_probe_kontaktu(request):
     return render(request, 'edit_app/lokal-proba-kontaktu.html', context)
 
 
-
 @login_required
 def rejestracja_konkurencji(request):
     dom_id = request.session.get('dom_id')
@@ -376,7 +379,6 @@ def rejestracja_konkurencji(request):
         form = KonkurencjaForm(request.POST, instance=dom)
         if form.is_valid():
             form.save()
-
 
             return redirect('edit_app:edit_dom')
     else:
@@ -429,12 +431,12 @@ def script(request):
         if Dom.objects.filter(id_adr_dom=field.id_adr_dom).exists():
             object_dom = Dom.objects.filter(id_adr_dom=field.id_adr_dom)
             object_dom.update(numer_domu=field.numer_domu,
-                               licz_lokali=field.licz_lokali,
-                               predkosc_max=field.predkosc_max, nazwa_ulicy=field.nazwa_ulicy,
-                               uruchomienie=field.uruchomienie, nazwa_gminy=field.nazwa_gminy,
-                               miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
-                               handlowiec=field.handlowiec,
-                               symbol=field.symbol, technologia=field.technologie)
+                              licz_lokali=field.licz_lokali,
+                              predkosc_max=field.predkosc_max, nazwa_ulicy=field.nazwa_ulicy,
+                              uruchomienie=field.uruchomienie, nazwa_gminy=field.nazwa_gminy,
+                              miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
+                              handlowiec=field.handlowiec,
+                              symbol=field.symbol, technologia=field.technologie)
         else:
             Dom.objects.create(id_adr_dom=field.id_adr_dom, numer_domu=field.numer_domu,
                                licz_lokali=field.licz_lokali,

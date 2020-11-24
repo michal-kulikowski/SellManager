@@ -1,25 +1,17 @@
 {% load auth_extras %}
 {% if request.user|has_group:"Handlowcy" %}
     <p><a href="{% url 'panel_lokalizacji:lokalizacje_list' %}">Panel lokalizacji</a></p>
-    <p><a href="#" onclick="return brak_uprawnien()">Panel instalatora</a></p>
+    <p><a href="{% url 'raporty:lokalizacje_bez_ulotek' %}">Raport braku ulotek</a></p>
 {% endif %}
 
 {% if request.user|has_group:"Instalatorzy" %}
-    <p><a href="#" onclick="return brak_uprawnien()">Panel Lokalizacji</a></p>
     <p><a href="{% url 'panel_instalatora:panel_instalatora' %}">Panel instalatora</a></p>
 {% endif %}
 
 {% if request.user|has_group:"Pracownicy" %}
     <p><a href="{% url 'panel_lokalizacji:lokalizacje_list' %}">Panel Lokalizacji</a></p>
-     <p><a href="#" onclick="return brak_uprawnien()">Panel instalatora</a></p>
 {% endif %}
 
 {% if request.user|has_group:"Ulotkarz" %}
     <p><a href="{% url 'panel_ulotek:ulotkarz' %}">Ulotkowanie</a></p>
 {% endif %}
-
-<script>
-    function brak_uprawnien() {
-        return alert("Nie masz uprawnień do otwarcia tej aplikacji");
-    }
-</script>
