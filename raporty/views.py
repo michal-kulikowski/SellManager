@@ -171,14 +171,14 @@ def lokalizacje_bez_ulotek(request):
     if has_group(request.user, 'Handlowcy'):
         lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).filter(
             handlowiec=(request.user.first_name + ' ' + request.user.last_name)).exclude(
-            ulotki__uploaded_at__gte=datetime.now() - timedelta(days=20)).exclude(nazwa_ulicy__icontains='Szkolna')
+            ulotki__uploaded_at__gte=datetime.now() - timedelta(days=14)).exclude(nazwa_ulicy__icontains='Szkolna')
         context = {
             'lokalizacje_bez_ulotek': lokalizacje_bez_ulotek,
         }
         return render(request, 'raporty/raport-braku-ulotek-ph.html', context)
     else:
         lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).exclude(
-            ulotki__uploaded_at__gte=datetime.now() - timedelta(days=20)).exclude(nazwa_ulicy__icontains='Szkolna')
+            ulotki__uploaded_at__gte=datetime.now() - timedelta(days=14)).exclude(nazwa_ulicy__icontains='Szkolna')
 
     context = {
         'lokalizacje_bez_ulotek': lokalizacje_bez_ulotek,
