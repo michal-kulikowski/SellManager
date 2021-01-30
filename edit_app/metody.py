@@ -31,3 +31,10 @@ dom_sql_main = '''SELECT MIN(lokalizacja.ID_ADR_DOM_PODPISUJACY) AS id_adr_dom_p
                        GROUP BY dom_technologia.ID_ADR_DOM) technologie ON dom.ID_ADR_DOM = technologie.ID_ADR_DOM 
                        GROUP BY sprzedawca.FORMAT_REKL_NUM, gmina.NAZWA_GMINY, miejscowosc.NAZWA_MIEJSCOWOSCI, ulica.TYP, ulica.NAZWA_ULICY, dom.NUMER_DOMU, budynek.NAZWA_TYPU, 
                        dom.LICZ_LOKALI, dom.PREDKOSC_MAX, handlowiec.nazwisko, technologie.TECHNOLOGIE'''
+
+
+dom_sql_main2 = '''SELECT MIN(lokalizacja.ID_ADR_DOM_PODPISUJACY) AS id_adr_dom_podpisujacy, dom.id_adr_dom, MAX(handlowiec.IMIE || ' ' || handlowiec.NAZWISKO) AS HANDLOWIEC 
+                    FROM USORT4.ADR_DOM_PODPISUJACY lokalizacja 
+                    INNER JOIN USORT4.ADR_DOM dom ON lokalizacja.ID_ADR_DOM = dom.ID_ADR_DOM 
+                    LEFT JOIN USORT4.UM_PODPISUJACY handlowiec ON lokalizacja.ID_UM_PODPISUJACY = handlowiec.ID_UM_PODPISUJACY 
+                      GROUP BY dom.ID_ADR_DOM, handlowiec.nazwisko'''

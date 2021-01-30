@@ -10,7 +10,7 @@ from core.models import Dom, Symbole, Sprzedawca, SortAdrDomPodpisujacy, SortAdr
     SortAdrBudynek, SortAdrTypBudynku, SortUmPodpisujacy, SortAdrDomSymbol, SortAdrDomTechnologia, \
     SortGniazdkaTechnologie, Lokale, LokaleHistory, Ulotki, Photo, ProbyKontaktu, SortAdrGmina, Konkurencja
 from edit_app.forms import EditDomForm, EditSymbolForm, LokalForm, FileFieldForm, ProbaForm, KonkurencjaForm
-from edit_app.metody import dom_sql_main
+from edit_app.metody import dom_sql_main, dom_sql_main2
 
 
 @login_required
@@ -416,7 +416,7 @@ def script(request):
 
 
 def update_ph(request):
-    dom = SortAdrDomPodpisujacy.objects.raw(dom_sql_main)
+    dom = SortAdrDomPodpisujacy.objects.raw(dom_sql_main2)
     for field in dom:
         if Dom.objects.filter(id_adr_dom=field.id_adr_dom).exists():
             object_dom = Dom.objects.filter(id_adr_dom=field.id_adr_dom)
