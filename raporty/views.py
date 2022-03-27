@@ -107,6 +107,25 @@ def raport_ulotki(request):
 
     return render(request, 'raporty/raport-ulotek.html', context)
 
+@login_required
+def raport_konkurencja(request):
+    if request.method == 'POST':
+        form = DateForm(request.POST)
+        if form.is_valid():
+            pass
+        else:
+            rekordy = Dom.objects.filter(konkurencja=True)
+
+    else:
+        form = DateForm()
+        rekordy = Dom.objects.all()
+
+    context = {
+        'form': form,
+        'rekordy': rekordy,
+    }
+
+    return render(request, 'raporty/raport-konkurencja.html', context)
 
 @login_required
 def raport_leady(request):

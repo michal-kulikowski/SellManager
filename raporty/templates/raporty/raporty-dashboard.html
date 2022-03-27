@@ -34,36 +34,7 @@
 
 
         <hr style="width: 85%; margin-bottom: 30px;">
-        <div style="margin-top: 50px;">
-            <button type="submit" onclick="window.open('/raporty/instalacje/', '_self');" value="Raport instalacji"
-                    class="btn btn-primary button-detail button_form_dom">Raport instalacji
-            </button>
-            <button type="submit" onclick="window.open('/raporty/ulotki/', '_self');" value="Raport ulotek"
-                    class="btn btn-primary button-detail button_form_dom">Raport ulotek
-            </button>
-            <button type="submit" onclick="window.open('/raporty/leady/', '_self');" value="Raport leadów"
-                    class="btn btn-primary button-detail button_form_dom">Raport leadów
-            </button>
-            <button type="submit" onclick="window.open('/raporty/brak-ulotek/', '_self');" value="Raport brak ulotek"
-                    class="btn btn-primary button-detail button_form_dom">Raport braku ulotek
-            </button>
-            <button type="submit" onclick="window.open('/edit_app/update_ph/', '_self');" value="Aktualizacja PH"
-                    class="btn btn-danger button-detail button_form_dom">Aktualizacja PH
-            </button>
-
-
-            {#            <input type="submit" onclick="window.open('/edit_app/dodaj-probe-kontaktu/', '_self');"#}
-            {#                   value="Formularz próby kontaktu"#}
-            {#                   class="btn btn-danger button-detail button_form_dom">#}
-            {##}
-            {#            <input type="submit" onclick="window.open('/edit_app/rejestracja-zaulotkowania/', '_self');"#}
-            {#                   value="Formularz zaulotkowania"#}
-            {#                   class="btn btn-warning button-detail button_form_dom">#}
-
-            <button type="submit" onclick="window.open('/dashboard/', '_self');"
-                    value="Powrót" class="btn btn-dark button-detail button_form_dom" readonly="readonly">Powrót
-            </button>
-        </div>
+        {% include 'raporty/raporty-linki.html' %}
 
     </div>
 

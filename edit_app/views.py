@@ -54,6 +54,12 @@ def edit_dom(request):
     except ObjectDoesNotExist:
         typ_budynku = 'Brak'
     try:
+        opis_budynku = SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica,
+                                                  numer_budynku=SortAdrDom.objects.get(
+                                                      id_adr_dom=dom_id).numer_domu).opis_budynku
+    except ObjectDoesNotExist:
+        opis_budynku = 'Brak'
+    try:
         symbol = SortAdrDomSymbol.objects.filter(id_adr_dom=dom_id)[0].symbol
     except IndexError:
         symbol = 'Brak'
@@ -80,12 +86,14 @@ def edit_dom(request):
         dom = Dom.objects.filter(id_adr_dom=dom_id)
         dom.update(id_adr_dom=dom_id, numer_domu=numer_domu, licz_lokali=licz_lokali, predkosc_max=predkosc_max,
                    nazwa_ulicy=nazwa_ulicy, uruchomienie=uruchomienie, miejscowosc=miejscowosc, typ_budynku=typ_budynku,
+                   opis_budynku=opis_budynku,
                    handlowiec=handlowiec, symbol=symbol, technologia=technologia, nazwa_gminy=nazwa_gminy)
         dom = Dom.objects.get(id_adr_dom=dom_id)
     else:
         Dom.objects.create(id_adr_dom=dom_id, numer_domu=numer_domu, licz_lokali=licz_lokali, predkosc_max=predkosc_max,
                            nazwa_ulicy=nazwa_ulicy, uruchomienie=uruchomienie, miejscowosc=miejscowosc,
-                           typ_budynku=typ_budynku, handlowiec=handlowiec, symbol=symbol, technologia=technologia,
+                           typ_budynku=typ_budynku, opis_budynku=opis_budynku, handlowiec=handlowiec, symbol=symbol,
+                           technologia=technologia,
                            nazwa_gminy=nazwa_gminy)
         dom = Dom.objects.get(id_adr_dom=dom_id)
 
@@ -372,6 +380,29 @@ def dodaj_probe_kontaktu(request):
 
 
 @login_required
+def dodaj_probe_kontaktu(request):
+    dom_id = request.session.get('dom_id')
+
+    if request.method == 'POST':
+        form_proba = ProbaForm(request.POST)
+        if form_proba.is_valid():
+            object = form_proba.save(commit=False)
+            object.id_adr_dom_id = dom_id
+            object.uzytkownik = request.user
+            object.save()
+
+            return redirect('edit_app:edit_dom')
+    else:
+        form_proba = ProbaForm()
+
+    context = {
+        'form_proba': form_proba,
+    }
+
+    return render(request, 'edit_app/lokal-proba-kontaktu.html', context)
+
+
+@login_required
 def rejestracja_konkurencji(request):
     dom_id = request.session.get('dom_id')
     dom = get_object_or_404(Dom, id_adr_dom=dom_id)
@@ -392,6 +423,18 @@ def rejestracja_konkurencji(request):
     return render(request, 'edit_app/edit-konkurencja.html', context)
 
 
+@login_required
+def opis_instalacji(request):
+    dom_id = request.session.get('dom_id')
+
+    dom = Dom.objects.get(id_adr_dom=dom_id)
+
+    context = {
+        'dom': dom,
+    }
+    return render(request, 'edit_app/opis-instalacji.html', context)
+
+
 def script(request):
     dom = SortAdrDomPodpisujacy.objects.raw(dom_sql_main)
     for field in dom:
@@ -402,6 +445,7 @@ def script(request):
                               predkosc_max=field.predkosc_max, nazwa_ulicy=field.nazwa_ulicy,
                               uruchomienie=field.uruchomienie, nazwa_gminy=field.nazwa_gminy,
                               miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
+                              opis_budynku=field.opis_budynku,
                               handlowiec=field.handlowiec,
                               symbol=field.symbol, technologia=field.technologie)
         else:
@@ -410,6 +454,7 @@ def script(request):
                                predkosc_max=field.predkosc_max, nazwa_ulicy=field.nazwa_ulicy,
                                uruchomienie=field.uruchomienie, nazwa_gminy=field.nazwa_gminy,
                                miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
+                               opis_budynku=field.opis_budynku,
                                handlowiec=field.handlowiec,
                                symbol=field.symbol, technologia=field.technologie)
     return HttpResponse('Finish successfull')

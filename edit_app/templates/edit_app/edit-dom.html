@@ -50,6 +50,7 @@
             <b>Opiekun: </b><font style="color: slategray">{{ dom.handlowiec }} <br></font>
             <b>Technologia: </b><font style="color: slategray">{{ dom.technologia }}<br></font>
             <b>Data dodania: </b><font style="color: slategray">{{ dom.data_dod|date:'Y/m/d' }}<br></font>
+            {#        {{ dom.opis_budynku }}#}
 
             <b>Konkurencja: </b><font style="color: slategray">
             {% for field in konkurencje %}{{ field.nazwa_konkurencji }}, {% endfor %}<br></font></font>
@@ -61,9 +62,14 @@
             <b>Brak ulotkowania </b>
         {% endif %}
 
+        {#            <b><br>Opis instalacji: </b><font style="color: slategray">{{ dom.opis_budynku }}<br></font>#}
 
         </font>
         <div style="margin-top: 50px;">
+            <input type="submit" onclick="window.open('/edit_app/opis-instalacji/', '_self');"
+                   value="Opis instalacji"
+                   class="btn btn-info button-detail button_form_dom">
+
             <input type="submit" onclick="window.open('/edit_app/dodaj-informacje-klient/', '_self');"
                    value="Formularz kontaktu"
                    class="btn btn-primary button-detail button_form_dom">

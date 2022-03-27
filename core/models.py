@@ -100,6 +100,7 @@ class Dom(models.Model):
     uruchomienie = models.DateField(null=True)
     nazwa_gminy = models.CharField(max_length=100, default='')
     miejscowosc = models.CharField(max_length=100, default='')
+    opis_budynku = models.TextField(max_length=1000, default='')
     typ_budynku = models.CharField(max_length=40, default='', null=True)
     handlowiec = models.CharField(max_length=40, default='')
     symbol = models.CharField(max_length=10, default='', null=True)
