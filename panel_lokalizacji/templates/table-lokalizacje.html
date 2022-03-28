@@ -18,6 +18,7 @@
         <th>Uruchomienie</th>
         <th>Handlowiec</th>
         <th style="width: 0px; padding: 0px; visibility: hidden"></th>
+        <th style="width: 0px; padding: 0px; visibility: hidden"></th>
         {#                <th style="width: 0px; padding: 0px; visibility: hidden"></th>#}
     </tr>
     </thead>
@@ -105,6 +106,11 @@
                                 style="font-size: 9.5pt;">Karta
                         </button>
                     {% endif %}
+                </td>
+                <td style="padding: 2px; width: 5px; border: none">
+                    <button onclick="return opis()" class="btn btn-secondary btn-info" type="submit" value="Details"
+                            style="font-size: 9.5pt;">Opis
+                    </button>
                 </td>
 
             {% endif %}
@@ -235,10 +241,16 @@
         newwindow = window.open('/edit_app/edit_dom_redirect/' + getIdFromRow, '_blank',)
     }
 
+    function opis(url) {
+        var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
+
+        newwindow = window.open('/edit_app/edit_opis_redirect/' + getIdFromRow, '_blank',)
+    }
+
     function zglos(url) {
         var getIdFromRow = $(event.target).closest('tr').find('td:first').html();
 
-        newwindow = window.open('/edit_app/rejestracja_ulotek_redirect/' + getIdFromRow,  '_blank',)
+        newwindow = window.open('/edit_app/rejestracja_ulotek_redirect/' + getIdFromRow, '_blank',)
     }
 
     function brak_uprawnien() {

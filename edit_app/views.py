@@ -18,6 +18,24 @@ def edit_dom_redirect(request, getIdFromRow):
     request.session['dom_id'] = getIdFromRow
     return redirect('edit_app:edit_dom')
 
+@login_required
+def edit_opis_redirect(request, getIdFromRow):
+    request.session['dom_id'] = getIdFromRow
+    dom_id = request.session.get('dom_id')
+    try:
+        opis_budynku = SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=dom_id).id_adr_ulica,
+                                                  numer_budynku=SortAdrDom.objects.get(
+                                                      id_adr_dom=dom_id).numer_domu).opis_budynku
+    except ObjectDoesNotExist:
+        opis_budynku = 'Brak'
+
+    if Dom.objects.filter(id_adr_dom=dom_id).exists():
+        dom = Dom.objects.filter(id_adr_dom=dom_id)
+        dom.update(id_adr_dom=dom_id, opis_budynku=opis_budynku)
+    else:
+        Dom.objects.create(id_adr_dom=dom_id, opis_budynku=opis_budynku)
+    return redirect('edit_app:opis_instalacji')
+
 
 @login_required
 def edit_dom_redirect_ulotki(request, getIdFromRow):
@@ -445,7 +463,6 @@ def script(request):
                               predkosc_max=field.predkosc_max, nazwa_ulicy=field.nazwa_ulicy,
                               uruchomienie=field.uruchomienie, nazwa_gminy=field.nazwa_gminy,
                               miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
-                              opis_budynku=field.opis_budynku,
                               handlowiec=field.handlowiec,
                               symbol=field.symbol, technologia=field.technologie)
         else:
@@ -454,7 +471,6 @@ def script(request):
                                predkosc_max=field.predkosc_max, nazwa_ulicy=field.nazwa_ulicy,
                                uruchomienie=field.uruchomienie, nazwa_gminy=field.nazwa_gminy,
                                miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
-                               opis_budynku=field.opis_budynku,
                                handlowiec=field.handlowiec,
                                symbol=field.symbol, technologia=field.technologie)
     return HttpResponse('Finish successfull')
