@@ -11,13 +11,17 @@ input, textarea {
 }
 
 .button_form2 {
-    font-size: 12pt;
-    width: 150px;
+    width: 120px;
     margin-top: 18px;
-    margin-left: 25px;
-    margin-right: 25%;
     text-shadow: 0.5pt 0.5pt black;
     letter-spacing: 1.5px;
-    float: left;
-    position: static;
+    background-color: #81207b !important;
+    border-color: #AC60A9 !important;
+    font-size: 10pt !important;
+}
+
+.button_form2:focus {
+    color: white !important;
+    background-color: #923A8E !important;
+    border-color: #4C0049 !important;
 }

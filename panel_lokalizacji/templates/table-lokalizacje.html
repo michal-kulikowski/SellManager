@@ -3,12 +3,13 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Sprzedawca</th>
         <th>Symbol</th>
-        <th>Ulica</th>
+        <th>Nazwa Ulicy</th>
         <th>Numer</th>
-        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
+        <th>Nazwa gminy</th>
+        <th>Powiat</th>
+        <th>Województwo</th>
         <th>Typ budynku</th>
         <th>Prędkość max</th>
         <th>Ilość HP</th>
@@ -25,12 +26,13 @@
     <tfoot>
     <tr>
         <th style="width: 0px; padding: 0px; visibility: hidden">ID</th>
-        <th>Sprzedawca</th>
-        <th>Symbol</th>
-        <th style="width: 0px; padding: 0px; visibility: hidden">Ulica</th>
+        <th style="width: 0px; padding: 0px; visibility: hidden">Symbol</th>
+        <th>Nazwa Ulicy</th>
         <th style="width: 0px; padding: 0px; visibility: hidden">Numer</th>
-        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
+        <th>Nazwa gminy</th>
+        <th>Powiat</th>
+        <th>Województwo</th>
         <th>Typ budynku</th>
         <th>Prędkość max</th>
         <th style="width: 0px; padding: 0px; visibility: hidden">Ilość HP</th>
@@ -45,7 +47,6 @@
     {% for field in dom %}
         <tr>
             <td>{{ field.id_adr_dom }}</td>
-            <td>{{ field.nazwa_sprzedawcy }}</td>
             {% if field.symbol is None %}
                 <td>brak</td>
             {% else %}
@@ -61,8 +62,10 @@
                 {% endif %}
             {% endif %}
             <td>{{ field.numer_domu }}</td>
-            <td>{{ field.nazwa_gminy }}</td>
             <td>{{ field.nazwa_miejscowosci }}</td>
+            <td>{{ field.nazwa_gminy }}</td>
+            <td>{{ field.nazwa_powiatu }}</td>
+            <td>{{ field.nazwa_wojewodztwa }}</td>
             {% if field.nazwa_typu is None %}
                 <td>brak</td>
             {% else %}
@@ -90,7 +93,7 @@
             {% if request.user|has_group:"Ulotkarz" %}
                 <td style="padding: 2px; width: 5px; border: none">
                     <button onclick="return zglos()" class="btn btn-secondary btn-sm" type="submit" value="Details"
-                            style="font-size: 9.5pt;">Zgłoś
+                            style="font-size: 8pt;">Zgłoś
                     </button>
                 </td>
             {% else %}
@@ -99,17 +102,17 @@
                         <button href="#" onclick="return brak_uprawnien()" class="btn btn-secondary btn-sm"
                                 type="submit"
                                 value="Details"
-                                style="font-size: 9.5pt;">Karta
+                                style="font-size: 8pt;">Karta
                         </button>
                     {% else %}
                         <button onclick="return edytuj()" class="btn btn-secondary btn-sm" type="submit" value="Details"
-                                style="font-size: 9.5pt;">Karta
+                                style="font-size: 8pt;">Karta
                         </button>
                     {% endif %}
                 </td>
                 <td style="padding: 2px; width: 5px; border: none">
                     <button onclick="return opis()" class="btn btn-secondary btn-info" type="submit" value="Details"
-                            style="font-size: 9.5pt;">Opis
+                            style="font-size: 8pt;">Opis
                     </button>
                 </td>
 
@@ -141,7 +144,7 @@
                 "infoCallback":
                     function (settings, start, end, max, total, pre) {
                         return "Rekord " + start + " do " + end + " z " + total + " wszystkich"
-                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + 'Klientów: ' + Total_C + '<br>HP: ' + (Total_HP) + '<br>Wypełnienie: ' + parseInt(Total_C * 100 / parseInt(Total_HP)) + '%' + '</font>';
+                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 8pt;"><br>' + '  ' + 'Klientów: ' + Total_C + '<br>HP: ' + (Total_HP) + '<br>Wypełnienie: ' + parseInt(Total_C * 100 / parseInt(Total_HP)) + '%' + '</font>';
                     },
 
                 "footerCallback": function (row, data, start, end, display) {
@@ -156,7 +159,7 @@
                     };
 
                     Total_HP = api
-                        .column(9, {filter: 'applied'})
+                        .column(10, {filter: 'applied'})
                         .data()
                         .reduce(function (a, b) {
                             {
@@ -165,7 +168,7 @@
                         }, 0);
 
                     Total_C = api
-                        .column(10, {filter: 'applied'})
+                        .column(11, {filter: 'applied'})
                         .data()
                         .reduce(function (a, b) {
                             {

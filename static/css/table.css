@@ -1,5 +1,5 @@
 #table_fleet {
-    font-size: 10.5pt;
+    font-size: 8pt;
     color: #3d4545;
     text-align: center;
     font-family: "Calibri";
@@ -11,7 +11,7 @@
     height: 25px;
     font-weight: bold;
     padding: 2px;
-    font-size: 10pt;
+    font-size: 8pt;
 }
 
 #table_fleet tfoot select {
@@ -19,7 +19,7 @@
     height: 1%;
     font-weight: bold;
     padding: 0px;
-    font-size: 10pt;
+    font-size: 8pt;
     background-color: #efefef; /* fallback color if gradients are not supported */
     background-position: center right;
     background-repeat: no-repeat;
@@ -34,7 +34,7 @@
 }
 
 #table_fleet_previous, #table_fleet_next, .page-link {
-    font-size: 9pt;
+    font-size: 8pt;
 }
 
 #table_fleet_wrapper {
@@ -43,17 +43,17 @@
     color: #007bff !important;
     border: 1px solid transparent;
     border-radius: 2px;
-    font-size: 10pt;
+    font-size: 8pt;
 }
 
 select[name=table_fleet_length] {
-    font-size: 11pt;
+    font-size: 7pt;
 }
 
 
 #table_mieszkania {
     width: 100%;
-    font-size: 9pt;
+    font-size: 8pt;
     color: #3d4545;
     text-align: center;
     font-family: "Calibri";
@@ -133,10 +133,10 @@ select[name=table_proby_kontaktu_length] {
 @media only screen and (max-width: 1500px) {
 
     #table_mieszkania th {
-        font-size: 10pt;
+        font-size: 8pt;
     }
     #table_mieszkania {
-        font-size: 10pt;
+        font-size: 8pt;
     }
 
 }
@@ -144,23 +144,24 @@ select[name=table_proby_kontaktu_length] {
 
 @media only screen and (max-width: 1200px) {
     #table_fleet {
-        font-size: 9pt;
+        font-size: 8pt;
     }
 
     #table_fleet thead input {
-        font-size: 8.5pt;
+        font-size: 7.5pt;
     }
 
     #table_fleet_previous, #table_fleet_next, .page-link {
-        font-size: 8pt;
+        font-size: 7pt;
     }
 
     select[name=table_fleet_length] {
-        font-size: 8pt;
+        font-size: 7pt;
     }
 
+
     .row label {
-        font-size: 8pt;
+        font-size: 7pt;
     }
 
 

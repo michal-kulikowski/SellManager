@@ -7,7 +7,11 @@
 
 
     .head_table {
-        display: none;
+        width: 180px;
+        font-size: 8pt;
+        margin-left: 100px;
+        float: left;
+        margin-top: 20px;
     }
 
 
@@ -29,13 +33,6 @@
         font-family: 'Muli', sans-serif;
     }
 
-    /*.head_table {*/
-    /*    width: 200px;*/
-    /*    font-size: 11.5pt;*/
-    /*    margin-left: 10%;*/
-    /*    float: left;*/
-    /*    margin-top: 15px;*/
-    /*}*/
     #table {
         padding: 0px 10px;
     }
@@ -130,10 +127,11 @@
 
 
     .button_form2 {
-        font-size: 25pt;
+        font-size: 10pt;
         width: 80%;
         text-shadow: 0.5pt 0.5pt black;
         letter-spacing: 1.5px;
+
     }
 
     #button_akcept, #button_back {
@@ -384,27 +382,35 @@
         margin-left: 0px;
     }
 
+    #div_logo {
+        width: 450px;
+        float: left;
+    }
+
 }
 
 @media only screen and (max-width: 1200px) {
-    #logo_img {
-        width: 175px;
-        margin-top: 20px;
-    }
-
     #div_logo {
-        width: 600px;
+        width: 450px;
         float: left;
     }
 
     #jmdi_logo {
-        width: 185px;
+        width: 125px;
         float: left;
     }
 
+    #logo_img {
+        width: 125px;
+        margin-top: 10px;
+    }
+
     #h2_header_JMDI {
-        font-size: 28pt;
+        font-size: 20px;
         margin-top: 28px;
+    }
+    .head_table {
+        display: None;
     }
 
     #header {
@@ -437,14 +443,14 @@
 
     #login-div {
         width: 120px;
-        font-size: 16pt;
+        font-size: 10pt;
         margin-right: 125px;
         float: right;
         font-family: 'Muli', sans-serif;
     }
 
     #dashboard-button {
-        font-size: 16pt;
+        font-size: 10pt;
     }
 
     select[name=jaka_konkurencja] {

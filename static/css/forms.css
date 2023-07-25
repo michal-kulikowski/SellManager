@@ -168,12 +168,15 @@ label {
 }
 
 .button_form2 {
-    font-size: 15pt;
+    font-size: 10pt;
     width: 80%;
     margin-left: 10%;
     text-shadow: 0.5pt 0.5pt black;
     letter-spacing: 1.5px;
     font-family: "Calibri Light";
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
 }
 
 .p_odznacz {
