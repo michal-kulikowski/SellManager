@@ -1,4 +1,5 @@
 from datetime import timedelta
+from http.cookiejar import domain_match
 from itertools import count
 
 import django
@@ -296,16 +297,26 @@ import json
 
 from core.models import SortAdrDomPodpisujacy
 from django.db.models import Q
+from django.shortcuts import render, redirect, get_object_or_404
 
-opis_budynku = Dom.objects.filter(licz_lokali__gte=5, jaka_konkurencja__isnull=True)
+# dom = Dom.objects.filter(id_adr_dom=39765)
+dom = get_object_or_404(Dom, id_adr_dom=39765)
 #opis_budynku = Dom.objects.filter(licz_lokali__gte=5)
 
 # typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(
 #             id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=6412).id_adr_ulica,
 #             numer_budynku=SortAdrDom.objects.get(id_adr_dom=6412).numer_domu).id_adr_typ_budynku).nazwa_typu
-for field in opis_budynku:
-    print(field.jaka_konkurencja.first())
+if dom.jaka_konkurencja.first() is not None and dom.jaka_konkurencja.first().nazwa_konkurencji !='':
+    print('yes')
+    dom.konkurencja = 1
+    dom.save()
+else:
+    print('no')
+    dom.konkurencja = 0
+    dom.save()
 
+print(dom.jaka_konkurencja.first())
+# print(dom.jaka_konkurencja.get().nazwa_konkurencji)
 # print(dom2)
 #
 # import cx_Oracle

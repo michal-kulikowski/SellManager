@@ -1,3 +1,4 @@
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -429,15 +430,25 @@ def rejestracja_konkurencji(request):
         form = KonkurencjaForm(request.POST, instance=dom)
         if form.is_valid():
             form.save()
-
-            return redirect('edit_app:edit_dom')
+        if dom.jaka_konkurencja.first() is not None and dom.jaka_konkurencja.first().nazwa_konkurencji != '':
+            dom.konkurencja = 1
+            dom.save()
+        else:
+            dom.konkurencja = 0
+            dom.save()
+        return redirect('edit_app:edit_dom')
     else:
+        if dom.jaka_konkurencja.first() is not None and dom.jaka_konkurencja.first().nazwa_konkurencji != '':
+            dom.konkurencja = 1
+            dom.save()
+        else:
+            dom.konkurencja = 0
+            dom.save()
         form = KonkurencjaForm(instance=dom)
 
     context = {
         'form': form,
     }
-
     return render(request, 'edit_app/edit-konkurencja.html', context)
 
 
