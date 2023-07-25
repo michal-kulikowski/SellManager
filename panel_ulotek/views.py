@@ -17,7 +17,7 @@ from users.models import User
 
 def base(request):
     lokalizacje_bez_ulotek = Dom.objects.filter(licz_lokali__gte=7).exclude(
-        ulotki__uploaded_at__gte=datetime.now() - timedelta(days=14)).exclude(nazwa_ulicy__icontains='Szkolna').filter(handlowiec__icontains='Handlowy')
+        ulotki__uploaded_at__gte=datetime.now() - timedelta(days=30)).exclude(nazwa_ulicy__icontains='Szkolna').filter(handlowiec__icontains='Handlowy')
 
     context = {
         'lokalizacje_bez_ulotek': lokalizacje_bez_ulotek,

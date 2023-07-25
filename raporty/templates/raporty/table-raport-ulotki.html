@@ -3,6 +3,7 @@
     <tr>
         <th>ID</th>
         <th>Ulica</th>
+        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
         <th>Ilość</th>
         <th>Opis</th>
@@ -17,6 +18,7 @@
     <tr>
         <th style="visibility: hidden">ID</th>
         <th>Ulica</th>
+        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
         <th style="visibility: hidden">Ilość</th>
         <th style="visibility: hidden">Opis</th>
@@ -31,6 +33,7 @@
         <tr>
             <td>{{ field.id }}</td>
             <td>{{ field.id_adr_dom }}</td>
+            <td>{{ field.id_adr_dom.nazwa_gminy }}</td>
             <td>{{ field.id_adr_dom.miejscowosc }}</td>
             <td>{{ field.ilosc }}</td>
             <td>{{ field.opis }}</td>

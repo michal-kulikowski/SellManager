@@ -473,6 +473,11 @@ def script(request):
                                miejscowosc=field.nazwa_miejscowosci, typ_budynku=field.nazwa_typu,
                                handlowiec=field.handlowiec,
                                symbol=field.symbol, technologia=field.technologie)
+    dom_local = Dom.objects.filter(licz_lokali__gte=5, jaka_konkurencja__isnull=False)
+    for field in dom_local:
+        object_dom_local = Dom.objects.filter(id_adr_dom=field.id_adr_dom)
+        object_dom_local.update(konkurencja=True)
+
     return HttpResponse('Finish successfull')
 
 

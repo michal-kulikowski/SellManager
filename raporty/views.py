@@ -114,11 +114,11 @@ def raport_konkurencja(request):
         if form.is_valid():
             pass
         else:
-            rekordy = Dom.objects.filter(konkurencja=True)
+            rekordy = Dom.objects.filter(licz_lokali__gte=5, konkurencja=0)
 
     else:
         form = DateForm()
-        rekordy = Dom.objects.all()
+        rekordy = Dom.objects.filter(licz_lokali__gte=5, konkurencja=0)
 
     context = {
         'form': form,

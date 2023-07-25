@@ -2,9 +2,12 @@
     <thead>
     <tr>
         <th>ID</th>
+        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
+        <th>Ulica</th>
         <th>Numer domu</th>
-        <th>Konkurencja</th>
+        <th>Liczba lokali</th>
+        <th>Przedstawiciel</th>
         <th style="visibility: hidden"></th>
     </tr>
     </thead>
@@ -12,9 +15,12 @@
     <tfoot>
     <tr>
         <th>ID</th>
+        <th>Nazwa gminy</th>
         <th>Miejscowość</th>
+        <th>Ulica</th>
         <th>Numer domu</th>
-        <th>Konkurencja</th>
+        <th>Liczba lokali</th>
+        <th>Przedstawiciel/th>
         <th style="visibility: hidden"></th>
     </tr>
     </tfoot>
@@ -22,9 +28,12 @@
     {% for field in rekordy %}
         <tr>
             <td>{{ field.id_adr_dom }}</td>
+            <td>{{ field.nazwa_gminy }}</td>
             <td>{{ field.miejscowosc }}</td>
+            <td>{{ field.nazwa_ulicy }}</td>
             <td>{{ field.numer_domu }}</td>
-            <td>{{ field.konkurencja }}</td>
+            <td>{{ field.licz_lokali }}</td>
+            <td>{{ field.handlowiec }}</td>
             <td style="width: 5px; border: none">
                 <button onclick="return budynek()" class="btn btn-secondary btn-sm" type="submit" value="budynek"
                         style="font-size: 9.5pt;">Karta budynku
@@ -51,7 +60,7 @@
                 "infoCallback":
                     function (settings, start, end, max, total, pre) {
                         return "Rekord " + start + " do " + end + " z " + total + " wszystkich"
-                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + '<br>Ulotek: ' + parseInt(Total_HP) + '</font>';
+                            + ((total !== max) ? " (filtered from " + max + " total entries)" : "") + '<font style="color: black; font-size: 11pt;"><br>' + '  ' + '</font>';
                     },
 
                 "footerCallback": function (row, data, start, end, display) {

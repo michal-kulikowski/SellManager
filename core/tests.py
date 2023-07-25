@@ -297,13 +297,14 @@ import json
 from core.models import SortAdrDomPodpisujacy
 from django.db.models import Q
 
-opis_budynku = SortAdrBudynek.objects.get(id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=6412).id_adr_ulica,
-            numer_budynku=SortAdrDom.objects.get(id_adr_dom=6412).numer_domu).opis_budynku
+opis_budynku = Dom.objects.filter(licz_lokali__gte=5, jaka_konkurencja__isnull=True)
+#opis_budynku = Dom.objects.filter(licz_lokali__gte=5)
 
 # typ_budynku = SortAdrTypBudynku.objects.get(id_adr_typ_budynku=SortAdrBudynek.objects.get(
 #             id_adr_ulica=SortAdrDom.objects.get(id_adr_dom=6412).id_adr_ulica,
 #             numer_budynku=SortAdrDom.objects.get(id_adr_dom=6412).numer_domu).id_adr_typ_budynku).nazwa_typu
-print(opis_budynku)
+for field in opis_budynku:
+    print(field.jaka_konkurencja.first())
 
 # print(dom2)
 #
